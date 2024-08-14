@@ -115,3 +115,5 @@ Gồm 6 trụ cột chính:
 - Mindmap: https://github.com/notcuder/aws-mindmap?tab=readme-ov-file
 - https://github.com/keenanromain/AWS-SAA-C02-Study-Guide?tab=readme-ov-file
 - https://github.com/skulltech/aws-solutions-architect-associate-notes?tab=readme-ov-file
+- Khóa học cơ bản Practitioner Essentials: https://explore.skillbuilder.aws/learn/course/134/play/136404/aws-cloud-practitioner-essentials
+- Technical Essentials: https://explore.skillbuilder.aws/learn/course/internal/view/elearning/1851/aws-technical-essentials
