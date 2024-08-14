@@ -114,3 +114,4 @@ Gồm 6 trụ cột chính:
 ### Nguồn tham khảo
 - Mindmap: https://github.com/notcuder/aws-mindmap?tab=readme-ov-file
 - https://github.com/keenanromain/AWS-SAA-C02-Study-Guide?tab=readme-ov-file
+- https://github.com/skulltech/aws-solutions-architect-associate-notes?tab=readme-ov-file
