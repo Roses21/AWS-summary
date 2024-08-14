@@ -101,5 +101,16 @@ Gồm 6 trụ cột chính:
   - Data management
   - Hardware and services
   - Process and culture
+
+## 4. Auto Scaling
+- Auto Scaling có 3 components:
+  - Group (Nhóm co giãn tự động) là một nhóm các EC2 Instance hoặc RDS Instance. Nhóm này có khả năng co giãn số lượng các EC2 Instance thành viên dựa trên các chính sách co giãn mà bạn thiết lập.
+  - Configuration Templates: là một tính năng giúp bạn tạo mẫu cho việc khởi tạo các EC2 Instance. Điều này giúp tự động hóa và đơn giản hóa việc khởi tạo các EC2 Instance cho dịch vụ Auto Scaling.
+  - Scaling Options: Cung cấp một số cách để scale ASG (scale khi đáp ứng một điều kiện cụ thể hay theo lịch trình).
+- Triển khai ứng dụng sử dụng Auto Scaling Group để đảm bảo khả năng mở rộng linh hoạt theo nhu cầu của người dùng, tăng tính sẵn sàng và đảm bảo khả năng chịu lỗi.
+- Khi thiết kế HA cho Auto Scaling, hãy ưu tiên sử dụng nhiều AZ và nhiều Region.
+- Auto Scaling cho phép bạn tạm dừng và sau đó tiếp tục một hoặc nhiều quy trình này, điều này có lợi cho bạn khi muốn điều tra sự cố trong ứng dụng của mình mà không kích hoạt quy trình Auto Scaling.
+- Bạn không thể sửa đổi cấu hình khởi chạy sau khi đã tạo nó. Nếu muốn thay đổi cấu hình khởi chạy cho nhóm Auto Scaling, bạn phải tạo cấu hình khởi chạy mới và cập nhật nhóm Auto Scaling của mình để kế thừa cấu hình khởi chạy mới này.
 ### Nguồn tham khảo
-Mindmap: https://github.com/notcuder/aws-mindmap?tab=readme-ov-file 
+- Mindmap: https://github.com/notcuder/aws-mindmap?tab=readme-ov-file
+- https://github.com/keenanromain/AWS-SAA-C02-Study-Guide?tab=readme-ov-file
