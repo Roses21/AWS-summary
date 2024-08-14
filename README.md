@@ -32,7 +32,7 @@ Gồm 6 trụ cột chính:
     - Operate
     - Evolve
 ### 3.2. Security 
-  -K/n: focuses on protecting information and systems: confidentiality and integrity of data, managing user permissions, and establishing controls to detect security events.
+  - K/n: focuses on protecting information and systems: confidentiality and integrity of data, managing user permissions, and establishing controls to detect security events.
   - Design Principles:
     - Implement a strong identity foundation: IAM
     - Maintain traceability (truy xuất nguồn gốc): AWS CloudTrail và AWS Config.
