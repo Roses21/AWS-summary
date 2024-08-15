@@ -160,8 +160,18 @@ Gồm 6 trụ cột chính:
   ![image](https://github.com/user-attachments/assets/1256b014-290d-483a-b2e2-6c4bbf80c976)
 
 #### IAM role
-- 
+- Phân quyền truy cập tạm thời: Thay vì gán quyền trực tiếp cho người dùng hoặc dịch vụ, bạn có thể tạo một IAM Role với các quyền cụ thể và sau đó gán role này cho người dùng, dịch vụ hoặc ứng dụng khi họ cần truy cập.
+- Tăng cường bảo mật: IAM Role giúp giảm rủi ro bảo mật bằng cách cung cấp quyền truy cập chỉ khi cần thiết và không cần sử dụng thông tin đăng nhập tĩnh (như Access Keys) cho các dịch vụ AWS.
+- Linh hoạt trong quản lý: Bạn có thể gán, thu hồi hoặc thay đổi IAM Role một cách dễ dàng mà không cần phải thay đổi cấu hình hoặc quyền hạn của người dùng hoặc dịch vụ.
+- Ví dụ: Truy cập dịch vụ khác từ EC2: Giả sử bạn có một ứng dụng chạy trên một EC2 instance cần truy cập vào một S3 bucket để lưu trữ hoặc đọc dữ liệu. Thay vì gán trực tiếp Access Key và Secret Key cho ứng dụng, bạn có thể tạo một IAM Role với quyền truy cập S3 và gán role này cho EC2 instance. Điều này cho phép ứng dụng truy cập S3 mà không cần quản lý thông tin đăng nhập.
 #### Best practices
+- Lock down the AWS root user.
+- Follow the principle of least privilege
+- Use IAM appropriately
+- Use IAM roles when possible
+- Consider using an identity provider
+- Regularly review and remove unused users, roles, and other credentials
+  
 ### 9.2. CloudWatch
 - CloudWatch là một dịch vụ giám sát, tổng hợp và phân tích dữ liệu, nguồn tài nguyên; cung cấp thông tin để định hướng hành động, gửi thông báo, hỗ trợ việc tối ưu hóa hiệu năng ứng dụng, quản lý sử dụng tài nguyên và hiểu rõ tình trạng hoạt động của toàn hệ thống.
 - CloudWatch sử dụng metrics - là dữ liệu về hiệu suất của hệ thống của bạn.
