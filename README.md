@@ -1,9 +1,9 @@
 ## Mục lục:
 1. [Lưu ý về vẽ kiến trúc trên draw.io](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#1-l%C6%B0u-%C3%BD-v%E1%BB%81-v%E1%BA%BD-ki%E1%BA%BFn-tr%C3%BAc-tr%C3%AAn-drawio)
-
 2. [Three tier architecture](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#2-three-tier-architecture)
-
 3. [AWS Well-Architected Framework](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#3-aws-well-architected-framework)
+4. [Auto Scaling]()
+5. []()
 ## 1. Lưu ý về vẽ kiến trúc trên draw.io
 - Tỉ lệ khung ngoài cùng của kiến trúc AWS: 1.618, ví dụ Height = 500 => Width = 500 x 1.618 = 809.
 - Khung tên của service AWS nên là màu cam (FF8000).
@@ -102,7 +102,7 @@ Gồm 6 trụ cột chính:
   - Hardware and services
   - Process and culture
 
-## 4. Auto Scaling
+## 4. EC2 Auto Scaling
 - Auto Scaling có 3 components:
   - Group (Nhóm co giãn tự động) là một nhóm các EC2 Instance hoặc RDS Instance. Nhóm này có khả năng co giãn số lượng các EC2 Instance thành viên dựa trên các chính sách co giãn mà bạn thiết lập.
   - Configuration Templates: là một tính năng giúp bạn tạo mẫu cho việc khởi tạo các EC2 Instance. Điều này giúp tự động hóa và đơn giản hóa việc khởi tạo các EC2 Instance cho dịch vụ Auto Scaling.
@@ -111,6 +111,104 @@ Gồm 6 trụ cột chính:
 - Khi thiết kế HA cho Auto Scaling, hãy ưu tiên sử dụng nhiều AZ và nhiều Region.
 - Auto Scaling cho phép bạn tạm dừng và sau đó tiếp tục một hoặc nhiều quy trình này, điều này có lợi cho bạn khi muốn điều tra sự cố trong ứng dụng của mình mà không kích hoạt quy trình Auto Scaling.
 - Bạn không thể sửa đổi cấu hình khởi chạy sau khi đã tạo nó. Nếu muốn thay đổi cấu hình khởi chạy cho nhóm Auto Scaling, bạn phải tạo cấu hình khởi chạy mới và cập nhật nhóm Auto Scaling của mình để kế thừa cấu hình khởi chạy mới này.
+
+![image](https://github.com/user-attachments/assets/41cdb655-d8de-4c1f-b0c8-c12f90d4205a)
+
+### Scaling policies
+- Gồm 3 loại:
+#### Simple scaling policy
+- Hoạt động dựa trên một điều kiện duy nhất: Simple Scaling chỉ có một ngưỡng đơn lẻ và thực hiện một hành động duy nhất khi điều kiện đó được đáp ứng.
+- Thay đổi đơn giản và ngay lập tức: Khi điều kiện (chẳng hạn như CPU vượt quá một mức cụ thể) được kích hoạt, Simple Scaling thực hiện ngay lập tức hành động mở rộng hoặc thu nhỏ số lượng instances theo một số lượng cố định.
+- Ví dụ: Nếu CPU > 70%, tăng thêm 1 instance. Nếu CPU < 30%, giảm 1 instance.
+#### Step scaling
+- Hoạt động dựa trên các ngưỡng cụ thể: Step Scaling cho phép bạn thiết lập nhiều ngưỡng khác nhau cho một chỉ số (như CPU, Network In/Out, v.v.), và tương ứng với mỗi ngưỡng, bạn có thể cấu hình một hành động mở rộng hoặc thu nhỏ cụ thể.
+- Thay đổi theo từng bước: Số lượng instances tăng hoặc giảm sẽ phụ thuộc vào mức độ mà chỉ số vượt qua các ngưỡng đã thiết lập. Điều này có nghĩa là khi chỉ số vượt qua ngưỡng cao hơn, số lượng instances được thay đổi sẽ lớn hơn so với khi chỉ số chỉ vượt qua ngưỡng thấp hơn.
+- Ví dụ: Nếu CPU > 70%, tăng thêm 2 instances. Nếu CPU > 90%, tăng thêm 4 instances. Nếu CPU < 30%, giảm 1 instance.
+#### Target Tracking
+- Tự động điều chỉnh số lượng instances dựa trên một chỉ số mục tiêu đã được xác định, chẳng hạn như mức sử dụng CPU. AWS sẽ liên tục theo dõi chỉ số này và tăng hoặc giảm số lượng instances để duy trì chỉ số gần với mục tiêu.
+- Ví dụ: Bạn có thể tạo một policy để tự động thêm hoặc bớt EC2 instances trong một Auto Scaling group nhằm duy trì mức sử dụng CPU trung bình là 50%.
+## 5. AWS Network
+### 5.1. VPC
+### 5.2. ELB
+### 5.3. ENB
+### 5.4. Route 53
+## 6. Compute
+## 7. Storage 
+### 7.1. CloudFront
+### 7.2. S3
+### 7.3. EBS
+## 8. Database
+### 8.1.
+## 9. AWS Management Tools
+### 9.1. IAM
+- AWS Identity and Access Management (IAM) is an AWS service that helps you manage access to your AWS account and resources. It also provides a centralized view of who and what are allowed inside your AWS account (authentication), and who and what have permissions to use and work with your AWS resources (authorization).
+- Với IAM, bạn có thể chia sẻ quyền truy cập vào tài khoản và tài nguyên AWS mà không cần chia sẻ bộ khóa truy cập hoặc mật khẩu. Bạn cũng có thể cung cấp quyền truy cập chi tiết cho những người làm việc trong tài khoản của mình để mọi người và dịch vụ chỉ có quyền đối với những tài nguyên họ cần.
+#### IAM features
+- Global: IAM mang tính toàn cầu và không dành riêng cho bất kỳ Region nào. Bạn có thể xem và sử dụng cấu hình IAM của mình từ bất kỳ Khu vực nào trong AWS Management Console.
+- Free to use.
+#### IAM user
+- 
+#### IAM groups
+- Là một tập hợp người dùng. Tất cả người dùng trong nhóm sẽ kế thừa các quyền được gán cho nhóm. Điều này cho phép ta cấp quyền cho nhiều người dùng cùng một lúc. 
+- Bạn không thể lồng các IAM group. Người dùng IAM riêng lẻ có thể thuộc nhiều nhóm, nhưng không thể tạo nhóm con trong một IAM group khác.
+- Lợi ích: Cung cấp một cách để xem ai có quyền gì trong tổ chức. Nó cũng giúp mở rộng quy mô khi có người mới tham gia, rời đi hay thay đổi vai trò trong tổ chức.
+#### IAM policies
+- Để quản lý quyền truy cập và cấp quyền cho các dịch vụ và tài nguyên AWS.
+- Hầu hết các chính sách đều được lưu trữ trong AWS dưới dạng tài liệu JSON với một số thông tin cơ bản như Version, Effect, Action, và Resource.
+- Ví dụ:
+  
+  ![image](https://github.com/user-attachments/assets/1256b014-290d-483a-b2e2-6c4bbf80c976)
+
+#### IAM role
+- 
+#### Best practices
+### 9.2. CloudWatch
+- CloudWatch là một dịch vụ giám sát, tổng hợp và phân tích dữ liệu, nguồn tài nguyên; cung cấp thông tin để định hướng hành động, gửi thông báo, hỗ trợ việc tối ưu hóa hiệu năng ứng dụng, quản lý sử dụng tài nguyên và hiểu rõ tình trạng hoạt động của toàn hệ thống.
+- CloudWatch sử dụng metrics - là dữ liệu về hiệu suất của hệ thống của bạn.
+  
+![image](https://github.com/user-attachments/assets/a155fe6f-c8e5-44f6-9009-6bbdffc80b34)
+
+- Các loại metrics:
+  
+  ![image](https://github.com/user-attachments/assets/8725b74d-e6ac-44cc-9b8c-ea1622d1997e)
+
+- CloudWatch hiển thị dữ liệu số liệu và nhật ký chi tiết đến từng giây, duy trì dữ liệu trong 15 tháng và cho phép tính toán trên số liệu.
+- Có thể truy cập Amazon CloudWatch thông qua API, CLI, các AWS SDK và AWS Management Console.
+- Trong compute domain, CloudWatch có thể thông báo cho bạn về tình trạng của EC2 intances, Autoscaling Groups, Elastic Load Balancers, and Route53 Health Checks. Trong storage and content delivery domains, CloudWatch có thể thông báo cho bạn về tình trạng của EBS Volumes, Storage Gateways, và CloudFront.
+- Liên quan đến EC2, CloudWatch chỉ có thể giám sát các số liệu ở cấp độ máy chủ như CPU, mạng, ổ đĩa và kiểm tra trạng thái để biết thông tin chi tiết như tình trạng của trình ảo hóa cơ bản.
+- CloudWatch tập trung vào hiệu suất. CloudTrail chủ yếu là kiểm tra (auditing).
+- Cách hoạt động:
+  
+  ![image](https://github.com/user-attachments/assets/2823c6ea-67d9-44a8-9519-50dbc8285239)
+  
+#### CloudWatch alarms
+- Gửi thông báo hoặc tự động thực hiện thay đổi khi vượt giá trị ngưỡng đối với tài nguyên bạn đang theo dõi dựa trên các quy tắc bạn xác định.
+- Có 3 trạng thái:
+  - OK: Số liệu nằm trong ngưỡng được xác định. Mọi thứ dường như đang hoạt động như bình thường.
+  - ALARM: Số liệu nằm ngoài ngưỡng được xác định. Đây có thể là một vấn đề hoạt động.
+  - INSUFFICIENT_DATA: Cảnh báo vừa mới bắt đầu, metric không có sẵn hoặc không có đủ dữ liệu cho metric để xác định trạng thái cảnh báo.
+#### Amazon CloudWatch Logs
+- Là nơi tập trung để lưu trữ và phân tích nhật ký. Với dịch vụ này, bạn có thể giám sát, lưu trữ và truy cập các tệp nhật ký của mình từ các ứng dụng chạy trên phiên bản EC2, hàm AWS Lambda và các nguồn khác.
+- Cách sắp xếp dữ liệu trong CloudWatch Logs:
+  - Event logs: là bản ghi hoạt động được ghi lại bởi ứng dụng hoặc tài nguyên đang được giám sát. Nó có dấu thời gian và thông báo sự kiện.
+  - Stream logs: Các event logs được nhóm thành stream logs - là chuỗi các sự kiện nhật ký thuộc về cùng một tài nguyên đang được theo dõi.
+  - Group logs: bao gồm các stream logs đều có chung cài đặt quyền và lưu giữ.
+    
+  ![image](https://github.com/user-attachments/assets/4f768068-64c3-4b98-af7c-59451e09065e)
+ 
+#### CloudWatch Dashboards:
+- Là các trang chủ có thể tùy chỉnh trong bảng điều khiển CloudWatch mà bạn có thể sử dụng để giám sát tài nguyên của mình trong một chế độ xem duy nhất.
+- CloudWatch Dashboards tích hợp với CloudWatch Metrics và CloudWatch Alarms để tạo chế độ xem tùy chỉnh về số liệu và cảnh báo cho tài nguyên AWS của bạn.
+### 9.3. CloudTrail
+
+![image](https://github.com/user-attachments/assets/2d6c1504-e844-4408-9d08-6a155a6c5e42)
+
+- AWS CloudTrail AWS CloudTrail: ghi lại các lệnh gọi API cho tài khoản của bạn. Thông tin được ghi lại bao gồm danh tính của người gọi API, thời gian gọi API, địa chỉ IP nguồn của người gọi API,...
+- Các sự kiện thường được cập nhật trong CloudTrail trong 15 phút sau lệnh gọi API.
+- Bạn có thể lọc các sự kiện bằng cách chỉ định ngày và giờ xảy ra lệnh gọi API, người dùng đã yêu cầu hành động, loại tài nguyên liên quan đến lệnh gọi API,...
+- Các sự kiện được ghi lại có thể được lưu trữ trong Amazon S3. CloudTrail có thể được tích hợp với Amazon CloudWatch để tạo ra các cảnh báo khi có các sự kiện quan trọng, hoặc kết hợp với AWS Lambda để tự động phản hồi các sự kiện cụ thể.
+#### CloudTrail Insights
+- Dùng để tự động phát hiện các hoạt động API bất thường trong tài khoản AWS của bạn. Mỗi hoạt động, bao gồm các hành động được thực hiện qua AWS Management Console, AWS SDK, Command Line Tools, và các dịch vụ AWS khác, đều được ghi lại dưới dạng "sự kiện" và lưu trữ để bạn có thể xem lại và phân tích sau này.
 ### Nguồn tham khảo
 - Mindmap: https://github.com/notcuder/aws-mindmap?tab=readme-ov-file
 - https://github.com/keenanromain/AWS-SAA-C02-Study-Guide?tab=readme-ov-file
