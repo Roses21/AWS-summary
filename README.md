@@ -3,11 +3,21 @@
 2. [Three tier architecture](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#2-three-tier-architecture)
 3. [AWS Well-Architected Framework](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#3-aws-well-architected-framework)
 4. [Auto Scaling](https://github.com/Roses21/AWS-summary/blob/main/README.md#4-ec2-auto-scaling)
-5. [AWS Network](https://github.com/Roses21/AWS-summary/blob/main/README.md#5-aws-network)
-6. [AWS Compute](https://github.com/Roses21/AWS-summary/blob/main/README.md#6-compute)
-7. [Storage](https://github.com/Roses21/AWS-summary/blob/main/README.md#7-storage)
-8. [Database](https://github.com/Roses21/AWS-summary/blob/main/README.md#8-database)
-9. [AWS Management Tools](https://github.com/Roses21/AWS-summary/blob/main/README.md#9-aws-management-tools)
+5. [AWS Networking](https://github.com/Roses21/AWS-summary/blob/main/README.md#5-aws-network)
+
+   5.1. [VPC]()
+   
+7. [AWS Compute](https://github.com/Roses21/AWS-summary/blob/main/README.md#6-compute)
+
+   6.1. [Elastic Compute Cloud (EC2)]()
+
+   6.2. [AWS Fargate - Severless]()
+
+   6.3. [AWS Lambda - Severless]()
+   
+8. [Storage](https://github.com/Roses21/AWS-summary/blob/main/README.md#7-storage)
+9. [Database](https://github.com/Roses21/AWS-summary/blob/main/README.md#8-database)
+10. [AWS Management Tools](https://github.com/Roses21/AWS-summary/blob/main/README.md#9-aws-management-tools)
 
    9.1. [IAM](https://github.com/Roses21/AWS-summary/blob/main/README.md#91-iam)
 
