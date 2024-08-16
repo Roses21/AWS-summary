@@ -2,8 +2,19 @@
 1. [Lưu ý về vẽ kiến trúc trên draw.io](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#1-l%C6%B0u-%C3%BD-v%E1%BB%81-v%E1%BA%BD-ki%E1%BA%BFn-tr%C3%BAc-tr%C3%AAn-drawio)
 2. [Three tier architecture](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#2-three-tier-architecture)
 3. [AWS Well-Architected Framework](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#3-aws-well-architected-framework)
-4. [Auto Scaling]()
-5. []()
+4. [Auto Scaling](https://github.com/Roses21/AWS-summary/blob/main/README.md#4-ec2-auto-scaling)
+5. [AWS Network](https://github.com/Roses21/AWS-summary/blob/main/README.md#5-aws-network)
+6. [AWS Compute](https://github.com/Roses21/AWS-summary/blob/main/README.md#6-compute)
+7. [Storage](https://github.com/Roses21/AWS-summary/blob/main/README.md#7-storage)
+8. [Database](https://github.com/Roses21/AWS-summary/blob/main/README.md#8-database)
+9. [AWS Management Tools](https://github.com/Roses21/AWS-summary/blob/main/README.md#9-aws-management-tools)
+
+   9.1. [IAM](https://github.com/Roses21/AWS-summary/blob/main/README.md#91-iam)
+
+   9.2. [CloudWatch (Application)](https://github.com/Roses21/AWS-summary/blob/main/README.md#92-cloudwatch-application)
+
+   9.3. [CloudTrail (AWS Account)](https://github.com/Roses21/AWS-summary/blob/main/README.md#93-cloudtrail-aws-account)
+11. [Nguồn tham khảo](https://github.com/Roses21/AWS-summary/blob/main/README.md#ngu%E1%BB%93n-tham-kh%E1%BA%A3o)
 ## 1. Lưu ý về vẽ kiến trúc trên draw.io
 - Tỉ lệ khung ngoài cùng của kiến trúc AWS: 1.618, ví dụ Height = 500 => Width = 500 x 1.618 = 809.
 - Khung tên của service AWS nên là màu cam (FF8000).
