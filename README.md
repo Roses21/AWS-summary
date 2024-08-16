@@ -7,7 +7,7 @@
 
    5.1. [VPC]()
    
-7. [AWS Compute](https://github.com/Roses21/AWS-summary/blob/main/README.md#6-compute)
+6. [AWS Compute](https://github.com/Roses21/AWS-summary/blob/main/README.md#6-compute)
 
    6.1. [Elastic Compute Cloud (EC2)]()
 
@@ -15,16 +15,16 @@
 
    6.3. [AWS Lambda - Severless]()
    
-8. [Storage](https://github.com/Roses21/AWS-summary/blob/main/README.md#7-storage)
-9. [Database](https://github.com/Roses21/AWS-summary/blob/main/README.md#8-database)
-10. [AWS Management Tools](https://github.com/Roses21/AWS-summary/blob/main/README.md#9-aws-management-tools)
+7. [Storage](https://github.com/Roses21/AWS-summary/blob/main/README.md#7-storage)
+8. [Database](https://github.com/Roses21/AWS-summary/blob/main/README.md#8-database)
+9. [AWS Management Tools](https://github.com/Roses21/AWS-summary/blob/main/README.md#9-aws-management-tools)
 
    9.1. [IAM](https://github.com/Roses21/AWS-summary/blob/main/README.md#91-iam)
 
    9.2. [CloudWatch (Application)](https://github.com/Roses21/AWS-summary/blob/main/README.md#92-cloudwatch-application)
 
    9.3. [CloudTrail (AWS Account)](https://github.com/Roses21/AWS-summary/blob/main/README.md#93-cloudtrail-aws-account)
-11. [Nguồn tham khảo](https://github.com/Roses21/AWS-summary/blob/main/README.md#ngu%E1%BB%93n-tham-kh%E1%BA%A3o)
+10. [Nguồn tham khảo](https://github.com/Roses21/AWS-summary/blob/main/README.md#ngu%E1%BB%93n-tham-kh%E1%BA%A3o)
 ## 1. Lưu ý về vẽ kiến trúc trên draw.io
 - Tỉ lệ khung ngoài cùng của kiến trúc AWS: 1.618, ví dụ Height = 500 => Width = 500 x 1.618 = 809.
 - Khung tên của service AWS nên là màu cam (FF8000).
