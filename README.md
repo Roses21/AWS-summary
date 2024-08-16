@@ -129,7 +129,10 @@ Gồm 6 trụ cột chính:
 - Ví dụ: Bạn có thể tạo một policy để tự động thêm hoặc bớt EC2 instances trong một Auto Scaling group nhằm duy trì mức sử dụng CPU trung bình là 50%.
 ## 5. AWS Network
 ### 5.1. VPC
-### 5.2. ELB
+### 5.2. Elastic Load Balancing (ELB)
+
+![image](https://github.com/user-attachments/assets/a8a9d511-a02d-4308-a506-515c48db4869)
+
 ### 5.3. ENB
 ### 5.4. Route 53
 ## 6. Compute
@@ -172,8 +175,11 @@ Gồm 6 trụ cột chính:
 - Consider using an identity provider
 - Regularly review and remove unused users, roles, and other credentials
   
-### 9.2. CloudWatch
-- CloudWatch là một dịch vụ giám sát, tổng hợp và phân tích dữ liệu, nguồn tài nguyên; cung cấp thông tin để định hướng hành động, gửi thông báo, hỗ trợ việc tối ưu hóa hiệu năng ứng dụng, quản lý sử dụng tài nguyên và hiểu rõ tình trạng hoạt động của toàn hệ thống.
+### 9.2. CloudWatch (Application)
+- CloudWatch là một dịch vụ thu thập, giám sát và phân tích dữ liệu, nguồn tài nguyên của ứng dụng; cung cấp thông tin để định hướng hành động, gửi thông báo, hỗ trợ việc tối ưu hóa hiệu năng ứng dụng, quản lý sử dụng tài nguyên và hiểu rõ tình trạng hoạt động của toàn hệ thống.
+
+  ![image](https://github.com/user-attachments/assets/859bb721-bf25-4b37-b3a9-f39174a3d01b)
+
 - CloudWatch sử dụng metrics - là dữ liệu về hiệu suất của hệ thống của bạn.
   
 ![image](https://github.com/user-attachments/assets/a155fe6f-c8e5-44f6-9009-6bbdffc80b34)
@@ -209,19 +215,36 @@ Gồm 6 trụ cột chính:
 #### CloudWatch Dashboards:
 - Là các trang chủ có thể tùy chỉnh trong bảng điều khiển CloudWatch mà bạn có thể sử dụng để giám sát tài nguyên của mình trong một chế độ xem duy nhất.
 - CloudWatch Dashboards tích hợp với CloudWatch Metrics và CloudWatch Alarms để tạo chế độ xem tùy chỉnh về số liệu và cảnh báo cho tài nguyên AWS của bạn.
-### 9.3. CloudTrail
+### 9.3. CloudTrail (AWS Account)
 
-![image](https://github.com/user-attachments/assets/2d6c1504-e844-4408-9d08-6a155a6c5e42)
+![image](https://github.com/user-attachments/assets/ad53f89b-f7ec-472a-83a5-fa140a316b34)
 
-- AWS CloudTrail AWS CloudTrail: ghi lại các lệnh gọi API cho tài khoản của bạn. Thông tin được ghi lại bao gồm danh tính của người gọi API, thời gian gọi API, địa chỉ IP nguồn của người gọi API,...
+- AWS CloudTrail AWS CloudTrail: là một dịch vụ audit cho tài khoản AWS. Actions taken by a user, role, or an AWS service are recorded as events in CloudTrail. Các events bao gồm các hành động được thực hiện trong AWS Management Console, AWS Command Line Interface, và AWS SDKs và APIs. Event được lưu lại tối đa 90 ngày trên CloudTrail (enabled by default and is no additional cost).
+- Use case:
+  - Tuân thủ & kiểm toán: sử dụng CloudTrail logs để chứng minh việc tuân thủ những quy định như SOC, PCI và HIPAA.
+  - Bảo mật: Cải thiện tình hình bảo mật của bạn bằng cách ghi lại các sự kiện và hoạt động của người dùng, đồng thời thiết lập quy tắc luồng công việc tự động với Amazon EventBridge.
+  - Vận hành: Trả lời các câu hỏi vận hành, tạo điều kiện thuận lợi cho việc gỡ lỗi và điều tra các vấn đề.
 - Các sự kiện thường được cập nhật trong CloudTrail trong 15 phút sau lệnh gọi API.
 - Bạn có thể lọc các sự kiện bằng cách chỉ định ngày và giờ xảy ra lệnh gọi API, người dùng đã yêu cầu hành động, loại tài nguyên liên quan đến lệnh gọi API,...
 - Các sự kiện được ghi lại có thể được lưu trữ trong Amazon S3. CloudTrail có thể được tích hợp với Amazon CloudWatch để tạo ra các cảnh báo khi có các sự kiện quan trọng, hoặc kết hợp với AWS Lambda để tự động phản hồi các sự kiện cụ thể.
-#### CloudTrail Insights
-- Dùng để tự động phát hiện các hoạt động API bất thường trong tài khoản AWS của bạn. Mỗi hoạt động, bao gồm các hành động được thực hiện qua AWS Management Console, AWS SDK, Command Line Tools, và các dịch vụ AWS khác, đều được ghi lại dưới dạng "sự kiện" và lưu trữ để bạn có thể xem lại và phân tích sau này.
+- CloudTrail cung cấp 3 cách để record sự kiện:
+  - Event history (free): cung cấp bản ghi có thể xem, tìm kiếm, tải xuống và không thể thay đổi về các sự kiện quản lý trong 90 ngày qua trong Region.
+  - CloudTrail Lake (có phí): là managed data lake để thu thập, lưu trữ, truy cập và phân tích hoạt động của người dùng và API trên AWS nhằm mục đích kiểm tra và bảo mật. CloudTrail Lake chuyển đổi các sự kiện hiện có ở định dạng JSON dựa trên hàng sang định dạng ORC của Apache (để truy xuất dữ liệu nhanh chóng). Bạn có thể lưu giữ dữ liệu sự kiện trong kho lưu trữ dữ liệu sự kiện trong tối đa 3.653 ngày (khoảng 10 năm) tùy vào gói dịch vụ bạn chọn.
+  - Trails (có tính phí lưu trữ trên S3): capture a record of AWS activities, delivering and storing these events in an Amazon S3 bucket, with optional delivery to CloudWatch Logs and Amazon EventBridge. Bạn có thể gửi miễn phí một bản sao các sự kiện quản lý đang diễn ra tới bộ chứa S3 của mình từ CloudTrail bằng cách tạo một trail, tuy nhiên, sẽ phải trả phí lưu trữ trên Amazon S3.
+- CloudTrail Insights: Dùng để tự động phát hiện các hoạt động API bất thường trong tài khoản AWS của bạn. Mỗi hoạt động, bao gồm các hành động được thực hiện qua AWS Management Console, AWS SDK, Command Line Tools, và các dịch vụ AWS khác, đều được ghi lại dưới dạng "sự kiện" và lưu trữ để bạn có thể xem lại và phân tích sau này.
+- Data protection in AWS CloudTrail: By default, CloudTrail event log files are encrypted using Amazon S3 server-side encryption (SSE). You can also choose to encrypt your log files with an AWS Key Management Service (AWS KMS) key.
+- Types of events that can be logged in CloudTrail: management events and data events.
+  - Management events: cung cấp khả năng hiển thị các hoạt động quản lý được thực hiện trên các tài nguyên trong tài khoản AWS của bạn. Ví dụ:
+    - Configuring security.
+    - Configuring rules for routing data.
+  - Data events: provide information about the resource operations performed on or in a resource. Ví dụ:
+    - Amazon S3 object-level API activity (for example, GetObject, DeleteObject, and PutObject API operations) on objects in S3 buckets.
+    - AWS Lambda function execution activity (the Invoke API).
+- By default, CloudTrail logs management events, but not data events.
 ### Nguồn tham khảo
 - Mindmap: https://github.com/notcuder/aws-mindmap?tab=readme-ov-file
 - https://github.com/keenanromain/AWS-SAA-C02-Study-Guide?tab=readme-ov-file
 - https://github.com/skulltech/aws-solutions-architect-associate-notes?tab=readme-ov-file
 - Khóa học cơ bản Practitioner Essentials: https://explore.skillbuilder.aws/learn/course/134/play/136404/aws-cloud-practitioner-essentials
 - Technical Essentials: https://explore.skillbuilder.aws/learn/course/internal/view/elearning/1851/aws-technical-essentials
+- Youtube: Be A Better Dev
