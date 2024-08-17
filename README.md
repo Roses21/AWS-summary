@@ -158,7 +158,7 @@ Gồm 6 trụ cột chính:
 ### 5.4. Route 53
 ## 6. Compute
 ### 6.1. Elastic Compute Cloud (EC2)
-#### EC2 instance lifecycle
+- EC2 instance lifecycle
   
   ![image](https://github.com/user-attachments/assets/d40c58fa-b292-4f4a-b5e7-cf0292bf3f35)
 
@@ -169,7 +169,7 @@ Gồm 6 trụ cột chính:
      - Stop (storage for any Amazon EBS volumes is charged): Giống như tắt nguồn máy tính, mất dữ liệu trong RAM. Bạn luôn có thể bật lại và nó sẽ trải qua trình tự khởi động thông thường, chuyển qua trạng thái chờ xử lý và quay lại trạng thái đang chạy.
      - Stop-hibernate: Giống với cách bạn lock máy tính xách tay và đóng nắp lại, nhưng khi bạn mở lại, mọi thứ vẫn ở nguyên vị trí nơi bạn để nó. Dữ liệu trong RAM được lưu vào ổ đĩa EBS gốc.
    - Terminate (stop incurring charges): xóa vĩnh viễn instance.
-#### Pricing: gồm 5 loại
+- Pricing: gồm 5 loại:
   - On-Demand Instances: dùng bao nhiêu trả bấy nhiêu (tính trên giờ or giây chạy instance). Phù hợp cho các trường hợp:
     - Người dùng thích chi phí thấp và tính linh hoạt của Amazon EC2 mà không cần trả trước hoặc cam kết sử dụng dài hạn.
     - Ứng dụng có khối lượng công việc ngắn hạn, thường xuyên biến động hoặc có khả năng bị gián đoạn.
