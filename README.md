@@ -10,7 +10,7 @@
 6. [AWS Compute](https://github.com/Roses21/AWS-summary/blob/main/README.md#6-compute)
 
    6.1. [Elastic Compute Cloud (EC2)]()
-
+      
    6.2. [AWS Fargate - Severless]()
 
    6.3. [AWS Lambda - Severless]()
@@ -157,6 +157,37 @@ Gồm 6 trụ cột chính:
 ### 5.3. ENB
 ### 5.4. Route 53
 ## 6. Compute
+### 6.1. Elastic Compute Cloud (EC2)
+- EC2 instance lifecycle:
+  
+  ![image](https://github.com/user-attachments/assets/d40c58fa-b292-4f4a-b5e7-cf0292bf3f35)
+
+   - Pending (billing has not started): AWS performs all actions needed to set up an instance, such as copying the AMI content to the root device and allocating the necessary networking components.
+   - Running (billing begins): you can take other actions on the instance, such as reboot, terminate, stop, and stop-hibernate.
+   - Rebooting: equivalent to rebooting an operating system. The instance keeps its public DNS name (IPv4) and private and public IPv4 addresses. An IPv6 address (if applicable) remains on the same host computer and maintains its public and private IP address, in addition to any data on its instance store volumes.
+   - Stopping: is similar to when you shut down your laptop; retains its private IPv4 addresses and IPv6 address. 2 options:
+     - Stop (storage for any Amazon EBS volumes is charged): Giống như tắt nguồn máy tính, mất dữ liệu trong RAM. Bạn luôn có thể bật lại và nó sẽ trải qua trình tự khởi động thông thường, chuyển qua trạng thái chờ xử lý và quay lại trạng thái đang chạy.
+     - Stop-hibernate: Giống với cách bạn lock máy tính xách tay và đóng nắp lại, nhưng khi bạn mở lại, mọi thứ vẫn ở nguyên vị trí nơi bạn để nó. Dữ liệu trong RAM được lưu vào ổ đĩa EBS gốc.
+   - Terminate (stop incurring charges): xóa vĩnh viễn instance.
+- Pricing: gồm 5 loại:
+  - On-Demand Instances: dùng bao nhiêu trả bấy nhiêu (tính trên giờ or giây chạy instance). Phù hợp cho các trường hợp:
+    - Người dùng thích chi phí thấp và tính linh hoạt của Amazon EC2 mà không cần trả trước hoặc cam kết sử dụng dài hạn.
+    - Ứng dụng có khối lượng công việc ngắn hạn, thường xuyên biến động hoặc có khả năng bị gián đoạn.
+    - Ứng dụng đang được phát triển hoặc thử nghiệm trên Amazon EC2 lần đầu tiên.
+  - Spot Instances: giảm tới 90% so với giá của On-Demand Instances. Use cases:
+    - Các ứng dụng có thời gian bắt đầu và kết thúc thay đổi liên tục như là chạy CI/CD, data analysis, batch jobs, background processing.
+    - Người dùng có khối lượng công việc có khả năng chịu lỗi hoặc không có trạng thái.
+    - Các ứng dụng chỉ khả thi ở mức giá rất thấp.
+  - Reserved Instances: tiết kiệm tới 72% so với giá của On-Demand Instances, phải ký hợp đồng sử dụng. Bạn có thể chọn giữa ba tùy chọn thanh toán: Trả trước toàn bộ, Trả trước một phần hoặc Không trả trước. Bạn có thể chọn thời hạn 1 năm hoặc 3 năm cho mỗi tùy chọn này. Có 3 options:
+    - Standard Reserved Instances: giảm nhiều nhất (lên tới 72% so với On-Demand Instances), phù hợp với ứng dụng cố định.
+    - Convertible Reserved Instances: rẻ hơn đến 54% so với On-Demand Instance, cung cấp khả năng thay đổi các thuộc tính của Reserved Instances như có thể lấy tài nguyên của nhiều loại instance khác nhau, ví dụ lấy vCPU của loại này và lấy memory của loại khác.
+    - Scheduled Reserved Instances:  là loại có thể cố định thời gian bật và tắt instance, chỉ tính tiền trong thời gian bật instance. Loại này phù hợp với các job chạy trong một khoảng thời gian cố định biết trước (VD như batch chạy vào 3h sáng tới 4h sáng mỗi cuối tuần).
+  - Savings Plans: phải ký hợp đồng nhưng bạn lại có thể quy định số tiền mình trả để sử dụng hết hoặc một phần giá rẻ của hợp đồng. Ví dụ Reserved Instances hợp đồng 1 năm bạn phải trả phí là 20 đô/giờ để tiết kiệm được 70% so với on-demand Instances, thì Saving Plans bạn có thể chỉ muốn trả 10 đô/giờ để chỉ sử dụng phần giá rẻ đó trong nửa năm, nếu sau nửa năm hết tiền giá rẻ mà bạn không tạo Saving Plans mới thì sẽ tính theo on-demand như bình thường. Use cases:
+    - Khối lượng công việc với mức sử dụng nhất quán và ổn định.
+    - Khách hàng muốn sử dụng các loại instance và giải pháp điện toán khác nhau ở nhiều địa điểm khác nhau.
+    - Khách hàng có thể cam kết tài chính để sử dụng Amazon EC2 trong thời hạn 1 năm hoặc 3 năm.
+  - Dedicated Hosts (máy chủ chuyên dụng): là máy chủ Amazon EC2 vật lý được dành riêng cho bạn sử dụng, giúp bạn giảm chi phí vì bạn có thể sử dụng các giấy phép phần mềm gắn với máy chủ hiện có của mình, chẳng hạn như giấy phép Windows Server, SQL Server và Oracle. Dedicated Hosts có thể được mua theo yêu cầu (tính theo giờ) với ưu đãi giảm tới 70% nếu đặt trước.
+
 ## 7. Storage 
 ### 7.1. CloudFront
 ### 7.2. S3
@@ -262,10 +293,13 @@ Gồm 6 trụ cột chính:
     - Amazon S3 object-level API activity (for example, GetObject, DeleteObject, and PutObject API operations) on objects in S3 buckets.
     - AWS Lambda function execution activity (the Invoke API).
 - By default, CloudTrail logs management events, but not data events.
+## 10. CloudFormation
+- 
 ### Nguồn tham khảo
 - Mindmap: https://github.com/notcuder/aws-mindmap?tab=readme-ov-file
-- https://github.com/keenanromain/AWS-SAA-C02-Study-Guide?tab=readme-ov-file
-- https://github.com/skulltech/aws-solutions-architect-associate-notes?tab=readme-ov-file
+- Tổng hợp kiến thức ôn thi SAA: https://github.com/keenanromain/AWS-SAA-C02-Study-Guide?tab=readme-ov-file
+- Note lý thuyết cơ bản về AWS: https://github.com/skulltech/aws-solutions-architect-associate-notes?tab=readme-ov-file
 - Khóa học cơ bản Practitioner Essentials: https://explore.skillbuilder.aws/learn/course/134/play/136404/aws-cloud-practitioner-essentials
 - Technical Essentials: https://explore.skillbuilder.aws/learn/course/internal/view/elearning/1851/aws-technical-essentials
 - Youtube: Be A Better Dev
+- Tối ưu chi phí cho AWS EC2: https://blog.daovanhung.com/post/toi-uu-chi-phi-cho-aws-ec2# 
