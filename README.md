@@ -202,17 +202,10 @@ Gồm 3 loại: virtual machines (VMs), containers, và serverless.
 - Tổ chức các containers:
   - Trong AWS, containers có thể chạy trên EC2 instances. Hầu hết các công ty và tổ chức đều chạy nhiều containers trên nhiều EC2 instances trên một vài AZ.
   - AWS cung cấp 2 dịch vụ container orchestration: Amazon Elastic Container Service (Amazon ECS) và Amazon Elastic Kubernetes Service (Amazon EKS):
-    - ECS:  là dịch vụ quản lý container với khả năng mở rộng cao cho phép đơn giản hóa việc chạy, ngừng chạy và quản lý các container trong cluster; tích hợp được với Docker. Gồm 3 layers:
-      - Capacity: Cơ sở hạ tầng nơi container của bạn chạy (gồm EC2 instance, Fargate, on-premises compute).
-      - Controller: Triển khai và quản lý các ứng dụng chạy trên container của bạn (ECS scheduler - là phần mềm quản lý các ứng dụng của bạn).
-      - Provisioning: Các công cụ mà bạn có thể sử dụng để giao tiếp với scheduler nhằm triển khai và quản lý các ứng dụng cũng như container của mình (Console, CLI, SDK, copilot, CDK).
-     
-        Các khái niệm trong ECS:
-         - Images: là một plaintext file chứa các hướng dẫn xây dựng container.
-         - Registry: là nơi lưu trữ images. AWS Elastic Container Registry (ECR) là một loại registry được quản lý hoàn toàn bởi AWS nhằm đơn giản hóa việc lưu trữ, quản lý và triển khai các Docker container image. 
-         - Task definition: là một tệp văn bản ở định dạng JSON mô tả các tham số và một hoặc nhiều vùng chứa tạo thành ứng dụng của bạn. Ví dụ: bạn có thể sử dụng nó để chỉ định hình ảnh và tham số cho hệ điều hành, bộ chứa nào sẽ sử dụng, cổng nào sẽ mở cho ứng dụng của bạn và khối lượng dữ liệu nào sẽ sử dụng với bộ chứa trong tác vụ.
-         - Amazon ECS Services: là một cấu hình cho phép chạy một hoặc nhiều các task liên tiếp nhau trong cluster và tự động duy trì chúng. Các task và các dịch vụ có thể được chạy trên các hạ tầng serverless (quản lý bởi AWS Fargate) hoặc thông quan hạ tầng do bạn quản lý như EC2 cluster.
-         - Cluster: là một nhóm logical tasks hoặc service chạy trên Capacity.
+    - ECS:
+      
+  ![image](https://github.com/user-attachments/assets/02587539-8d63-417b-84db-3e7a1bd03045)
+
     - EKS: là một dịch vụ được quản lý mà bạn có thể sử dụng để chạy Kubernetes trên AWS mà không cần cài đặt, vận hành và bảo trì.
 - ECS khác EKS:
   - An ECS container is called a task. An EKS container is called a pod.
