@@ -157,7 +157,10 @@ Gồm 6 trụ cột chính:
 ### 5.3. ENB
 ### 5.4. Route 53
 ## 6. Compute
-### 6.1. Elastic Compute Cloud (EC2)
+
+Gồm 3 loại: virtual machines (VMs), containers, và serverless.
+
+### 6.1. Virtual machines (VMs): Elastic Compute Cloud (EC2)
 - EC2 instance lifecycle
   
   ![image](https://github.com/user-attachments/assets/d40c58fa-b292-4f4a-b5e7-cf0292bf3f35)
@@ -188,6 +191,34 @@ Gồm 6 trụ cột chính:
     - Khách hàng có thể cam kết tài chính để sử dụng Amazon EC2 trong thời hạn 1 năm hoặc 3 năm.
   - Dedicated Hosts (máy chủ chuyên dụng): là máy chủ Amazon EC2 vật lý được dành riêng cho bạn sử dụng, giúp bạn giảm chi phí vì bạn có thể sử dụng các giấy phép phần mềm gắn với máy chủ hiện có của mình, chẳng hạn như giấy phép Windows Server, SQL Server và Oracle. Dedicated Hosts có thể được mua theo yêu cầu (tính theo giờ) với ưu đãi giảm tới 70% nếu đặt trước.
 
+### 6.2. Containers
+- Container: đóng gói mã ứng dụng và các phần phụ thuộc của nó, tạo ra môi trường độc lập của riêng container đó; giúp workload có thể được chuyển từ nơi này sang nơi khác, chẳng hạn như từ quá trình phát triển đến production hoặc từ môi trường tại chỗ lên đám mây. Một ví dụ về nền tảng container là Docker.
+- Sự khác biệt giữa VM và container:
+  
+![image](https://github.com/user-attachments/assets/995224c1-c3a1-4b5a-bd43-0cff7c41011a)
+
+   - Các containers chia sẻ cùng hệ điều hành và kernel với máy chủ mà chúng tồn tại trên đó. Nhưng máy ảo có hệ điều hành riêng. Mỗi máy ảo phải duy trì một bản sao của hệ điều hành, điều này dẫn đến lãng phí tài nguyên ở mức độ nào đó.
+   - Container nhẹ hơn, khởi động nhanh hơn, có ưu thế về tốc độ. Còn máy ảo cung cấp toàn bộ sức mạnh của hệ điều hành và nhiều tài nguyên, như cài đặt gói, hạt nhân chuyên dụng, v.v.
+- Tổ chức các containers:
+  - Trong AWS, containers có thể chạy trên EC2 instances. Hầu hết các công ty và tổ chức đều chạy nhiều containers trên nhiều EC2 instances trên một vài AZ.
+  - AWS cung cấp 2 dịch vụ container orchestration: Amazon Elastic Container Service (Amazon ECS) và Amazon Elastic Kubernetes Service (Amazon EKS):
+    - ECS:  là dịch vụ quản lý container với khả năng mở rộng cao cho phép đơn giản hóa việc chạy, ngừng chạy và quản lý các container trong cluster; tích hợp được với Docker. Gồm 3 layers:
+      - Capacity: Cơ sở hạ tầng nơi container của bạn chạy (gồm EC2 instance, Fargate, on-premises compute).
+      - Controller: Triển khai và quản lý các ứng dụng chạy trên container của bạn (ECS scheduler - là phần mềm quản lý các ứng dụng của bạn).
+      - Provisioning: Các công cụ mà bạn có thể sử dụng để giao tiếp với scheduler nhằm triển khai và quản lý các ứng dụng cũng như container của mình (Console, CLI, SDK, copilot, CDK).
+     
+        Các khái niệm trong ECS:
+         - Images: là một plaintext file chứa các hướng dẫn xây dựng container.
+         - Registry: là nơi lưu trữ images. AWS Elastic Container Registry (ECR) là một loại registry được quản lý hoàn toàn bởi AWS nhằm đơn giản hóa việc lưu trữ, quản lý và triển khai các Docker container image. 
+         - Task definition: là một tệp văn bản ở định dạng JSON mô tả các tham số và một hoặc nhiều vùng chứa tạo thành ứng dụng của bạn. Ví dụ: bạn có thể sử dụng nó để chỉ định hình ảnh và tham số cho hệ điều hành, bộ chứa nào sẽ sử dụng, cổng nào sẽ mở cho ứng dụng của bạn và khối lượng dữ liệu nào sẽ sử dụng với bộ chứa trong tác vụ.
+         - Amazon ECS Services: là một cấu hình cho phép chạy một hoặc nhiều các task liên tiếp nhau trong cluster và tự động duy trì chúng. Các task và các dịch vụ có thể được chạy trên các hạ tầng serverless (quản lý bởi AWS Fargate) hoặc thông quan hạ tầng do bạn quản lý như EC2 cluster.
+         - Cluster: là một nhóm logical tasks hoặc service chạy trên Capacity.
+    - EKS: là một dịch vụ được quản lý mà bạn có thể sử dụng để chạy Kubernetes trên AWS mà không cần cài đặt, vận hành và bảo trì.
+    - ECS khác EKS:
+      - An ECS container is called a task. An EKS container is called a pod.
+      - Amazon ECS chạy trên công nghệ gốc của AWS. Amazon EKS chạy trên Kubernetes.
+      - In Amazon ECS, the machine that runs the containers is an EC2 instance that has an ECS agent installed and configured to run and manage your containers. This instance is called a container instance. In Amazon EKS, the machine that runs the containers is called a worker node or Kubernetes node. 
+### 6.3. Serverless 
 ## 7. Storage 
 ### 7.1. CloudFront
 ### 7.2. S3
