@@ -214,10 +214,10 @@ Gồm 3 loại: virtual machines (VMs), containers, và serverless.
          - Amazon ECS Services: là một cấu hình cho phép chạy một hoặc nhiều các task liên tiếp nhau trong cluster và tự động duy trì chúng. Các task và các dịch vụ có thể được chạy trên các hạ tầng serverless (quản lý bởi AWS Fargate) hoặc thông quan hạ tầng do bạn quản lý như EC2 cluster.
          - Cluster: là một nhóm logical tasks hoặc service chạy trên Capacity.
     - EKS: là một dịch vụ được quản lý mà bạn có thể sử dụng để chạy Kubernetes trên AWS mà không cần cài đặt, vận hành và bảo trì.
-    - ECS khác EKS:
-      - An ECS container is called a task. An EKS container is called a pod.
-      - Amazon ECS chạy trên công nghệ gốc của AWS. Amazon EKS chạy trên Kubernetes.
-      - In Amazon ECS, the machine that runs the containers is an EC2 instance that has an ECS agent installed and configured to run and manage your containers. This instance is called a container instance. In Amazon EKS, the machine that runs the containers is called a worker node or Kubernetes node. 
+- ECS khác EKS:
+  - An ECS container is called a task. An EKS container is called a pod.
+  - Amazon ECS chạy trên công nghệ gốc của AWS. Amazon EKS chạy trên Kubernetes.
+  - In Amazon ECS, the machine that runs the containers is an EC2 instance that has an ECS agent installed and configured to run and manage your containers. This instance is called a container instance. In Amazon EKS, the machine that runs the containers is called a worker node or Kubernetes node. 
 ### 6.3. Serverless 
 ## 7. Storage 
 ### 7.1. CloudFront
