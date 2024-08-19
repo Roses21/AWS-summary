@@ -175,14 +175,48 @@ Dùng khi muốn public subnet connect tới private subnet thông qua 1 port.
  - Public subnet: được ra ngoài internet.
  - Private subnet: giao tiếp với internet qua NAT gateway.
  - VPN-only subnet: This subnet has a route table that directs traffic to Amazon VPC’s Virtual Private Gateway 
-
 #### Route table
 Khi tạo VPC, AWS sẽ tự tạo 1 Default Route Table - không thể bị xóa và chỉ chứa 1 route duy nhất cho phép tất cả các subnet trong VPC liên lạc với nhau.
 1 router-table có thể có nhiều subnets, nhưng 1 subnet chỉ có 1 route-table.
 #### VPC Peering và Transit gateway
 - VPC Peering: giúp kết nối 2 VPC, để các tài nguyên trong 2 VPC có thể liên lạc trực tiếp với nhau mà không thông qua Internet. Kết nối 1:1 giữa 2 VPC. Không hỗ trợ khi 2 VPC bị overlap IP address space. Phải cấu hình bảng định tuyến, chỉ ra rằng phải kết nối với VPC Peering để đến được IP đích. IP đích có thể là IP của VPC/máy ảo/subnet.
 - Transit Gateway: phổ biến và tiện ích hơn VPC Peering. Cho phép kết nối nhiều VPCs và các mạng tại chỗ (on-premises networks) thông qua một gateway trung tâm duy nhất. Transit Gateway Attachment là công cụ dùng để gán các subnet của từng VPC cần kết nối với nhau vào một Transit Gateway đã được khởi tạo, hoạt động ở phạm vi toàn bộ AZ.
+#### Connect to VPC
+- Internet gateways:
+  - Có quy mô theo chiều ngang, dự phòng và có tính khả dụng cao cho phép giao tiếp giữa VPC và Internet. Nó hỗ trợ lưu lượng IPv4 và IPv6.
+  - Sử dụng Internet gateway thì miễn phí, nhưng sẽ tính phí truyền dữ liệu đối với các EC2 instances sử dụng internet gateway.
+- NAT devices:
+  
+  ![image](https://github.com/user-attachments/assets/4b84ee6e-caa8-45c2-b474-dddf74f37cb0)
 
+- Elastic IP (EIP): cho phép tài nguyên đám mây của bạn giao tiếp với Internet bằng địa chỉ IP công cộng tĩnh và băng thông có thể mở rộng. Nếu một tài nguyên được gán EIP, nó có khả năng truy cập Internet trực tiếp. Mỗi EIP chỉ có thể được liên kết với một tài nguyên đám mây và chúng phải ở cùng một khu vực. Tính năng:
+  - Uyển chuyển: có thể liên kết linh hoạt EIP với hoặc hủy liên kết EIP khỏi bất kỳ EC, GPU, cổng NAT, bộ cân bằng tải và địa chỉ IP ảo nào.
+  - Băng thông tốc độ cao.
+  - Chi phí thấp.
+  - Quản lý dễ dàng
+- Transit Gateway:
+  
+  ![image](https://github.com/user-attachments/assets/b7f6f0fb-a971-4682-aa98-35bbdebc9737)
+
+  - Lợi ích chính: khả năng tập trung và đơn giản hóa việc quản lý kết nối giữa VPC và mạng tại chỗ.
+  - Dùng kết nối các VPC và mạng tại chỗ, cổng này hoạt động như một trung tâm định tuyến lưu lượng giữa các VPC, kết nối VPN và kết nối AWS Direct Connect.
+  - Pricing: dựa trên lượng dữ liệu truyền qua cổng và thời gian sử dụng.
+- AWS Virtual Private Network (VPN): kết nối VPC của mình với các mạng và người dùng remote. VPN connectivity option:
+  - AWS Site-to-Site VPN: create an IPsec VPN connection between your VPC and your remote network. On the AWS side of the Site-to-Site VPN connection, a virtual private gateway or transit gateway provides two VPN endpoints (tunnels) for automatic failover. 
+  - AWS Client VPN
+  - AWS VPN CloudHub
+  - Third party software VPN appliance
+- VPC peering connections: 
+  
+  ![image](https://github.com/user-attachments/assets/569b4519-c6ca-4bb5-97bf-75f0ab81ce68)
+
+  - Cho phép liên lạc trực tiếp và an toàn giữa hai đám mây riêng ảo (VPC). Đảm bảo rằng không có điểm lỗi hoặc tắc nghẽn băng thông nào.
+  - Có khả năng kết nối các VPC trên các tài khoản AWS khác nhau hoặc thậm chí các Khu vực AWS khác nhau.
+  - Đảm bảo rằng tất cả lưu lượng dữ liệu giữa các VPC ngang hàng vẫn nằm trong mạng AWS mà không bao giờ truyền qua Internet công cộng.
+  - Use cases: c
+    - Cho phép liên lạc an toàn giữa các tầng khác nhau của ứng dụng (chẳng hạn như máy chủ web và máy chủ cơ sở dữ liệu).
+    - Hỗ trợ chia sẻ tài nguyên giữa nhiều nhóm hoặc đơn vị kinh doanh.
+    - Cho phép kiến ​​trúc đám mây lai bằng cách kết nối mạng tại chỗ với VPC AWS.
 ### 5.2. Elastic Load Balancing (ELB)
 
 ![image](https://github.com/user-attachments/assets/a8a9d511-a02d-4308-a506-515c48db4869)
