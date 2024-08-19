@@ -213,7 +213,7 @@ Khi tạo VPC, AWS sẽ tự tạo 1 Default Route Table - không thể bị xó
   - Cho phép liên lạc trực tiếp và an toàn giữa hai đám mây riêng ảo (VPC). Đảm bảo rằng không có điểm lỗi hoặc tắc nghẽn băng thông nào.
   - Có khả năng kết nối các VPC trên các tài khoản AWS khác nhau hoặc thậm chí các Khu vực AWS khác nhau.
   - Đảm bảo rằng tất cả lưu lượng dữ liệu giữa các VPC ngang hàng vẫn nằm trong mạng AWS mà không bao giờ truyền qua Internet công cộng.
-  - Use cases: c
+  - Use cases: 
     - Cho phép liên lạc an toàn giữa các tầng khác nhau của ứng dụng (chẳng hạn như máy chủ web và máy chủ cơ sở dữ liệu).
     - Hỗ trợ chia sẻ tài nguyên giữa nhiều nhóm hoặc đơn vị kinh doanh.
     - Cho phép kiến ​​trúc đám mây lai bằng cách kết nối mạng tại chỗ với VPC AWS.
