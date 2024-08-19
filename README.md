@@ -7,7 +7,7 @@
 
    5.1. [VPC]()
    
-6. [AWS Compute](https://github.com/Roses21/AWS-summary/blob/main/README.md#6-compute)
+7. [AWS Compute](https://github.com/Roses21/AWS-summary/blob/main/README.md#6-compute)
 
    6.1. [Elastic Compute Cloud (EC2)](https://github.com/Roses21/AWS-summary/tree/main#61-elastic-compute-cloud-ec2)
       
@@ -15,17 +15,17 @@
 
    6.3. [AWS Lambda - Severless]()
    
-7. [Storage](https://github.com/Roses21/AWS-summary/blob/main/README.md#7-storage)
-8. [Database](https://github.com/Roses21/AWS-summary/blob/main/README.md#8-database)
-9. [AWS Management Tools](https://github.com/Roses21/AWS-summary/blob/main/README.md#9-aws-management-tools)
+8. [Storage](https://github.com/Roses21/AWS-summary/blob/main/README.md#7-storage)
+9. [Database](https://github.com/Roses21/AWS-summary/blob/main/README.md#8-database)
+10. [AWS Management Tools](https://github.com/Roses21/AWS-summary/blob/main/README.md#9-aws-management-tools)
 
    9.1. [IAM](https://github.com/Roses21/AWS-summary/blob/main/README.md#91-iam)
 
    9.2. [CloudWatch (Application)](https://github.com/Roses21/AWS-summary/blob/main/README.md#92-cloudwatch-application)
 
    9.3. [CloudTrail (AWS Account)](https://github.com/Roses21/AWS-summary/blob/main/README.md#93-cloudtrail-aws-account)
-10. [Nguồn tham khảo](https://github.com/Roses21/AWS-summary/blob/main/README.md#ngu%E1%BB%93n-tham-kh%E1%BA%A3o)
-11. [AWS Billing and Cost Management]()
+11. [Nguồn tham khảo](https://github.com/Roses21/AWS-summary/blob/main/README.md#ngu%E1%BB%93n-tham-kh%E1%BA%A3o)
+12. [AWS Billing and Cost Management]()
 ## 1. Lưu ý về vẽ kiến trúc trên draw.io
 - Tỉ lệ khung ngoài cùng của kiến trúc AWS: 1.618, ví dụ Height = 500 => Width = 500 x 1.618 = 809.
 - Khung tên của service AWS nên là màu cam (FF8000).
@@ -151,6 +151,28 @@ Gồm 6 trụ cột chính:
 - Ví dụ: Bạn có thể tạo một policy để tự động thêm hoặc bớt EC2 instances trong một Auto Scaling group nhằm duy trì mức sử dụng CPU trung bình là 50%.
 ## 5. AWS Network
 ### 5.1. VPC
+- Nằm trong 1 Region (1 khu vực địa lý nơi mà AWS đặt hạ tầng chính), hiện tại 1 AWS Region tối đa 5 VPC trên 1 AWS account.
+- Khi tạo VPC cần khai báo 1 lớp mạng CIDR IPv4 (bắt buộc) và IPv6 (tùy chọn).
+- Mục đích chính: phân tách các môi trường (dev/test/production/…) ở mức network. Còn muốn tách biệt hẳn các tài nguyên (user không thấy được tài nguyên) thì cần tạo nhiều AWS account chứ không phải tạo nhiều VPC.
+#### Firewall trong VPC
+Dùng khi muốn public subnet connect tới private subnet thông qua 1 port.
+  - Security Group (phạm vi instance): là 1 tường lửa ảo lưu giữ trạng thái (stateful - 2 chiều kết nối vào ra trong cùng 1 session), giúp kiểm soát lưu lượng truy cập đến và đi trong tài nguyên của AWS. Rule chỉ cho phép rule allow, rule sẽ hạn chế theo protocol, IP nguồn, port kết nối or 1 SG khác. Không có thứ tự xử lý quy tắc. Áp dụng lên các tài nguyên bên trong VPC. Mặc định: chặn tất cả đến, cho tất cả đi. Mỗi Security Group có thể chứa tối đa 60 quy tắc inbound và 60 quy tắc outbound.
+  - NACL (Network Access Control List) (phạm vi subnet): stateless, áp dụng lên các Amazon VPC subnets => ảnh hưởng đến nhiều máy chủ/ứng dụng khác khi change NACL. Mặc định là cho phép mọi truy cập đến và đi. NACLs xử lý các quy tắc theo thứ tự số tăng dần. Khi một quy tắc phù hợp được tìm thấy, NACL sẽ dừng đánh giá và áp dụng quy tắc đó. Điều này có nghĩa là thứ tự quy tắc trong NACLs rất quan trọng. Mỗi NACL có thể chứa tối đa 20 quy tắc inbound và 20 quy tắc outbound.
+  - VPC Flow logs: cho phép nắm bắt thông tin về lưu lượng IP đến và đi từ các giao diện mạng trong VPC. Các file logs để thể xuất lên  Amazon CloudWatch và S3. Không capture được nội dung gói tin. => Theo dõi lưu lượng bất thường trong mạng.
+#### Subnet
+- VPC cho phép tạo nhiều mạng ảo và chia các mạng ảo này thành các mạng con. VPC Subnet sẽ nằm trong 1 AZ cụ thể. Khi tạo subnet, cần chỉ định CIDR cho mạng con đó và đây là một tập hợp con của khối VPC CIDR (Classless Inter-Domain Routing ví dụ: 192.168.10.1/24).
+- AWS giữ 4 địa chỉ IP đầu và 1 IP cuối của mỗi subnet để kết nối mạng. Subnet nhỏ nhất là /28 ~ 16 địa chỉ IP.
+ - Public subnet: được ra ngoài internet.
+ - Private subnet: giao tiếp với internet qua NAT gateway.
+ - VPN-only subnet: This subnet has a route table that directs traffic to Amazon VPC’s Virtual Private Gateway 
+
+#### Route table
+Khi tạo VPC, AWS sẽ tự tạo 1 Default Route Table - không thể bị xóa và chỉ chứa 1 route duy nhất cho phép tất cả các subnet trong VPC liên lạc với nhau.
+1 router-table có thể có nhiều subnets, nhưng 1 subnet chỉ có 1 route-table.
+#### VPC Peering và Transit gateway
+- VPC Peering: giúp kết nối 2 VPC, để các tài nguyên trong 2 VPC có thể liên lạc trực tiếp với nhau mà không thông qua Internet. Kết nối 1:1 giữa 2 VPC. Không hỗ trợ khi 2 VPC bị overlap IP address space. Phải cấu hình bảng định tuyến, chỉ ra rằng phải kết nối với VPC Peering để đến được IP đích. IP đích có thể là IP của VPC/máy ảo/subnet.
+- Transit Gateway: phổ biến và tiện ích hơn VPC Peering. Cho phép kết nối nhiều VPCs và các mạng tại chỗ (on-premises networks) thông qua một gateway trung tâm duy nhất. Transit Gateway Attachment là công cụ dùng để gán các subnet của từng VPC cần kết nối với nhau vào một Transit Gateway đã được khởi tạo, hoạt động ở phạm vi toàn bộ AZ.
+
 ### 5.2. Elastic Load Balancing (ELB)
 
 ![image](https://github.com/user-attachments/assets/a8a9d511-a02d-4308-a506-515c48db4869)
