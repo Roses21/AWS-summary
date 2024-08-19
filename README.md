@@ -352,6 +352,14 @@ Ví dụ: nếu ngày hôm nay là ngày 15, bạn được sếp yêu cầu tí
   - AWS Budgets: Sử dụng để theo dõi và quản lý chi phí AWS của mình. Khi tạo ngân sách, bạn tạo một ranh giới trên một cách hiệu quả mà bạn muốn chi phí của mình duy trì trong khoảng thời gian đã định cấu hình. Bạn có thể theo dõi chi phí chuyên sâu bằng cách thêm các bộ lọc liên quan đến dịch vụ AWS, tài khoản thành viên, Khu vực AWS, thẻ, v.v. Ví dụ: bạn có thể muốn theo dõi chi tiêu hàng tháng cho môi trường phát triển có thẻ cụ thể được gắn vào từng tài nguyên.
 
   - AWS Cost Anomaly Detection: Phát hiện chi phí bất thường của AWS là một tính năng Quản lý chi phí AWS sử dụng ML để liên tục theo dõi chi phí và mức sử dụng của bạn nhằm phát hiện các khoản chi tiêu bất thường. Công cụ này có thể được sử dụng như một yếu tố giảm thiểu khác đối với việc nhận các hóa đơn bất ngờ vào cuối tháng. 
+#### Cảnh báo vượt ngưỡng của AWS
+
+AWS Budget bao gồm 4 loại cảnh báo:
+
+- Cost Budget: gửi cảnh báo khi tổng chi phí vượt qua ngưỡng chi phí trong ngân sách.
+- Usage Budget: gửi cảnh báo khi tổng mức sử dụng theo từng dịch vụ bạn lựa chọn vượt qua ngưỡng mức sử dụng trong ngân sách.
+- RI Budget: gửi cảnh báo dựa trên mức sử dụng các dịch vụ trả trước (reserve instance) của bạn.
+- Savings Plans Budget: gửi cảnh báo dựa trên mức sử dụng các dịch vụ đã được quy định ở trong savings plans.
 
 ### Nguồn tham khảo
 - Mindmap: https://github.com/notcuder/aws-mindmap?tab=readme-ov-file
