@@ -25,6 +25,7 @@
 
    9.3. [CloudTrail (AWS Account)](https://github.com/Roses21/AWS-summary/blob/main/README.md#93-cloudtrail-aws-account)
 10. [Nguồn tham khảo](https://github.com/Roses21/AWS-summary/blob/main/README.md#ngu%E1%BB%93n-tham-kh%E1%BA%A3o)
+11. [AWS Billing and Cost Management]()
 ## 1. Lưu ý về vẽ kiến trúc trên draw.io
 - Tỉ lệ khung ngoài cùng của kiến trúc AWS: 1.618, ví dụ Height = 500 => Width = 500 x 1.618 = 809.
 - Khung tên của service AWS nên là màu cam (FF8000).
@@ -226,13 +227,19 @@ Gồm 3 loại: virtual machines (VMs), containers, và serverless.
 - Global: IAM mang tính toàn cầu và không dành riêng cho bất kỳ Region nào. Bạn có thể xem và sử dụng cấu hình IAM của mình từ bất kỳ Khu vực nào trong AWS Management Console.
 - Free to use.
 #### IAM user
-- 
+- Là một chủ thể được người dùng tạo trong aws và được sử dụng để đại diện cho một người hoặc một service tương tác với AWS.
+- When to create an IAM user (instead of a role)?
+  - Workloads that cannot use IAM roles.
+  - Third-party AWS clients: không host trên AWS được nên không dùng IAM role để phân quyền được.
+  - AWS CodeCommit (dùng để lưu trữ code) access.
+  - Amazon Keyspaces (for Apache Cassandra) access.
+  - Emergency access.
 #### IAM groups
 - Là một tập hợp người dùng. Tất cả người dùng trong nhóm sẽ kế thừa các quyền được gán cho nhóm. Điều này cho phép ta cấp quyền cho nhiều người dùng cùng một lúc. 
 - Bạn không thể lồng các IAM group. Người dùng IAM riêng lẻ có thể thuộc nhiều nhóm, nhưng không thể tạo nhóm con trong một IAM group khác.
 - Lợi ích: Cung cấp một cách để xem ai có quyền gì trong tổ chức. Nó cũng giúp mở rộng quy mô khi có người mới tham gia, rời đi hay thay đổi vai trò trong tổ chức.
 #### IAM policies
-- Để quản lý quyền truy cập và cấp quyền cho các dịch vụ và tài nguyên AWS.
+- Để quản lý quyền truy cập và cấp quyền cho các dịch vụ và tài nguyên AWS. AWS cũng có cung cấp những policies có sẵn cho user, ví dụ như AmazonEC2FullAccess,...
 - Hầu hết các chính sách đều được lưu trữ trong AWS dưới dạng tài liệu JSON với một số thông tin cơ bản như Version, Effect, Action, và Resource.
 - Ví dụ:
   
@@ -318,7 +325,34 @@ Gồm 3 loại: virtual machines (VMs), containers, và serverless.
     - AWS Lambda function execution activity (the Invoke API).
 - By default, CloudTrail logs management events, but not data events.
 ## 10. CloudFormation
-- 
+## 11. AWS Billing and Cost Management
+#### Sử dụng để làm gì?
+  - Ước tính và lập kế hoạch chi phí AWS của bạn.
+  - Nhận thông báo nếu chi phí của bạn vượt quá hoặc đạt đến ngưỡng.
+  - Đánh giá khoản đầu tư lớn nhất của bạn vào tài nguyên AWS.
+  - Tổ chức hợp lý sổ sách kế toán nếu bạn làm việc với nhiều tài khoản AWS.
+#### Month-to-date (MTD)
+
+Là một khoảng thời gian bắt đầu từ đầu tháng và kết thúc ở ngày hiện tại trong tháng đó.
+
+Ví dụ: nếu ngày hôm nay là ngày 15, bạn được sếp yêu cầu tính sales trong tháng hiện tại, bạn sẽ tính tổng sales từ ngày 1 đến ngày 14 (ngày 15 chưa kết thúc).
+
+#### AWS Cost Management Console 
+- Sử dụng để tối ưu hóa chi phí trong tương lai.
+- Daily unblended costs là thuật ngữ trong quản lý chi phí đám mây (cloud cost management), đề cập đến tổng chi phí mà bạn phải thanh toán cho tất cả các dịch vụ và tài nguyên cloud mà bạn đã sử dụng trong một ngày cụ thể, không phân tách ra theo từng dịch vụ hay loại tài nguyên cụ thể.
+#### Các dịch vụ liên quan đến chi phí
+  
+  ![image](https://github.com/user-attachments/assets/0510451e-1db7-4cb9-85e5-4c2c23eba502)
+- Establish visibility:
+  - Cost Explorer: Cost Explorer là tính năng của Cost Management mà bạn có thể sử dụng để trực quan hóa và hiểu rõ hơn về chi phí và mức sử dụng của mình. Sau khi kích hoạt dịch vụ này, bạn có thể xem lại dữ liệu chi phí lịch sử trong 12 tháng qua và Cost Explorer có thể sử dụng dữ liệu đó để dự đoán số tiền bạn có thể chi tiêu trong 12 tháng tới.
+  - Cost and Usage Reports:
+    - Theo dõi mức sử dụng AWS của bạn và cung cấp mức phí ước tính cho tài khoản. Các báo cáo cung cấp quyền truy cập vào dữ liệu chi tiết, giúp bạn phân tích và hiểu rõ hơn về chi phí AWS của mình, cũng như các dịch vụ sản phẩm cụ thể và lượng sử dụng làm cơ sở cho các chi phí đó. Mỗi báo cáo chứa các mục hàng cho từng tổ hợp sản phẩm AWS, loại sử dụng và hoạt động duy nhất mà bạn sử dụng trong tài khoản AWS của mình.
+    - Báo cáo chi phí và mức sử dụng sẽ hữu ích nhất nếu chúng tôi muốn chạy truy vấn tùy chỉnh trên dữ liệu chi phí hoặc xây dựng ứng dụng báo cáo của riêng mình. Ngoài ra, mức độ chi tiết cao trong các báo cáo này sẽ hữu ích nếu chúng tôi phát hiện chi phí bất thường nào và chúng tôi cần điều tra
+- Avoiding overspend with AWS:
+  - AWS Budgets: Sử dụng để theo dõi và quản lý chi phí AWS của mình. Khi tạo ngân sách, bạn tạo một ranh giới trên một cách hiệu quả mà bạn muốn chi phí của mình duy trì trong khoảng thời gian đã định cấu hình. Bạn có thể theo dõi chi phí chuyên sâu bằng cách thêm các bộ lọc liên quan đến dịch vụ AWS, tài khoản thành viên, Khu vực AWS, thẻ, v.v. Ví dụ: bạn có thể muốn theo dõi chi tiêu hàng tháng cho môi trường phát triển có thẻ cụ thể được gắn vào từng tài nguyên.
+
+  - AWS Cost Anomaly Detection: Phát hiện chi phí bất thường của AWS là một tính năng Quản lý chi phí AWS sử dụng ML để liên tục theo dõi chi phí và mức sử dụng của bạn nhằm phát hiện các khoản chi tiêu bất thường. Công cụ này có thể được sử dụng như một yếu tố giảm thiểu khác đối với việc nhận các hóa đơn bất ngờ vào cuối tháng. 
+
 ### Nguồn tham khảo
 - Mindmap: https://github.com/notcuder/aws-mindmap?tab=readme-ov-file
 - Tổng hợp kiến thức ôn thi SAA: https://github.com/keenanromain/AWS-SAA-C02-Study-Guide?tab=readme-ov-file
