@@ -226,11 +226,12 @@ Khi tạo VPC, AWS sẽ tự tạo 1 Default Route Table - không thể bị xó
     - Cho phép kiến ​​trúc đám mây lai bằng cách kết nối mạng tại chỗ với VPC AWS.
 ### 5.2. Elastic Load Balancing (ELB)
 
-![image](https://github.com/user-attachments/assets/a8a9d511-a02d-4308-a506-515c48db4869)
 
 ### 5.3. ENB
 ### 5.4. Route 53
-- 
+
+![image](https://github.com/user-attachments/assets/c5660d3e-fa00-410e-890c-60dac47d9ef7)
+
 ## 6. Compute
 
 Gồm 3 loại: virtual machines (VMs), containers, và serverless.
