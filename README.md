@@ -6,8 +6,14 @@
 5. [AWS Networking](https://github.com/Roses21/AWS-summary/blob/main/README.md#5-aws-network)
 
    5.1. [VPC](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#51-vpc)
+
+   5.2. [Elastic Load Balancing (ELB)]()
+
+   5.3. [ENB]()
+
+   5.4. [Route 53]()
    
-6. [AWS Compute](https://github.com/Roses21/AWS-summary/blob/main/README.md#6-compute)
+7. [AWS Compute](https://github.com/Roses21/AWS-summary/blob/main/README.md#6-compute)
 
    6.1. [Virtual machines (VMs): Elastic Compute Cloud (EC2)](https://github.com/Roses21/AWS-summary/tree/main#61-elastic-compute-cloud-ec2](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#61-virtual-machines-vms-elastic-compute-cloud-ec2))
       
@@ -15,7 +21,7 @@
 
    6.3. [Severless](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#63-serverless)
    
-7. [Storage](https://github.com/Roses21/AWS-summary/blob/main/README.md#7-storage)
+8. [Storage](https://github.com/Roses21/AWS-summary/blob/main/README.md#7-storage)
    
    7.1. [CloudFront](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#71-cloudfront)
    
@@ -23,8 +29,8 @@
 
    7.3. [EBS](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#73-ebs)
 
-8. [Database](https://github.com/Roses21/AWS-summary/blob/main/README.md#8-database)
-9. [AWS Management Tools](https://github.com/Roses21/AWS-summary/blob/main/README.md#9-aws-management-tools)
+9. [Database](https://github.com/Roses21/AWS-summary/blob/main/README.md#8-database)
+10. [AWS Management Tools](https://github.com/Roses21/AWS-summary/blob/main/README.md#9-aws-management-tools)
 
    9.1. [IAM](https://github.com/Roses21/AWS-summary/blob/main/README.md#91-iam)
 
@@ -32,10 +38,10 @@
 
    9.3. [CloudTrail (AWS Account)](https://github.com/Roses21/AWS-summary/blob/main/README.md#93-cloudtrail-aws-account)
 
-10. [CloudFormation](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#10-cloudformation)
-11. [AWS Billing and Cost Management](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#11-aws-billing-and-cost-management)
-12. [AWS CLI]()    
-13. [Nguồn tham khảo](https://github.com/Roses21/AWS-summary/blob/main/README.md#ngu%E1%BB%93n-tham-kh%E1%BA%A3o)
+11. [CloudFormation](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#10-cloudformation)
+12. [AWS Billing and Cost Management](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#11-aws-billing-and-cost-management)
+13. [AWS CLI]()    
+14. [Nguồn tham khảo](https://github.com/Roses21/AWS-summary/blob/main/README.md#ngu%E1%BB%93n-tham-kh%E1%BA%A3o)
 
 ## 1. Lưu ý về vẽ kiến trúc trên draw.io
 - Tỉ lệ khung ngoài cùng của kiến trúc AWS: 1.618, ví dụ Height = 500 => Width = 500 x 1.618 = 809.
@@ -224,6 +230,7 @@ Khi tạo VPC, AWS sẽ tự tạo 1 Default Route Table - không thể bị xó
 
 ### 5.3. ENB
 ### 5.4. Route 53
+- 
 ## 6. Compute
 
 Gồm 3 loại: virtual machines (VMs), containers, và serverless.
