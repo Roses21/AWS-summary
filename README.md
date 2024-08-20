@@ -34,7 +34,8 @@
 
 10. [CloudFormation](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#10-cloudformation)
 11. [AWS Billing and Cost Management](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#11-aws-billing-and-cost-management)
-12. [Nguồn tham khảo](https://github.com/Roses21/AWS-summary/blob/main/README.md#ngu%E1%BB%93n-tham-kh%E1%BA%A3o)
+12. [AWS CLI]()    
+13. [Nguồn tham khảo](https://github.com/Roses21/AWS-summary/blob/main/README.md#ngu%E1%BB%93n-tham-kh%E1%BA%A3o)
 
 ## 1. Lưu ý về vẽ kiến trúc trên draw.io
 - Tỉ lệ khung ngoài cùng của kiến trúc AWS: 1.618, ví dụ Height = 500 => Width = 500 x 1.618 = 809.
@@ -426,6 +427,41 @@ AWS Budget bao gồm 4 loại cảnh báo:
 - Usage Budget: gửi cảnh báo khi tổng mức sử dụng theo từng dịch vụ bạn lựa chọn vượt qua ngưỡng mức sử dụng trong ngân sách.
 - RI Budget: gửi cảnh báo dựa trên mức sử dụng các dịch vụ trả trước (reserve instance) của bạn.
 - Savings Plans Budget: gửi cảnh báo dựa trên mức sử dụng các dịch vụ đã được quy định ở trong savings plans.
+## 12. AWS CLI
+### Bật tính năng tự động gợi ý (auto-prompt mode)
+`aws --cli-auto-prompt`
+  
+  ![image](https://github.com/user-attachments/assets/52051188-d468-4e26-aa00-b9ef11f33869)
+
+### Tương tác với S3
+- Tạo S3 bucket: `aws s3 mb s3://<name_bucket>` .Do tên bucket là duy nhất trên global nên tôi đã thêm các ký tự rác.
+  
+  ![image](https://github.com/user-attachments/assets/895686b5-c3dc-4756-82f5-820967705846)
+
+- Kiểm tra danh sách s3 bucket: `aws s3 ls`
+  
+  ![image](https://github.com/user-attachments/assets/72c1ea10-718d-43bb-a46d-fddd994086e6)
+  
+- Kiểm tra object trong s3 bucket: `aws s3 ls s3://<bucket-name>`
+- Xóa object: `aws s3 rm s3://<bucket-name>/<object>`
+- Xóa bucket: `aws s3 rb <target>`
+  
+  ![image](https://github.com/user-attachments/assets/c781a54c-f63f-47be-9278-45d6477e3290)
+
+### Tương tác với VPC
+- Tạo VPC: `aws ec2 create-vpc <option> <value>`
+  
+  ![image](https://github.com/user-attachments/assets/4df4afee-e832-4abc-b5e9-f2af3d009096)
+
+- Tạo subnet: `aws ec2 create-subnet --vpc-id <VPC id> --cidr-block <dải IP>`
+
+  ![image](https://github.com/user-attachments/assets/79faf861-ca18-4ac4-8509-d90aaaebbb2c)
+
+- Tạo Internet Gateway: `aws ec2 create-internet-gateway`
+- Attach internet gateway: `aws ec2 attach-internet-gateway --vpc-id <VPC-ID> --internet-gateway-id <IGW ID>`
+- Tạo route table: `aws ec2 create-route-table --vpc-id <VPC-ID> --query RouteTable.RouteTableId --output text`
+- Định tuyến Route table: `aws ec2 create-route --route-table-id <RTB ID> --destination-cidr-block 0.0.0.0/0 --gateway-id <IGW ID>`
+- Associate route table: `aws ec2 associate-route-table  --subnet-id <subnet ID> --route-table-id <RTB ID>`
 
 ### Nguồn tham khảo
 - Mindmap: https://github.com/notcuder/aws-mindmap?tab=readme-ov-file
@@ -434,4 +470,4 @@ AWS Budget bao gồm 4 loại cảnh báo:
 - Khóa học cơ bản Practitioner Essentials: https://explore.skillbuilder.aws/learn/course/134/play/136404/aws-cloud-practitioner-essentials
 - Technical Essentials: https://explore.skillbuilder.aws/learn/course/internal/view/elearning/1851/aws-technical-essentials
 - Youtube: Be A Better Dev
-- Tối ưu chi phí cho AWS EC2: https://blog.daovanhung.com/post/toi-uu-chi-phi-cho-aws-ec2# 
+- Tối ưu chi phí cho AWS EC2: https://blog.daovanhung.com/post/toi-uu-chi-phi-cho-aws-ec2#
