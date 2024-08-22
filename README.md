@@ -298,8 +298,37 @@ Gồm 3 loại: virtual machines (VMs), containers, và serverless.
 - Fargate allocates the right amount of compute. This eliminates the need to choose and manage EC2 instances, cluster capacity, and scaling.
 #### Lambda
 ## 7. Storage 
+- Có 3 loại lưu trữ:
+  
+   ![image](https://github.com/user-attachments/assets/7519d070-17d0-4b9c-8c06-b078d172fe2f)
+
+### File storage
+- Dữ liệu được lưu trữ dưới dạng tệp theo cấu trúc phân cấp. Mỗi tệp có siêu dữ liệu như tên tệp, kích thước tệp và ngày tạo tệp. Tệp cũng có đường dẫn. Khi bạn cần truy xuất một tệp, hệ thống của bạn có thể sử dụng đường dẫn để tìm tệp đó trong hệ thống phân cấp tệp. File storage là giải pháp lý tưởng khi bạn yêu cầu quyền truy cập tập trung vào các tệp phải được chia sẻ và quản lý dễ dàng bởi nhiều máy tính chủ.
+- AWS có 2 dịch vụ:
+  - EFS (Elastic File System): một hệ thống tệp cài đặt và quên, tự động tăng và thu nhỏ khi bạn thêm và xóa tệp. Không cần cung cấp hoặc quản lý dung lượng và hiệu suất lưu trữ. Cho phép tạo ra NFSv4 network volume và gán vào nhiều EC2 cùng lúc, chỉ support Linux. Có thể được cấu hình để gắn vào môi trường on-premise qua direct connect hoặc VPN.
+  - FSx: là một dịch vụ được quản lý toàn phần mang lại độ tin cậy, bảo mật, khả năng mở rộng và một loạt chức năng giúp việc khởi chạy, chạy và mở rộng quy mô các hệ thống tệp hiệu suất cao trên đám mây trở nên thuận tiện và tiết kiệm chi phí. Support cả windows và linux. Hỗ trợ deduplication. Gán vào nhiều EC2 thông qua giao thức SMB (server message block).
+### Block storage
+
+![image](https://github.com/user-attachments/assets/b28c44a6-2537-4dd7-b9fe-7865296fa6f4)
+
+- Volume types:
+  - SSD (solid-state drives): được sử dụng cho khối lượng công việc giao dịch có thao tác đọc/ghi thường xuyên với kích thước I/O nhỏ.
+    
+    ![image](https://github.com/user-attachments/assets/2e80587f-1a20-4f73-ae72-68d95b7a45bf)
+
+  - HDD (hard-disk drives): sử dụng cho streaming workload lớn, cần hiệu suất thông lượng cao.
+
+    ![image](https://github.com/user-attachments/assets/bbae45c8-83bc-4979-9865-f3cb2221cff9)
+
+### Object storage 
+- Dữ liệu được lưu trữ dưới dạng object trong bucket, thích hợp để lưu dữ liệu phi cấu trúc và ít thay đổi. 
 ### 7.1. CloudFront
 ### 7.2. S3
+
+![image](https://github.com/user-attachments/assets/fe87eaa3-8683-400f-8be4-b2fb9701e7bd)
+
+![image](https://github.com/user-attachments/assets/fe4326f9-6090-45b4-8e83-b5e868bd664b)
+
 ### 7.3. EBS
 ## 8. Database
 ### 8.1. Amazon Relational Database Service (RDS):
