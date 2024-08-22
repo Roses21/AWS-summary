@@ -288,12 +288,66 @@ Gồm 3 loại: virtual machines (VMs), containers, và serverless.
   - Amazon ECS chạy trên công nghệ gốc của AWS. Amazon EKS chạy trên Kubernetes.
   - In Amazon ECS, the machine that runs the containers is an EC2 instance that has an ECS agent installed and configured to run and manage your containers. This instance is called a container instance. In Amazon EKS, the machine that runs the containers is called a worker node or Kubernetes node. 
 ### 6.3. Serverless 
+- Serverless có nghĩa là bạn không thể xem hoặc truy cập vào cơ sở hạ tầng hoặc instance cơ bản đang lưu trữ giải pháp của bạn. Thay vào đó, tất cả việc quản lý môi trường cơ bản từ góc độ cung cấp, mở rộng quy mô, khả năng chịu lỗi và bảo trì đều được AWS đảm bảo. Tất cả những gì bạn cần làm là tập trung vào ứng dụng của mình.
+- Tự động mở rộng theo mức sử dụng.
+#### Fargate
+
+![image](https://github.com/user-attachments/assets/fca29408-95c0-4d14-b1ed-04bb722ba950)
+
+- AWS Fargate là nền tảng điện toán serverless dành cho container mà bạn có thể sử dụng với ECS hoặc EKS.
+- Fargate allocates the right amount of compute. This eliminates the need to choose and manage EC2 instances, cluster capacity, and scaling.
+#### Lambda
 ## 7. Storage 
 ### 7.1. CloudFront
 ### 7.2. S3
 ### 7.3. EBS
 ## 8. Database
-### 8.1.
+### 8.1. Amazon Relational Database Service (RDS):
+#### Relational Database
+- Cơ sở dữ liệu quan hệ tổ chức dữ liệu thành các bảng. Dữ liệu trong một bảng có thể liên kết với dữ liệu trong các bảng khác để tạo mối quan hệ.
+- Một bảng lưu trữ dữ liệu theo hàng và cột. Một hàng, thường được gọi là bản ghi (record), chứa tất cả thông tin về một mục cụ thể. Các cột mô tả các thuộc tính của một mục.
+- Lợi ích khi dùng RD: dùng câu truy vấn SQL phức tạp, giảm dư thừa (lưu data vào 1 bảng và các bảng khác truy vấn đến thay vì lưu trong nhiều bảng), quen thuộc (ra đời 1970s), accuracy (đảm bảo rằng dữ liệu có tính toàn vẹn cao và tuân thủ nguyên tắc).
+- Use cases:
+  - Những ứng dụng có lược đồ cố định và không thay đổi thường xuyên.
+  - Những ứng dụng cần lưu trữ liên tục và tuân theo nguyên tắc ACID, chẳng hạn như: Ứng dụng hoạch định nguồn lực doanh nghiệp (ERP) Ứng dụng quản lý quan hệ khách hàng (CRM).
+#### Amazon Relational Database Service
+- Là một dịch vụ quản lý cho phép bạn triển khai và quản lý các cơ sở dữ liệu quan hệ trên AWS. 
+- Storage in the RDS:
+   - EBS: MySQL, MariaDB, PostgreSQL, Oracle, and SQL Server. 
+   - Cluster volumes: Aurora - lưu trữ dữ liệu trong một tầng lưu trữ riêng biệt, phân tán, và được quản lý bởi AWS.
+   - Có 3 loại lưu trữ: General Purpose SSD (also called gp2 and gp3 - nhu cầu I/O trung bình, hiệu quả về chi phí), Provisioned IOPS SSD (also called io1 - yêu cầu I/O cao, độ trễ thấp), and Magnetic (also called standard).
+- Amazon RDS là loại cơ sở dữ liệu xử lý giao dịch trực tuyến (OLTP). Nó phù hợp nhất với các yêu cầu lưu trữ dữ liệu có cấu trúc và quan hệ.
+- RDS tự động xử lý các nhiệm vụ như sao lưu dữ liệu, sao chép dữ liệu cho độ tin cậy cao, thiết lập môi trường mạng bảo mật, quản lý các phiên bản cơ sở dữ liệu và cung cấp khả năng mở rộng linh hoạt. Việc mở rộng, sao chép và tính sẵn có chỉ cần một nút nhấn.
+- Use case: Build web and mobile applications, Move to managed databases, break free from legacy databases
+- Mặc định, khách hàng được phép có tối đa 40 DB instances Amazon RDS (chỉ có 10 trong số này có thể là Oracle hoặc MS SQL trừ khi bạn có giấy phép riêng của mình).
+- Sự kiện và thông báo: RDS sử dụng AWS SNS để gửi sự kiện RDS qua thông báo SNS. Bạn có thể sử dụng API calls đến dịch vụ Amazon RDS để liệt kê các sự kiện RDS trong 14 ngày qua (API DescribeEvents). Bạn có thể xem các sự kiện trong 14 ngày qua bằng dòng lệnh CLI. Sử dụng AWS Console, bạn chỉ có thể xem các sự kiện RDS trong 1 ngày qua.
+- Các yêu cầu không phù hợp cho RDS:
+  
+![image](https://github.com/user-attachments/assets/1e442d59-2f8f-41ec-ad5b-45e5b020420a)
+
+- Amazon RDS Multi-AZ:  creates a redundant copy of your database in another Availability Zone. Bạn không thể chọn AZ nào trong AZ sẽ được chọn để tạo bản sao DB dự phòng.
+
+![image](https://github.com/user-attachments/assets/d10ce159-beaf-4e8f-8206-eb68c08bad7e)
+
+- Amazon RDS security:
+  - SSL/TLS: Use Secure Sockets Layer (SSL) or Transport Layer Security (TLS) connections with DB instances running the MySQL, MariaDB, PostgreSQL, Oracle, or SQL Server database engines.
+  - RDS encryption: to secure your DB instances and snapshots at rest.
+  - IAM: to assign permissions that determine who can manage Amazon RDS resources.
+  - Security Group: to control which IP addresses or Amazon EC2 instances can connect to your databases on a DB instance.
+- Cách chọn loại db theo mục đích sử dụng:
+  - Amazon DynamoDB: fully managed NoSQL database, phù hợp high-scale applications and serverless applications. High concurrency and connections for millions of users and millions of requests per second
+  - Amazon ElastiCache: fully managed, in-memory caching solution. It provides support for two open-source, in-memory cache engines: Redis and Memcached. Lưu trữ tạm thời nhanh cho lượng dữ liệu nhỏ, dữ liệu biến động cao.
+  - Amazon MemoryDB for Redis: hiệu suất cực nhanh, độ trễ đọc micro giây, độ trễ ghi mili giây một chữ số, thông lượng cao và độ bền Multi-AZ cho các ứng dụng hiện đại.
+  - Amazon DocumentDB (with MongoDB compatibility): fully managed document database, có khả năng tương thích API với MongoDB.
+  - Amazon Neptune: fully managed graph database, use for recommendation engines, fraud detection, and knowledge graphs.
+  - Amazon Timestream: Dữ liệu chuỗi thời gian là một chuỗi các điểm dữ liệu được ghi lại trong một khoảng thời gian. Nó được sử dụng để đo lường các sự kiện thay đổi theo thời gian, chẳng hạn như giá cổ phiếu theo thời gian hoặc đo nhiệt độ theo thời gian. Nhanh, rẻ, có thể mở rộng và không cần máy chủ dành cho Internet of Things (IoT) và các ứng dụng vận hành.
+  - Amazon Quantum Ledger Database (Amazon QLDB): được xây dựng với mục đích cung cấp lịch sử đầy đủ và có thể xác minh bằng mật mã về tất cả các thay đổi được thực hiện đối với dữ liệu ứng dụng của bạn.
+  - Amazon Keyspaces (for Apache Cassandra): tương thích với Apache Cassandra có khả năng mở rộng, có tính sẵn sàng cao và được quản lý, phổ biến cho các ứng dụng quy mô cao cần hiệu năng cao nhất.
+
+![image](https://github.com/user-attachments/assets/e1df3cde-9445-4fbe-b898-5fc9a287fa24)
+
+![image](https://github.com/user-attachments/assets/8a462c72-0754-4f0c-8e10-3276c3c9253b)
+
 ## 9. AWS Management Tools
 ### 9.1. IAM
 - AWS Identity and Access Management (IAM) is an AWS service that helps you manage access to your AWS account and resources. It also provides a centralized view of who and what are allowed inside your AWS account (authentication), and who and what have permissions to use and work with your AWS resources (authorization).
