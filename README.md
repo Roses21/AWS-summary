@@ -297,6 +297,7 @@ Gồm 3 loại: virtual machines (VMs), containers, và serverless.
 - AWS Fargate là nền tảng điện toán serverless dành cho container mà bạn có thể sử dụng với ECS hoặc EKS.
 - Fargate allocates the right amount of compute. This eliminates the need to choose and manage EC2 instances, cluster capacity, and scaling.
 #### Lambda
+
 ## 7. Storage 
 - Có 3 loại lưu trữ:
   
