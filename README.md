@@ -328,17 +328,24 @@ Gồm 3 loại: virtual machines (VMs), containers, và serverless.
 
 ![image](https://github.com/user-attachments/assets/fe87eaa3-8683-400f-8be4-b2fb9701e7bd)
 
+S3 Standard, S3 Standard-IA, S3 Intelligent-Tiering, S3 Glacier Instant Retrieval, S3 Glacier Flexible Retrieval, và S3 Glacier Deep Archive: các đối tượng sẽ tự động được lưu trữ trên nhiều thiết bị, trải rộng ít nhất là ba Vùng Sẵn Sàng (Availability Zones - AZs). Các AZs này được tách biệt về mặt vật lý với một khoảng cách đáng kể, nhưng so với bất kỳ 1 AZ nào khác, tất cả đều **nằm trong phạm vi 100 km** (60 dặm).
+
 ![image](https://github.com/user-attachments/assets/fe4326f9-6090-45b4-8e83-b5e868bd664b)
 
+#### General purpose bucket and directory bucket
+- General purpose bucket: are the **original S3 bucket type**, and a single general purpose bucket can contain objects stored across all storage classes except S3 Express One Zone. They are recommended for most use cases and access patterns.
+- Directory bucket: only allow objects stored in the **S3 Express One Zone** storage class, which provides faster data processing within a **single Availability Zone**. They are recommended for **low-latency** use cases. Each S3 directory bucket can support hundreds of thousands of transactions per second (TPS), independent of the number of directories within the bucket.
+  
 #### Amazon S3 Transfer Acceleration
 - Amazon S3 Transfer Acceleration cho phép truyền tập tin một cách nhanh chóng, dễ dàng và bảo mật qua khoảng cách lớn giữa máy client và Amazon S3 bucket.
 - S3 Transfer Acceleration tận dụng AWS Edge Location được phân phối toàn cầu của Amazon CloudFront. Khi dữ liệu đến một AWS Edge Location, dữ liệu được định tuyến tới Amazon S3 bucket của bạn qua một đường dẫn qua mạng đã được tối ưu hóa.
 - Mỗi lần bạn sử dụng S3 Transfer Acceleration để tải lên một đối tượng, AWS sẽ kiểm tra xem S3 Transfer Acceleration có nhanh hơn tốc độ truyền thông thường của Amazon S3 hay không. Nếu không, thì AWS sẽ không tính phí sử dụng S3 Transfer Acceleration cho lần truyền đó và có thể bỏ qua Hệ thống S3 Transfer Acceleration cho quá trình tải lên đó.
+  
 #### Amazon Athena (truy vấn tại chỗ)
 - Amazon Athena is an interactive query service that makes it **easy to analyze data** in Amazon S3 using **standard SQL queries**.
 - Athena is serverless, so there is no infrastructure to set up or manage, and you can start analyzing data immediately. You don’t even need to load your data into Athena; it works directly with data stored in any S3 storage class.
 - To get started, just log into the Athena Management Console, define your schema, and start querying. Amazon Athena uses Presto with full standard SQL support and works with a variety of standard data formats, including CSV, JSON, ORC, Apache Parquet and Avro. While Athena is ideal for quick, ad-hoc querying and integrates with Amazon QuickSight for easy visualization, it can also handle complex analysis, including large joins, window functions, and arrays.
-#### Amazon Redshift
+
 ### 7.3. EBS
 ## 8. Database
 ### 8.1. Amazon Relational Database Service (RDS):
