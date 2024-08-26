@@ -40,8 +40,9 @@
 
 10. [CloudFormation](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#10-cloudformation)
 11. [AWS Billing and Cost Management](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#11-aws-billing-and-cost-management)
-12. [AWS CLI]()    
-13. [Nguồn tham khảo](https://github.com/Roses21/AWS-summary/blob/main/README.md#ngu%E1%BB%93n-tham-kh%E1%BA%A3o)
+12. [AWS CLI]()
+13. WAF    
+14. [Nguồn tham khảo](https://github.com/Roses21/AWS-summary/blob/main/README.md#ngu%E1%BB%93n-tham-kh%E1%BA%A3o)
 
 # 1. Lưu ý về vẽ kiến trúc trên draw.io
 - Tỉ lệ khung ngoài cùng của kiến trúc AWS: 1.618, ví dụ Height = 500 => Width = 500 x 1.618 = 809.
@@ -606,7 +607,11 @@ AWS Budget bao gồm 4 loại cảnh báo:
 - Tạo route table: `aws ec2 create-route-table --vpc-id <VPC-ID> --query RouteTable.RouteTableId --output text`
 - Định tuyến Route table: `aws ec2 create-route --route-table-id <RTB ID> --destination-cidr-block 0.0.0.0/0 --gateway-id <IGW ID>`
 - Associate route table: `aws ec2 associate-route-table  --subnet-id <subnet ID> --route-table-id <RTB ID>`
-
+# 13. WAF (Web application firewall)
+- Giúp bảo vệ các ứng dụng web ở layer 7 khỏi các cuộc tấn công bằng cách cho phép định cấu hình các quy tắc allow, block hoặc monitor (đếm) yêu cầu web dựa trên các điều kiện mà bạn xác định. Các điều kiện này bao gồm địa chỉ IP, tiêu đề HTTP, nội dung HTTP, URI string, SQL injection và cross-site scripting.
+- WAF với Amazon CloudFront, Application Load Balancer (ALB), Amazon API Gateway, AWS AppSyn:
+  - Áp dụng AWS WAF trên Amazon CloudFront: các rules sẽ chạy ở tất cả các Vị trí biên AWS, nằm trên khắp thế giới, gần với người dùng cuối. Bảo mật không ảnh hưởng đến hiệu suất. Các yêu cầu bị chặn sẽ bị dừng trước khi chúng đến được máy chủ web.
+  - Dùng AWS WAF trên regional services (như Application Load Balancer, Amazon API Gateway, AWS AppSync): rules run in region and can be used to protect internet-facing resources as well as internal resources.
 # Nguồn tham khảo
 - Mindmap: https://github.com/notcuder/aws-mindmap?tab=readme-ov-file
 - Tổng hợp kiến thức ôn thi SAA: https://github.com/keenanromain/AWS-SAA-C02-Study-Guide?tab=readme-ov-file
