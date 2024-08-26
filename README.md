@@ -1,4 +1,4 @@
-## Mục lục:
+# Mục lục:
 1. [Lưu ý về vẽ kiến trúc trên draw.io](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#1-l%C6%B0u-%C3%BD-v%E1%BB%81-v%E1%BA%BD-ki%E1%BA%BFn-tr%C3%BAc-tr%C3%AAn-drawio)
 2. [Three tier architecture](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#2-three-tier-architecture)
 3. [AWS Well-Architected Framework](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#3-aws-well-architected-framework)
@@ -43,20 +43,20 @@
 12. [AWS CLI]()    
 13. [Nguồn tham khảo](https://github.com/Roses21/AWS-summary/blob/main/README.md#ngu%E1%BB%93n-tham-kh%E1%BA%A3o)
 
-## 1. Lưu ý về vẽ kiến trúc trên draw.io
+# 1. Lưu ý về vẽ kiến trúc trên draw.io
 - Tỉ lệ khung ngoài cùng của kiến trúc AWS: 1.618, ví dụ Height = 500 => Width = 500 x 1.618 = 809.
 - Khung tên của service AWS nên là màu cam (FF8000).
 - Size icon: 60x60.
-## 2. Three tier architecture
+# 2. Three tier architecture
 - Web/Presentation Tier: Houses the user-facing elements of the application, such as web servers and the interface/frontend.
 - Application Tier: Houses the backend and application source code needed to process data and run functions.
 - Data Tier: Houses and manages the application data. Often where the databases are stored.
 
 ![image](https://github.com/user-attachments/assets/31b4a426-bc54-43cd-a527-4a27a8a866a8)
 
-## 3. AWS Well-Architected Framework
+# 3. AWS Well-Architected Framework
 Gồm 6 trụ cột chính:
-### 3.1. Operational Excellence Pillar
+## 3.1. Operational Excellence Pillar
   - K/n: focuses on running and monitoring systems, and continually improving processes and procedures: automating changes, responding to events, and defining standards to manage daily operations.
   - Design Principles
     - Perform operations as code
@@ -70,7 +70,7 @@ Gồm 6 trụ cột chính:
     - Prepare
     - Operate
     - Evolve
-### 3.2. Security 
+## 3.2. Security 
   - K/n: focuses on protecting information and systems: confidentiality and integrity of data, managing user permissions, and establishing controls to detect security events.
   - Design Principles:
     - Implement a strong identity foundation: IAM
@@ -86,7 +86,7 @@ Gồm 6 trụ cột chính:
     - Infrastructure Protection
     - Data Protection
     - Incident Response
-### 3.3. Reliability 
+## 3.3. Reliability 
 - K/n:đảm bảo workload hoạt động chính xác và như mong đợi: distributed system design, recovery planning, and adapting to changing requirements.
 - Design Principles:
   - Automatically recover from failure: EC2 Auto scaling, Amazon Route 53, Load Balancer
@@ -98,7 +98,7 @@ Gồm 6 trụ cột chính:
  - Foundations
  - Change Management
  - Failure Management
-### 3.4. Performance Efficiency
+## 3.4. Performance Efficiency
 - K/n: tập trung vào việc phân bổ có cấu trúc và hợp lý các tài nguyên máy tính và CNTT: chọn loại và quy mô tài nguyên được tối ưu hóa cho yêu cầu khối lượng công việc, giám sát hiệu suất và duy trì hiệu quả khi nhu cầu kinh doanh phát triển.
 - Design Principles:
   - Democratize advanced technologies (cung cấp các dịch vụ dễ sử dụng, không cần phải có chuyên môn sâu để triển khai)
@@ -111,7 +111,7 @@ Gồm 6 trụ cột chính:
   - Review
   - Monitoring
   - Tradeoffs
-### 3.5. Cost Optimization
+## 3.5. Cost Optimization
 - K/n: tránh những chi phí không cần thiết: understanding spending over time and controlling fund allocation, selecting resources of the right type and quantity, and scaling to meet business needs without overspending.
 - Design Principles:
   - Implement cloud financial management: Cost Explorer.
@@ -124,7 +124,7 @@ Gồm 6 trụ cột chính:
   - Cost-Effective Resources
   - Matching Supply and Demand
   - Optimizing Over Time
-### 3.6. Sustainability 
+## 3.6. Sustainability 
 - K/n: focuses on minimizing the environmental impacts of running cloud workloads: a shared responsibility model for sustainability, understanding impact, and maximizing utilization to minimize required resources and reduce downstream impacts. 
 - Design Principles:
   - Understand your impact
@@ -141,7 +141,7 @@ Gồm 6 trụ cột chính:
   - Hardware and services
   - Process and culture
 
-## 4. EC2 Auto Scaling
+# 4. EC2 Auto Scaling
 - Auto Scaling có 3 components:
   - Group (Nhóm co giãn tự động) là một nhóm các EC2 Instance hoặc RDS Instance. Nhóm này có khả năng co giãn số lượng các EC2 Instance thành viên dựa trên các chính sách co giãn mà bạn thiết lập.
   - Configuration Templates: là một tính năng giúp bạn tạo mẫu cho việc khởi tạo các EC2 Instance. Điều này giúp tự động hóa và đơn giản hóa việc khởi tạo các EC2 Instance cho dịch vụ Auto Scaling.
@@ -153,42 +153,42 @@ Gồm 6 trụ cột chính:
 
 ![image](https://github.com/user-attachments/assets/41cdb655-d8de-4c1f-b0c8-c12f90d4205a)
 
-### Scaling policies
+## Scaling policies
 - Gồm 3 loại:
-#### Simple scaling policy
+### Simple scaling policy
 - Hoạt động dựa trên một điều kiện duy nhất: Simple Scaling chỉ có một ngưỡng đơn lẻ và thực hiện một hành động duy nhất khi điều kiện đó được đáp ứng.
 - Thay đổi đơn giản và ngay lập tức: Khi điều kiện (chẳng hạn như CPU vượt quá một mức cụ thể) được kích hoạt, Simple Scaling thực hiện ngay lập tức hành động mở rộng hoặc thu nhỏ số lượng instances theo một số lượng cố định.
 - Ví dụ: Nếu CPU > 70%, tăng thêm 1 instance. Nếu CPU < 30%, giảm 1 instance.
-#### Step scaling
+### Step scaling
 - Hoạt động dựa trên các ngưỡng cụ thể: Step Scaling cho phép bạn thiết lập nhiều ngưỡng khác nhau cho một chỉ số (như CPU, Network In/Out, v.v.), và tương ứng với mỗi ngưỡng, bạn có thể cấu hình một hành động mở rộng hoặc thu nhỏ cụ thể.
 - Thay đổi theo từng bước: Số lượng instances tăng hoặc giảm sẽ phụ thuộc vào mức độ mà chỉ số vượt qua các ngưỡng đã thiết lập. Điều này có nghĩa là khi chỉ số vượt qua ngưỡng cao hơn, số lượng instances được thay đổi sẽ lớn hơn so với khi chỉ số chỉ vượt qua ngưỡng thấp hơn.
 - Ví dụ: Nếu CPU > 70%, tăng thêm 2 instances. Nếu CPU > 90%, tăng thêm 4 instances. Nếu CPU < 30%, giảm 1 instance.
-#### Target Tracking
+### Target Tracking
 - Tự động điều chỉnh số lượng instances dựa trên một chỉ số mục tiêu đã được xác định, chẳng hạn như mức sử dụng CPU. AWS sẽ liên tục theo dõi chỉ số này và tăng hoặc giảm số lượng instances để duy trì chỉ số gần với mục tiêu.
 - Ví dụ: Bạn có thể tạo một policy để tự động thêm hoặc bớt EC2 instances trong một Auto Scaling group nhằm duy trì mức sử dụng CPU trung bình là 50%.
-## 5. AWS Network
-### 5.1. VPC
+# 5. AWS Network
+## 5.1. VPC
 - Nằm trong 1 Region (1 khu vực địa lý nơi mà AWS đặt hạ tầng chính), hiện tại 1 AWS Region tối đa 5 VPC trên 1 AWS account.
 - Khi tạo VPC cần khai báo 1 lớp mạng CIDR IPv4 (bắt buộc) và IPv6 (tùy chọn).
 - Mục đích chính: phân tách các môi trường (dev/test/production/…) ở mức network. Còn muốn tách biệt hẳn các tài nguyên (user không thấy được tài nguyên) thì cần tạo nhiều AWS account chứ không phải tạo nhiều VPC.
-#### Firewall trong VPC
+### Firewall trong VPC
 Dùng khi muốn public subnet connect tới private subnet thông qua 1 port.
   - Security Group (phạm vi instance): là 1 tường lửa ảo lưu giữ trạng thái (stateful - 2 chiều kết nối vào ra trong cùng 1 session), giúp kiểm soát lưu lượng truy cập đến và đi trong tài nguyên của AWS. Rule chỉ cho phép rule allow, rule sẽ hạn chế theo protocol, IP nguồn, port kết nối or 1 SG khác. Không có thứ tự xử lý quy tắc. Áp dụng lên các tài nguyên bên trong VPC. Mặc định: chặn tất cả đến, cho tất cả đi. Mỗi Security Group có thể chứa tối đa 60 quy tắc inbound và 60 quy tắc outbound.
   - NACL (Network Access Control List) (phạm vi subnet): stateless, áp dụng lên các Amazon VPC subnets => ảnh hưởng đến nhiều máy chủ/ứng dụng khác khi change NACL. Mặc định là cho phép mọi truy cập đến và đi. NACLs xử lý các quy tắc theo thứ tự số tăng dần. Khi một quy tắc phù hợp được tìm thấy, NACL sẽ dừng đánh giá và áp dụng quy tắc đó. Điều này có nghĩa là thứ tự quy tắc trong NACLs rất quan trọng. Mỗi NACL có thể chứa tối đa 20 quy tắc inbound và 20 quy tắc outbound.
   - VPC Flow logs: cho phép nắm bắt thông tin về lưu lượng IP đến và đi từ các giao diện mạng trong VPC. Các file logs để thể xuất lên  Amazon CloudWatch và S3. Không capture được nội dung gói tin. => Theo dõi lưu lượng bất thường trong mạng.
-#### Subnet
+### Subnet
 - VPC cho phép tạo nhiều mạng ảo và chia các mạng ảo này thành các mạng con. VPC Subnet sẽ nằm trong 1 AZ cụ thể. Khi tạo subnet, cần chỉ định CIDR cho mạng con đó và đây là một tập hợp con của khối VPC CIDR (Classless Inter-Domain Routing ví dụ: 192.168.10.1/24).
 - AWS giữ 4 địa chỉ IP đầu và 1 IP cuối của mỗi subnet để kết nối mạng. Subnet nhỏ nhất là /28 ~ 16 địa chỉ IP.
  - Public subnet: được ra ngoài internet.
  - Private subnet: giao tiếp với internet qua NAT gateway.
  - VPN-only subnet: This subnet has a route table that directs traffic to Amazon VPC’s Virtual Private Gateway 
-#### Route table
+### Route table
 Khi tạo VPC, AWS sẽ tự tạo 1 Default Route Table - không thể bị xóa và chỉ chứa 1 route duy nhất cho phép tất cả các subnet trong VPC liên lạc với nhau.
 1 router-table có thể có nhiều subnets, nhưng 1 subnet chỉ có 1 route-table.
-#### VPC Peering và Transit gateway
+### VPC Peering và Transit gateway
 - VPC Peering: giúp kết nối 2 VPC, để các tài nguyên trong 2 VPC có thể liên lạc trực tiếp với nhau mà không thông qua Internet. Kết nối 1:1 giữa 2 VPC. Không hỗ trợ khi 2 VPC bị overlap IP address space. Phải cấu hình bảng định tuyến, chỉ ra rằng phải kết nối với VPC Peering để đến được IP đích. IP đích có thể là IP của VPC/máy ảo/subnet.
 - Transit Gateway: phổ biến và tiện ích hơn VPC Peering. Cho phép kết nối nhiều VPCs và các mạng tại chỗ (on-premises networks) thông qua một gateway trung tâm duy nhất. Transit Gateway Attachment là công cụ dùng để gán các subnet của từng VPC cần kết nối với nhau vào một Transit Gateway đã được khởi tạo, hoạt động ở phạm vi toàn bộ AZ.
-#### Connect to VPC
+### Connect to VPC
 - Internet gateways:
   - Có quy mô theo chiều ngang, dự phòng và có tính khả dụng cao cho phép giao tiếp giữa VPC và Internet. Nó hỗ trợ lưu lượng IPv4 và IPv6.
   - Sử dụng Internet gateway thì miễn phí, nhưng sẽ tính phí truyền dữ liệu đối với các EC2 instances sử dụng internet gateway.
@@ -224,19 +224,19 @@ Khi tạo VPC, AWS sẽ tự tạo 1 Default Route Table - không thể bị xó
     - Cho phép liên lạc an toàn giữa các tầng khác nhau của ứng dụng (chẳng hạn như máy chủ web và máy chủ cơ sở dữ liệu).
     - Hỗ trợ chia sẻ tài nguyên giữa nhiều nhóm hoặc đơn vị kinh doanh.
     - Cho phép kiến ​​trúc đám mây lai bằng cách kết nối mạng tại chỗ với VPC AWS.
-### 5.2. Elastic Load Balancing (ELB)
+## 5.2. Elastic Load Balancing (ELB)
 
 
-### 5.3. ENB
-### 5.4. Route 53
+## 5.3. ENB
+## 5.4. Route 53
 
 ![image](https://github.com/user-attachments/assets/c5660d3e-fa00-410e-890c-60dac47d9ef7)
 
-## 6. Compute
+# 6. Compute
 
 Gồm 3 loại: virtual machines (VMs), containers, và serverless.
 
-### 6.1. Virtual machines (VMs): Elastic Compute Cloud (EC2)
+## 6.1. Virtual machines (VMs): Elastic Compute Cloud (EC2)
 - EC2 instance lifecycle
   
   ![image](https://github.com/user-attachments/assets/d40c58fa-b292-4f4a-b5e7-cf0292bf3f35)
@@ -267,7 +267,7 @@ Gồm 3 loại: virtual machines (VMs), containers, và serverless.
     - Khách hàng có thể cam kết tài chính để sử dụng Amazon EC2 trong thời hạn 1 năm hoặc 3 năm.
   - Dedicated Hosts (máy chủ chuyên dụng): là máy chủ Amazon EC2 vật lý được dành riêng cho bạn sử dụng, giúp bạn giảm chi phí vì bạn có thể sử dụng các giấy phép phần mềm gắn với máy chủ hiện có của mình, chẳng hạn như giấy phép Windows Server, SQL Server và Oracle. Dedicated Hosts có thể được mua theo yêu cầu (tính theo giờ) với ưu đãi giảm tới 70% nếu đặt trước.
 
-### 6.2. Containers
+## 6.2. Containers
 - Container: đóng gói mã ứng dụng và các phần phụ thuộc của nó, tạo ra môi trường độc lập của riêng container đó; giúp workload có thể được chuyển từ nơi này sang nơi khác, chẳng hạn như từ quá trình phát triển đến production hoặc từ môi trường tại chỗ lên đám mây. Một ví dụ về nền tảng container là Docker.
 - Sự khác biệt giữa VM và container:
   
@@ -287,18 +287,18 @@ Gồm 3 loại: virtual machines (VMs), containers, và serverless.
   - An ECS container is called a task. An EKS container is called a pod.
   - Amazon ECS chạy trên công nghệ gốc của AWS. Amazon EKS chạy trên Kubernetes.
   - In Amazon ECS, the machine that runs the containers is an EC2 instance that has an ECS agent installed and configured to run and manage your containers. This instance is called a container instance. In Amazon EKS, the machine that runs the containers is called a worker node or Kubernetes node. 
-### 6.3. Serverless 
+## 6.3. Serverless 
 - Serverless có nghĩa là bạn không thể xem hoặc truy cập vào cơ sở hạ tầng hoặc instance cơ bản đang lưu trữ giải pháp của bạn. Thay vào đó, tất cả việc quản lý môi trường cơ bản từ góc độ cung cấp, mở rộng quy mô, khả năng chịu lỗi và bảo trì đều được AWS đảm bảo. Tất cả những gì bạn cần làm là tập trung vào ứng dụng của mình.
 - Tự động mở rộng theo mức sử dụng.
-#### Fargate
+### Fargate
 
 ![image](https://github.com/user-attachments/assets/fca29408-95c0-4d14-b1ed-04bb722ba950)
 
 - AWS Fargate là nền tảng điện toán serverless dành cho container mà bạn có thể sử dụng với ECS hoặc EKS.
 - Fargate allocates the right amount of compute. This eliminates the need to choose and manage EC2 instances, cluster capacity, and scaling.
-#### Lambda
+### Lambda
 
-## 7. Storage 
+# 7. Storage 
 - Có 3 loại lưu trữ:
   
    ![image](https://github.com/user-attachments/assets/7519d070-17d0-4b9c-8c06-b078d172fe2f)
@@ -323,40 +323,71 @@ Gồm 3 loại: virtual machines (VMs), containers, và serverless.
 
 ### Object storage 
 - Dữ liệu được lưu trữ dưới dạng object trong bucket, thích hợp để lưu dữ liệu phi cấu trúc và ít thay đổi. 
-### 7.1. CloudFront
-### 7.2. S3
+## 7.1. CloudFront
+## 7.2. S3
 
 ![image](https://github.com/user-attachments/assets/fe87eaa3-8683-400f-8be4-b2fb9701e7bd)
 
+### Storage classes
 S3 Standard, S3 Standard-IA, S3 Intelligent-Tiering, S3 Glacier Instant Retrieval, S3 Glacier Flexible Retrieval, và S3 Glacier Deep Archive: các đối tượng sẽ tự động được lưu trữ trên nhiều thiết bị, trải rộng ít nhất là ba Vùng Sẵn Sàng (Availability Zones - AZs). Các AZs này được tách biệt về mặt vật lý với một khoảng cách đáng kể, nhưng so với bất kỳ 1 AZ nào khác, tất cả đều **nằm trong phạm vi 100 km** (60 dặm).
 
+- (1) S3 Intelligent-Tiering: được thiết kế để tối ưu hóa chi phí lưu trữ ở cấp độ object bằng cách tự động di chuyển dữ liệu sang lớp truy cập tiết kiệm chi phí nhất khi tần suất truy cập dữ liệu thay đổi. Chi phí thấp bao gồm việc tự động hóa di chuyển data và giám sát object hàng tháng. 
+  - Các đối tượng chưa được truy cập trong 30 ngày liên tiếp: di chuyển sang Infrequent Access tier => tiết kiệm 40% chi phí.
+  - Sau 90 ngày liên tục không truy cập: các đối tượng sẽ được chuyển sang bậc Archive Instant Access tier => tiết kiệm tới 68% chi phí lưu trữ.
+  - Không yêu cầu kích thước tối thiểu cho các object, nhưng các object **nhỏ hơn 128KB sẽ không auto-tiering**. Những objects này vẫn có thể được lưu tại lớp này nhưng sẽ luôn bị tính phí theo lớp truy cập thường xuyên và không bị tính phí giám sát và tự động hóa.
+  - Use case: dành cho dữ liệu có kiểu truy cập không xác định hoặc đang thay đổi, đặc biệt data lakes, data analytics, machine learning, new applications, and user-generated content.
+- (2) Amazon S3 Standard: khả năng lưu trữ lâu dài với độ trễ truy cập tính bằng mili giây và hiệu suất thông lượng cao cho dữ liệu được truy cập thường xuyên, thường là nhiều hơn 1 lần/tháng. Use case:  lý tưởng nhất cho dữ liệu được **truy cập hoặc sửa đổi thường xuyên**; data lakes, cloud native applications, dynamic websites, content distribution, mobile and gaming applications, and analytics.
+- (3) S3 Express One Zone: có độ trễ thấp nhất, với tốc độ truy cập dữ liệu nhanh hơn tới 10 lần và chi phí yêu cầu thấp hơn 50% so với Amazon S3 Standard; thích hợp cho: machine learning (ML) training and inference, interactive analytics, and media content creation (edit video).
+- (4) S3 Standard-Infrequent Access (S3 Standard-IA): dành cho dữ liệu được truy cập ít thường xuyên hơn nhưng yêu cầu truy cập nhanh khi cần. Lý tưởng cho dữ liệu được lưu giữ trong ít nhất một tháng và được truy cập một hoặc hai tháng một lần.
+- (5) S3 One Zone-Infrequent Access (S3 One Zone-IA)
+- (6) Amazon S3 Glacier:
+  - Instant Retrieval: cung cấp bộ lưu trữ có chi phí thấp nhất cho dữ liệu có thời gian tồn tại lâu, **ít truy cập** (mỗi quý một lần); cung cấp khả năng **truy cập nhanh nhất** vào kho lưu trữ; thời gian lưu trữ tối thiểu là 90 ngày.
+  - Amazon S3 Glacier Flexible Retrieval: dành cho dữ liệu lưu trữ được truy cập 1-2 lần mỗi năm, không yêu cầu truy cập ngay lập tức nhưng muốn **truy xuất các bộ dữ liệu lớn mà không mất phí**. (sao lưu hoặc khắc phục thảm họa)
+  - Amazon S3 Glacier Deep Archive: lưu giữ lâu dài những dữ liệu được truy cập 1-2 lần trong một năm. Chỉ từ 0,00099 USD mỗi GB-tháng, cung cấp bộ lưu trữ có **chi phí thấp nhất trên đám mây, truy xuất lâu (12 tiếng cho Standard retrieval tier)**. Phù hợp cho mục đích bảo vệ tài sản trí tuệ cốt lõi, hồ sơ tài chính và y tế, kết quả nghiên cứu, tài liệu pháp lý, nghiên cứu thăm dò địa chấn và sao lưu dài hạn, đặc biệt là trong các ngành được quản lý chặt chẽ như Dịch vụ tài chính, Chăm sóc sức khỏe , Dầu khí và Khu vực công. Thời gian lưu trữ tối thiểu là 180 ngày.
+- (7) S3 on Outposts: cung cấp khả năng lưu trữ đối tượng trong môi trường tại chỗ.
+    
 ![image](https://github.com/user-attachments/assets/fe4326f9-6090-45b4-8e83-b5e868bd664b)
 
-#### General purpose bucket and directory bucket
+### General purpose bucket and directory bucket
 - General purpose bucket: are the **original S3 bucket type**, and a single general purpose bucket can contain objects stored across all storage classes except S3 Express One Zone. They are recommended for most use cases and access patterns.
 - Directory bucket: only allow objects stored in the **S3 Express One Zone** storage class, which provides faster data processing within a **single Availability Zone**. They are recommended for **low-latency** use cases. Each S3 directory bucket can support hundreds of thousands of transactions per second (TPS), independent of the number of directories within the bucket.
   
-#### Amazon S3 Transfer Acceleration
-- Amazon S3 Transfer Acceleration cho phép truyền tập tin một cách nhanh chóng, dễ dàng và bảo mật qua khoảng cách lớn giữa máy client và Amazon S3 bucket.
+### Amazon S3 Transfer Acceleration
+- Amazon S3 Transfer Acceleration cho phép **truyền tập tin một cách nhanh chóng, dễ dàng và bảo mật qua khoảng cách lớn** giữa máy client và Amazon S3 bucket.
 - S3 Transfer Acceleration tận dụng AWS Edge Location được phân phối toàn cầu của Amazon CloudFront. Khi dữ liệu đến một AWS Edge Location, dữ liệu được định tuyến tới Amazon S3 bucket của bạn qua một đường dẫn qua mạng đã được tối ưu hóa.
 - Mỗi lần bạn sử dụng S3 Transfer Acceleration để tải lên một đối tượng, AWS sẽ kiểm tra xem S3 Transfer Acceleration có nhanh hơn tốc độ truyền thông thường của Amazon S3 hay không. Nếu không, thì AWS sẽ không tính phí sử dụng S3 Transfer Acceleration cho lần truyền đó và có thể bỏ qua Hệ thống S3 Transfer Acceleration cho quá trình tải lên đó.
+
+### Security
+- Data: Amazon S3 tự động mã hóa server-side (SSE - S3) tất cả các đối tượng được tải lên bucket (kể từ ngày 5 tháng 1 năm 2023). Ngoài ra, bạn có thể sử dụng thư viện mã hóa của riêng mình để mã hóa dữ liệu trước khi lưu trữ trên Amazon S3.
+- Control access to data stored on Amazon S3:
+  - IAM (bucket or objects)
+  - Bucket and access point policies
+  - ACLs (cấp các quyền cụ thể (ví dụ: ĐỌC, VIẾT, FULL_Control) cho những người dùng cụ thể cho một bucket hoặc object riêng lẻ)
+  - Query String Authentication (tạo URL tới object, URL này chỉ có hiệu lực trong một khoảng thời gian giới hạn)
+  - Service control policies
+  - VPC endpoint: đính kèm endpoint policies vào để kiểm soát quyền truy cập vào tài nguyên Amazon S3 mà họ đang kết nối. Có 2 loại VPC endpoints cho S3:
+    - Gateway VPC endpoints: là một cổng mà bạn chỉ định trong route table để truy cập S3 từ VPC qua mạng AWS.
+    - Interface VPC endpoints: sử dụng private IPs để định tuyến các yêu cầu đến S3 từ VPC, tại chỗ hoặc từ Region khác.
+  - S3 Block Public Access.
+- AWS PrivateLink for Amazon S3: cung cấp kết nối riêng tư giữa Amazon S3 và on-premise.
+- Amazon Macie: là dịch vụ bảo mật được **hỗ trợ bởi AI (cụ thể là ML)** giúp bạn ngăn ngừa mất dữ liệu bằng cách tự động phát hiện, phân loại và bảo vệ dữ liệu nhạy cảm được lưu trữ trong Amazon S3.
   
-#### Amazon Athena (truy vấn tại chỗ)
+### Amazon Athena (truy vấn tại chỗ)
 - Amazon Athena is an interactive query service that makes it **easy to analyze data** in Amazon S3 using **standard SQL queries**.
 - Athena is serverless, so there is no infrastructure to set up or manage, and you can start analyzing data immediately. You don’t even need to load your data into Athena; it works directly with data stored in any S3 storage class.
 - To get started, just log into the Athena Management Console, define your schema, and start querying. Amazon Athena uses Presto with full standard SQL support and works with a variety of standard data formats, including CSV, JSON, ORC, Apache Parquet and Avro. While Athena is ideal for quick, ad-hoc querying and integrates with Amazon QuickSight for easy visualization, it can also handle complex analysis, including large joins, window functions, and arrays.
 
-### 7.3. EBS
-## 8. Database
-### 8.1. Amazon Relational Database Service (RDS):
-#### Relational Database
+## 7.3. EBS
+# 8. Database
+## 8.1. Amazon Relational Database Service (RDS):
+### Relational Database
 - Cơ sở dữ liệu quan hệ tổ chức dữ liệu thành các bảng. Dữ liệu trong một bảng có thể liên kết với dữ liệu trong các bảng khác để tạo mối quan hệ.
 - Một bảng lưu trữ dữ liệu theo hàng và cột. Một hàng, thường được gọi là bản ghi (record), chứa tất cả thông tin về một mục cụ thể. Các cột mô tả các thuộc tính của một mục.
 - Lợi ích khi dùng RD: dùng câu truy vấn SQL phức tạp, giảm dư thừa (lưu data vào 1 bảng và các bảng khác truy vấn đến thay vì lưu trong nhiều bảng), quen thuộc (ra đời 1970s), accuracy (đảm bảo rằng dữ liệu có tính toàn vẹn cao và tuân thủ nguyên tắc).
 - Use cases:
   - Những ứng dụng có lược đồ cố định và không thay đổi thường xuyên.
   - Những ứng dụng cần lưu trữ liên tục và tuân theo nguyên tắc ACID, chẳng hạn như: Ứng dụng hoạch định nguồn lực doanh nghiệp (ERP) Ứng dụng quản lý quan hệ khách hàng (CRM).
-#### Amazon Relational Database Service
+### Amazon Relational Database Service
 - Là một dịch vụ quản lý cho phép bạn triển khai và quản lý các cơ sở dữ liệu quan hệ trên AWS. 
 - Storage in the RDS:
    - EBS: MySQL, MariaDB, PostgreSQL, Oracle, and SQL Server. 
@@ -394,14 +425,14 @@ S3 Standard, S3 Standard-IA, S3 Intelligent-Tiering, S3 Glacier Instant Retrieva
 
 ![image](https://github.com/user-attachments/assets/8a462c72-0754-4f0c-8e10-3276c3c9253b)
 
-## 9. AWS Management Tools
-### 9.1. IAM
+# 9. AWS Management Tools
+## 9.1. IAM
 - AWS Identity and Access Management (IAM) is an AWS service that helps you manage access to your AWS account and resources. It also provides a centralized view of who and what are allowed inside your AWS account (authentication), and who and what have permissions to use and work with your AWS resources (authorization).
 - Với IAM, bạn có thể chia sẻ quyền truy cập vào tài khoản và tài nguyên AWS mà không cần chia sẻ bộ khóa truy cập hoặc mật khẩu. Bạn cũng có thể cung cấp quyền truy cập chi tiết cho những người làm việc trong tài khoản của mình để mọi người và dịch vụ chỉ có quyền đối với những tài nguyên họ cần.
-#### IAM features
+### IAM features
 - Global: IAM mang tính toàn cầu và không dành riêng cho bất kỳ Region nào. Bạn có thể xem và sử dụng cấu hình IAM của mình từ bất kỳ Khu vực nào trong AWS Management Console.
 - Free to use.
-#### IAM user
+### IAM user
 - Là một chủ thể được người dùng tạo trong aws và được sử dụng để đại diện cho một người hoặc một service tương tác với AWS.
 - When to create an IAM user (instead of a role)?
   - Workloads that cannot use IAM roles.
@@ -409,23 +440,23 @@ S3 Standard, S3 Standard-IA, S3 Intelligent-Tiering, S3 Glacier Instant Retrieva
   - AWS CodeCommit (dùng để lưu trữ code) access.
   - Amazon Keyspaces (for Apache Cassandra) access.
   - Emergency access.
-#### IAM groups
+### IAM groups
 - Là một tập hợp người dùng. Tất cả người dùng trong nhóm sẽ kế thừa các quyền được gán cho nhóm. Điều này cho phép ta cấp quyền cho nhiều người dùng cùng một lúc. 
 - Bạn không thể lồng các IAM group. Người dùng IAM riêng lẻ có thể thuộc nhiều nhóm, nhưng không thể tạo nhóm con trong một IAM group khác.
 - Lợi ích: Cung cấp một cách để xem ai có quyền gì trong tổ chức. Nó cũng giúp mở rộng quy mô khi có người mới tham gia, rời đi hay thay đổi vai trò trong tổ chức.
-#### IAM policies
+### IAM policies
 - Để quản lý quyền truy cập và cấp quyền cho các dịch vụ và tài nguyên AWS. AWS cũng có cung cấp những policies có sẵn cho user, ví dụ như AmazonEC2FullAccess,...
 - Hầu hết các chính sách đều được lưu trữ trong AWS dưới dạng tài liệu JSON với một số thông tin cơ bản như Version, Effect, Action, và Resource.
 - Ví dụ:
   
   ![image](https://github.com/user-attachments/assets/1256b014-290d-483a-b2e2-6c4bbf80c976)
 
-#### IAM role
+### IAM role
 - Phân quyền truy cập tạm thời: Thay vì gán quyền trực tiếp cho người dùng hoặc dịch vụ, bạn có thể tạo một IAM Role với các quyền cụ thể và sau đó gán role này cho người dùng, dịch vụ hoặc ứng dụng khi họ cần truy cập.
 - Tăng cường bảo mật: IAM Role giúp giảm rủi ro bảo mật bằng cách cung cấp quyền truy cập chỉ khi cần thiết và không cần sử dụng thông tin đăng nhập tĩnh (như Access Keys) cho các dịch vụ AWS.
 - Linh hoạt trong quản lý: Bạn có thể gán, thu hồi hoặc thay đổi IAM Role một cách dễ dàng mà không cần phải thay đổi cấu hình hoặc quyền hạn của người dùng hoặc dịch vụ.
 - Ví dụ: Truy cập dịch vụ khác từ EC2: Giả sử bạn có một ứng dụng chạy trên một EC2 instance cần truy cập vào một S3 bucket để lưu trữ hoặc đọc dữ liệu. Thay vì gán trực tiếp Access Key và Secret Key cho ứng dụng, bạn có thể tạo một IAM Role với quyền truy cập S3 và gán role này cho EC2 instance. Điều này cho phép ứng dụng truy cập S3 mà không cần quản lý thông tin đăng nhập.
-#### Best practices
+### Best practices
 - Lock down the AWS root user.
 - Follow the principle of least privilege
 - Use IAM appropriately
@@ -433,7 +464,7 @@ S3 Standard, S3 Standard-IA, S3 Intelligent-Tiering, S3 Glacier Instant Retrieva
 - Consider using an identity provider
 - Regularly review and remove unused users, roles, and other credentials
   
-### 9.2. CloudWatch (Application)
+## 9.2. CloudWatch (Application)
 - CloudWatch là một dịch vụ thu thập, giám sát và phân tích dữ liệu, nguồn tài nguyên của ứng dụng; cung cấp thông tin để định hướng hành động, gửi thông báo, hỗ trợ việc tối ưu hóa hiệu năng ứng dụng, quản lý sử dụng tài nguyên và hiểu rõ tình trạng hoạt động của toàn hệ thống.
 
   ![image](https://github.com/user-attachments/assets/859bb721-bf25-4b37-b3a9-f39174a3d01b)
@@ -455,13 +486,13 @@ S3 Standard, S3 Standard-IA, S3 Intelligent-Tiering, S3 Glacier Instant Retrieva
   
   ![image](https://github.com/user-attachments/assets/2823c6ea-67d9-44a8-9519-50dbc8285239)
   
-#### CloudWatch alarms
+### CloudWatch alarms
 - Gửi thông báo hoặc tự động thực hiện thay đổi khi vượt giá trị ngưỡng đối với tài nguyên bạn đang theo dõi dựa trên các quy tắc bạn xác định.
 - Có 3 trạng thái:
   - OK: Số liệu nằm trong ngưỡng được xác định. Mọi thứ dường như đang hoạt động như bình thường.
   - ALARM: Số liệu nằm ngoài ngưỡng được xác định. Đây có thể là một vấn đề hoạt động.
   - INSUFFICIENT_DATA: Cảnh báo vừa mới bắt đầu, metric không có sẵn hoặc không có đủ dữ liệu cho metric để xác định trạng thái cảnh báo.
-#### Amazon CloudWatch Logs
+### Amazon CloudWatch Logs
 - Là nơi tập trung để lưu trữ và phân tích nhật ký. Với dịch vụ này, bạn có thể giám sát, lưu trữ và truy cập các tệp nhật ký của mình từ các ứng dụng chạy trên phiên bản EC2, hàm AWS Lambda và các nguồn khác.
 - Cách sắp xếp dữ liệu trong CloudWatch Logs:
   - Event logs: là bản ghi hoạt động được ghi lại bởi ứng dụng hoặc tài nguyên đang được giám sát. Nó có dấu thời gian và thông báo sự kiện.
@@ -470,10 +501,10 @@ S3 Standard, S3 Standard-IA, S3 Intelligent-Tiering, S3 Glacier Instant Retrieva
     
   ![image](https://github.com/user-attachments/assets/4f768068-64c3-4b98-af7c-59451e09065e)
  
-#### CloudWatch Dashboards:
+### CloudWatch Dashboards:
 - Là các trang chủ có thể tùy chỉnh trong bảng điều khiển CloudWatch mà bạn có thể sử dụng để giám sát tài nguyên của mình trong một chế độ xem duy nhất.
 - CloudWatch Dashboards tích hợp với CloudWatch Metrics và CloudWatch Alarms để tạo chế độ xem tùy chỉnh về số liệu và cảnh báo cho tài nguyên AWS của bạn.
-### 9.3. CloudTrail (AWS Account)
+## 9.3. CloudTrail (AWS Account)
 
 ![image](https://github.com/user-attachments/assets/ad53f89b-f7ec-472a-83a5-fa140a316b34)
 
@@ -499,23 +530,23 @@ S3 Standard, S3 Standard-IA, S3 Intelligent-Tiering, S3 Glacier Instant Retrieva
     - Amazon S3 object-level API activity (for example, GetObject, DeleteObject, and PutObject API operations) on objects in S3 buckets.
     - AWS Lambda function execution activity (the Invoke API).
 - By default, CloudTrail logs management events, but not data events.
-## 10. CloudFormation
-## 11. AWS Billing and Cost Management
-#### Sử dụng để làm gì?
+# 10. CloudFormation
+# 11. AWS Billing and Cost Management
+### Sử dụng để làm gì?
   - Ước tính và lập kế hoạch chi phí AWS của bạn.
   - Nhận thông báo nếu chi phí của bạn vượt quá hoặc đạt đến ngưỡng.
   - Đánh giá khoản đầu tư lớn nhất của bạn vào tài nguyên AWS.
   - Tổ chức hợp lý sổ sách kế toán nếu bạn làm việc với nhiều tài khoản AWS.
-#### Month-to-date (MTD)
+### Month-to-date (MTD)
 
 Là một khoảng thời gian bắt đầu từ đầu tháng và kết thúc ở ngày hiện tại trong tháng đó.
 
 Ví dụ: nếu ngày hôm nay là ngày 15, bạn được sếp yêu cầu tính sales trong tháng hiện tại, bạn sẽ tính tổng sales từ ngày 1 đến ngày 14 (ngày 15 chưa kết thúc).
 
-#### AWS Cost Management Console 
+### AWS Cost Management Console 
 - Sử dụng để tối ưu hóa chi phí trong tương lai.
 - Daily unblended costs là thuật ngữ trong quản lý chi phí đám mây (cloud cost management), đề cập đến tổng chi phí mà bạn phải thanh toán cho tất cả các dịch vụ và tài nguyên cloud mà bạn đã sử dụng trong một ngày cụ thể, không phân tách ra theo từng dịch vụ hay loại tài nguyên cụ thể.
-#### Các dịch vụ liên quan đến chi phí
+### Các dịch vụ liên quan đến chi phí
   
   ![image](https://github.com/user-attachments/assets/0510451e-1db7-4cb9-85e5-4c2c23eba502)
 - Establish visibility:
@@ -527,7 +558,7 @@ Ví dụ: nếu ngày hôm nay là ngày 15, bạn được sếp yêu cầu tí
   - AWS Budgets: Sử dụng để theo dõi và quản lý chi phí AWS của mình. Khi tạo ngân sách, bạn tạo một ranh giới trên một cách hiệu quả mà bạn muốn chi phí của mình duy trì trong khoảng thời gian đã định cấu hình. Bạn có thể theo dõi chi phí chuyên sâu bằng cách thêm các bộ lọc liên quan đến dịch vụ AWS, tài khoản thành viên, Khu vực AWS, thẻ, v.v. Ví dụ: bạn có thể muốn theo dõi chi tiêu hàng tháng cho môi trường phát triển có thẻ cụ thể được gắn vào từng tài nguyên.
 
   - AWS Cost Anomaly Detection: Phát hiện chi phí bất thường của AWS là một tính năng Quản lý chi phí AWS sử dụng ML để liên tục theo dõi chi phí và mức sử dụng của bạn nhằm phát hiện các khoản chi tiêu bất thường. Công cụ này có thể được sử dụng như một yếu tố giảm thiểu khác đối với việc nhận các hóa đơn bất ngờ vào cuối tháng. 
-#### Cảnh báo vượt ngưỡng của AWS
+### Cảnh báo vượt ngưỡng của AWS
 
 AWS Budget bao gồm 4 loại cảnh báo:
 
@@ -535,13 +566,13 @@ AWS Budget bao gồm 4 loại cảnh báo:
 - Usage Budget: gửi cảnh báo khi tổng mức sử dụng theo từng dịch vụ bạn lựa chọn vượt qua ngưỡng mức sử dụng trong ngân sách.
 - RI Budget: gửi cảnh báo dựa trên mức sử dụng các dịch vụ trả trước (reserve instance) của bạn.
 - Savings Plans Budget: gửi cảnh báo dựa trên mức sử dụng các dịch vụ đã được quy định ở trong savings plans.
-## 12. AWS CLI
-### Bật tính năng tự động gợi ý (auto-prompt mode)
+# 12. AWS CLI
+## Bật tính năng tự động gợi ý (auto-prompt mode)
 `aws --cli-auto-prompt`
   
   ![image](https://github.com/user-attachments/assets/52051188-d468-4e26-aa00-b9ef11f33869)
 
-### Tương tác với S3
+## Tương tác với S3
 - Tạo S3 bucket: `aws s3 mb s3://<name_bucket>` .Do tên bucket là duy nhất trên global nên tôi đã thêm các ký tự rác.
   
   ![image](https://github.com/user-attachments/assets/895686b5-c3dc-4756-82f5-820967705846)
@@ -556,7 +587,7 @@ AWS Budget bao gồm 4 loại cảnh báo:
   
   ![image](https://github.com/user-attachments/assets/c781a54c-f63f-47be-9278-45d6477e3290)
 
-### Tương tác với VPC
+## Tương tác với VPC
 - Tạo VPC: `aws ec2 create-vpc <option> <value>`
   
   ![image](https://github.com/user-attachments/assets/4df4afee-e832-4abc-b5e9-f2af3d009096)
@@ -571,7 +602,7 @@ AWS Budget bao gồm 4 loại cảnh báo:
 - Định tuyến Route table: `aws ec2 create-route --route-table-id <RTB ID> --destination-cidr-block 0.0.0.0/0 --gateway-id <IGW ID>`
 - Associate route table: `aws ec2 associate-route-table  --subnet-id <subnet ID> --route-table-id <RTB ID>`
 
-### Nguồn tham khảo
+# Nguồn tham khảo
 - Mindmap: https://github.com/notcuder/aws-mindmap?tab=readme-ov-file
 - Tổng hợp kiến thức ôn thi SAA: https://github.com/keenanromain/AWS-SAA-C02-Study-Guide?tab=readme-ov-file
 - Note lý thuyết cơ bản về AWS: https://github.com/skulltech/aws-solutions-architect-associate-notes?tab=readme-ov-file
