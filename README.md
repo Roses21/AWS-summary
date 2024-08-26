@@ -324,6 +324,11 @@ Gồm 3 loại: virtual machines (VMs), containers, và serverless.
 ### Object storage 
 - Dữ liệu được lưu trữ dưới dạng object trong bucket, thích hợp để lưu dữ liệu phi cấu trúc và ít thay đổi. 
 ## 7.1. CloudFront
+- Amazon CloudFront là một dịch vụ web giúp tăng tốc độ phân phối nội dung web tĩnh và động, chẳng hạn như các tệp .html, .css, .js và hình ảnh tới người dùng. CloudFront cung cấp nội dung của bạn thông qua mạng lưới trung tâm dữ liệu trên toàn thế giới được gọi là edge locations. Khi người dùng yêu cầu nội dung mà bạn đang phân phát bằng CloudFront, yêu cầu đó sẽ được chuyển đến vị trí biên có độ trễ thấp nhất, để nội dung đó được phân phối với hiệu suất tốt nhất có thể.
+  - Nếu nội dung đã ở vị trí biên có độ trễ thấp nhất thì CloudFront sẽ phân phối nội dung đó ngay lập tức.
+  - Ngược lại, nó sẽ truy xuất nội dung từ nguồn mà bạn đã chỉ định (S3, MediaPackage channel hoặc máy chủ HTTP). 
+- Higher performance: CloudFront đảm bảo rằng các yêu cầu của người dùng cuối được phân phát ở vị trí biên gần nhất; tăng tốc độ phân phối nội dung của bạn bằng cách định tuyến từng yêu cầu của người dùng thông qua **AWS backbone network** để đến vị trí biên. Đồng thời, lưu vào bộ nhớ đệm biên thuộc region các bản sao nội dung của bạn. CloudFront sẽ duy trì các kết nối liên tục với máy chủ gốc để có thể tìm nạp những tệp đó từ máy chủ gốc nhanh nhất có thể.
+  
 ## 7.2. S3
 
 ![image](https://github.com/user-attachments/assets/fe87eaa3-8683-400f-8be4-b2fb9701e7bd)
