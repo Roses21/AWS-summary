@@ -23,7 +23,6 @@
 
 - Sharing your estimate: Estimate links created on or after May 31, 2023, remain valid for **one year**. Estimate links created before this date remain valid for three years.
 - Exporting your estimates: CSV, JSON hoặc PDF. Trong file sẽ gồm các thông tin như: ngày export, estimate link, chi phí ước tính theo tháng và theo năm, Groups (nếu có), chi tiết ước tính (gồm các thông tin liên quan đến cấu hình của từng service).
-- Migrating from Simple Monthly Calculator estimates to the AWS Pricing Calculator:
 ## 4. Thực hành
   - Version 1 - chỉ estimate EC2: https://calculator.aws/#/estimate?id=78ee48d44fa4f7d519a98ad1614f184aab54e957
   - Version 2 - xóa EC2: https://calculator.aws/#/estimate?id=e930bebfb774aceb1ec0f18e84673b061303cb4f
