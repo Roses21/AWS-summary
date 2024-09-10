@@ -456,7 +456,18 @@ S3 Standard, S3 Standard-IA, S3 Intelligent-Tiering, S3 Glacier Instant Retrieva
 - Ví dụ:
   
   ![image](https://github.com/user-attachments/assets/1256b014-290d-483a-b2e2-6c4bbf80c976)
+   #### IAM Permission Boundary
+  - AWS hỗ trợ Permission Boundary cho các thực thể IAM (users or roles). Permission Boundary là một tính năng nâng cao để sử dụng chính sách được quản lý nhằm đặt các quyền tối đa mà chính sách dựa trên danh tính có thể cấp cho thực thể IAM. Quyền hạn có hiệu lực (effective permissions) của thực thể sẽ bao gồm những quyền được cho phép bởi cả Permission Boundary và chính sách quyền dựa trên danh tính của thực thể đó (Identity-based policy).
 
+    ![image](https://github.com/user-attachments/assets/0c0609e5-a1e5-4b89-b2cb-972898248424)
+
+  - Tại sao sử dụng IAM Permission Boundary?
+
+    Hữu ích khi số lượng user tăng lên và những thay đổi liên tục trong vai trò công việc của các user yêu cầu bạn phải tạo ra thêm nhiều chính sách quyền mới. Để đơn giản hóa công tác quản lý quyền, thay vì bạn phải chỉnh sửa từng chính sách quyền, bạn có thể áp dụng Permission Boundary một cách nhanh chóng và đồng loạt để giúp bạn đóng những lỗ hổng về privilege escalation.
+  - Ví dụ về policy giới hạn quyền: Đoạn JSON có ý nghĩa rằng mọi hành động đối với tất cả dịch vụ EC2 từ mọi tài nguyên đều được cho phép với điều kiện rằng dịch vụ EC2 đó phải ở region ap-southeast-1 (Singapore).
+    
+    ![image](https://github.com/user-attachments/assets/970f95f1-c874-403d-8a82-4e2fe5a1bd03)
+  
 ### IAM role
 - Phân quyền truy cập tạm thời: Thay vì gán quyền trực tiếp cho người dùng hoặc dịch vụ, bạn có thể tạo một IAM Role với các quyền cụ thể và sau đó gán role này cho người dùng, dịch vụ hoặc ứng dụng khi họ cần truy cập.
 - Tăng cường bảo mật: IAM Role giúp giảm rủi ro bảo mật bằng cách cung cấp quyền truy cập chỉ khi cần thiết và không cần sử dụng thông tin đăng nhập tĩnh (như Access Keys) cho các dịch vụ AWS.
@@ -469,7 +480,7 @@ S3 Standard, S3 Standard-IA, S3 Intelligent-Tiering, S3 Glacier Instant Retrieva
 - Use IAM roles when possible
 - Consider using an identity provider
 - Regularly review and remove unused users, roles, and other credentials
-  
+
 ## 9.2. CloudWatch (Application)
 - CloudWatch là một dịch vụ thu thập, giám sát và phân tích dữ liệu, nguồn tài nguyên của ứng dụng; cung cấp thông tin để định hướng hành động, gửi thông báo, hỗ trợ việc tối ưu hóa hiệu năng ứng dụng, quản lý sử dụng tài nguyên và hiểu rõ tình trạng hoạt động của toàn hệ thống.
 
