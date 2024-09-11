@@ -473,6 +473,18 @@ S3 Standard, S3 Standard-IA, S3 Intelligent-Tiering, S3 Glacier Instant Retrieva
 - Tăng cường bảo mật: IAM Role giúp giảm rủi ro bảo mật bằng cách cung cấp quyền truy cập chỉ khi cần thiết và không cần sử dụng thông tin đăng nhập tĩnh (như Access Keys) cho các dịch vụ AWS.
 - Linh hoạt trong quản lý: Bạn có thể gán, thu hồi hoặc thay đổi IAM Role một cách dễ dàng mà không cần phải thay đổi cấu hình hoặc quyền hạn của người dùng hoặc dịch vụ.
 - Ví dụ: Truy cập dịch vụ khác từ EC2: Giả sử bạn có một ứng dụng chạy trên một EC2 instance cần truy cập vào một S3 bucket để lưu trữ hoặc đọc dữ liệu. Thay vì gán trực tiếp Access Key và Secret Key cho ứng dụng, bạn có thể tạo một IAM Role với quyền truy cập S3 và gán role này cho EC2 instance. Điều này cho phép ứng dụng truy cập S3 mà không cần quản lý thông tin đăng nhập.
+#### Role condition
+- Tham khảo: https://000044.awsstudygroup.com/
+- AWS STS (Security Token Service) là dịch vụ web cho phép người dùng yêu cầu thông tin xác thực tạm thời, có đặc quyền hạn chế để người dùng truy cập tài nguyên AWS mà không cần tạo danh tính AWS. AWS Temporary Credentials được tạo ra bởi Assume Role có thời hạn hiệu lực trong vòng 3600s (1 tiếng) để kéo dài thời gian này cần dùng thêm options *--duration-seconds* với giá trị từ 900s (15 phút) tới 43200s (12 giờ).
+- Quá trình assume role (có thể hiểu nôm na là "Ủy thác Vai trò"): 
+
+   ![image](https://github.com/user-attachments/assets/d02a9d7d-2013-430f-92a7-c259f90b9605)
+
+  - IAM user sẽ có thông tin chứng thực dài hạn ( password / acccesskey & secretaccesskey ) và sẽ dùng thông tin chứng thực dài hạn đó để request tới AWS Security Token Service ( AWS STS ) và thực hiện action sts:AssumeRole.
+  - STS sẽ thực hiện kiểm tra xem IAM user có quyền để thực hiện action này hay không thông qua kiểm tra Trust Relationship ( gán vào Role ) và Identity Policy ( gán vào IAM User ). Nếu quá trình STS kiểm tra thành công, STS sẽ trả về thông tin chứng thực tạm thời.
+  - IAM user sẽ sử dụng thông tin chứng thực tạm thời để thực hiện các request (API call) tới các dịch vụ của AWS. (IAM User ở thời điểm này sẽ có các quyền hạn được gán vào IAM role mà IAM User đã assume).
+- Trusted entity là thực thể (service, account, custom trust policy,...) được phép assume role.
+- 
 ### Best practices
 - Lock down the AWS root user.
 - Follow the principle of least privilege
