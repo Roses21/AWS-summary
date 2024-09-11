@@ -484,6 +484,18 @@ S3 Standard, S3 Standard-IA, S3 Intelligent-Tiering, S3 Glacier Instant Retrieva
   - STS sẽ thực hiện kiểm tra xem IAM user có quyền để thực hiện action này hay không thông qua kiểm tra Trust Relationship ( gán vào Role ) và Identity Policy ( gán vào IAM User ). Nếu quá trình STS kiểm tra thành công, STS sẽ trả về thông tin chứng thực tạm thời.
   - IAM user sẽ sử dụng thông tin chứng thực tạm thời để thực hiện các request (API call) tới các dịch vụ của AWS. (IAM User ở thời điểm này sẽ có các quyền hạn được gán vào IAM role mà IAM User đã assume).
 - Trusted entity là thực thể (service, account, custom trust policy,...) được phép assume role.
+- Thực hành: Lab 000044:
+  - Tạo 1 IAM Group có quyền truy cập admin tới cả hai dịch vụ EC2 và RDS: *ec2-rds-admin-group*
+  - Thực hiện tạo 4 IAM user: *EC2-admin-user*, *RDS-admin-user*, *Group-user* (user được gán quyền quản trị thông qua IAM User Group được tạo ở trên), *No-permission-user* (user không có quyền gì cả, sẽ được dùng để tiếp nhận IAM role có quyền Admin).
+  - Tạo IAM Role: *lab44-RoleFullAccess* có quyền Admin.
+  - Cấu hình Switch role: cấu hình role *lab44-RoleFullAccess* để cho phép user *No-permission-user* sử dụng được role này.
+    - Sao chép thông tin User ARN của *No-permission-user*.
+    - Edit trust relationship của role *lab44-RoleFullAccess*: nhằm mục đích siết chặt khả năng sử dụng role này - chỉ sử dụng role khi thỏa các condition. Thêm thông tin:
+      
+      ![image](https://github.com/user-attachments/assets/a6368baa-5386-4788-bd76-4697ac455fa4)
+
+    - Log in user *No-permission-user* -> Switch Role -> nhập các thông tin gồm ID của role và tên role.
+    - Edit trust relationship để bổ sung thêm condition (như IP, thời gian,...) tùy thuộc vào mục đích sử dụng role.
 ### Best practices
 - Lock down the AWS root user.
 - Follow the principle of least privilege
