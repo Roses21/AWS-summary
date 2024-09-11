@@ -484,7 +484,6 @@ S3 Standard, S3 Standard-IA, S3 Intelligent-Tiering, S3 Glacier Instant Retrieva
   - STS sẽ thực hiện kiểm tra xem IAM user có quyền để thực hiện action này hay không thông qua kiểm tra Trust Relationship ( gán vào Role ) và Identity Policy ( gán vào IAM User ). Nếu quá trình STS kiểm tra thành công, STS sẽ trả về thông tin chứng thực tạm thời.
   - IAM user sẽ sử dụng thông tin chứng thực tạm thời để thực hiện các request (API call) tới các dịch vụ của AWS. (IAM User ở thời điểm này sẽ có các quyền hạn được gán vào IAM role mà IAM User đã assume).
 - Trusted entity là thực thể (service, account, custom trust policy,...) được phép assume role.
-- 
 ### Best practices
 - Lock down the AWS root user.
 - Follow the principle of least privilege
