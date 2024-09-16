@@ -7,11 +7,11 @@
 
    5.1. [VPC](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#51-vpc)
 
-   5.2. [Elastic Load Balancing (ELB)]()
+   5.2. [Elastic Load Balancing (ELB)](https://github.com/Roses21/AWS-summary/blob/main/README.md#52-elastic-load-balancing-elb)
 
-   5.3. [ENB]()
+   5.3. [ENB](https://github.com/Roses21/AWS-summary/blob/main/README.md#53-enb)
 
-   5.4. [Route 53]()
+   5.4. [Route 53](https://github.com/Roses21/AWS-summary/blob/main/README.md#54-route-53)
    
 6. [AWS Compute](https://github.com/Roses21/AWS-summary/blob/main/README.md#6-compute)
 
@@ -30,6 +30,11 @@
    7.3. [EBS](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#73-ebs)
 
 8. [Database](https://github.com/Roses21/AWS-summary/blob/main/README.md#8-database)
+
+   8.1. [Amazon Relational Database Service](https://github.com/Roses21/AWS-summary/blob/main/README.md#81-amazon-relational-database-service-rds)
+
+   
+   
 9. [AWS Management Tools](https://github.com/Roses21/AWS-summary/blob/main/README.md#9-aws-management-tools)
 
    9.1. [IAM](https://github.com/Roses21/AWS-summary/blob/main/README.md#91-iam)
@@ -40,8 +45,8 @@
 
 10. [CloudFormation](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#10-cloudformation)
 11. [AWS Billing and Cost Management](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#11-aws-billing-and-cost-management)
-12. [AWS CLI]()
-13. WAF    
+12. [AWS CLI](https://github.com/Roses21/AWS-summary/blob/main/README.md#12-aws-cli)
+13. [WAF](https://github.com/Roses21/AWS-summary/blob/main/README.md#13-waf-web-application-firewall) 
 14. [Nguồn tham khảo](https://github.com/Roses21/AWS-summary/blob/main/README.md#ngu%E1%BB%93n-tham-kh%E1%BA%A3o)
 
 # 1. Lưu ý về vẽ kiến trúc trên draw.io
