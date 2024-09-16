@@ -291,6 +291,11 @@ Gồm 3 loại: virtual machines (VMs), containers, và serverless.
 ## 6.3. Serverless 
 - Serverless có nghĩa là bạn không thể xem hoặc truy cập vào cơ sở hạ tầng hoặc instance cơ bản đang lưu trữ giải pháp của bạn. Thay vào đó, tất cả việc quản lý môi trường cơ bản từ góc độ cung cấp, mở rộng quy mô, khả năng chịu lỗi và bảo trì đều được AWS đảm bảo. Tất cả những gì bạn cần làm là tập trung vào ứng dụng của mình.
 - Tự động mở rộng theo mức sử dụng.
+- Serverless services on AWS:
+  - Compute: Fargate, Lambda.
+  - Data store: Aurora, Redshift, DynamoDB, S3, EFS, RDS Proxy, Neptune, ElastiCache, OpenSearch.
+  - Application integration: EventBridge, Step Functions, SQS, SNS, API Gateway, AppSync.
+    
 ### Fargate
 
 ![image](https://github.com/user-attachments/assets/fca29408-95c0-4d14-b1ed-04bb722ba950)
@@ -298,6 +303,20 @@ Gồm 3 loại: virtual machines (VMs), containers, và serverless.
 - AWS Fargate là nền tảng điện toán serverless dành cho container mà bạn có thể sử dụng với ECS hoặc EKS.
 - Fargate allocates the right amount of compute. This eliminates the need to choose and manage EC2 instances, cluster capacity, and scaling.
 ### Lambda
+
+![image](https://github.com/user-attachments/assets/4e03985d-027a-460d-b2ee-ecd2345e1711)
+
+### Amazon API Gateway
+
+![image](https://github.com/user-attachments/assets/b41f1fbb-34b7-407f-8d8e-2300e131bdcf)
+
+- APIs hoạt động như "cửa trước" để các ứng dụng truy cập dữ liệu, business logic hoặc chức năng từ các dịch vụ backend.
+- Bằng cách sử dụng API Gateway, bạn có thể tạo các API RESTful và API WebSocket để kích hoạt các ứng dụng giao tiếp hai chiều theo thời gian thực. API Gateway hỗ trợ các khối lượng công việc có trong container và serverless, cũng như các ứng dụng web.
+- API Gateway xử lý tất cả các nhiệm vụ liên quan đến việc chấp nhận và xử lý lên tới hàng trăm nghìn lệnh gọi API đồng thời, bao gồm quản lý lưu lượng, hỗ trợ CORS (Cross-Origin Resource Sharing), kiểm soát ủy quyền và truy cập, điều tiết, giám sát và quản lý phiên bản API.
+- API Gateway không có phí tối thiểu hoặc chi phí khởi động. Bạn trả tiền cho các lệnh gọi API mà bạn nhận được cũng như lượng dữ liệu được truyền đi và với mô hình định giá theo bậc của API Gateway, bạn có thể giảm chi phí khi mức sử dụng API của bạn tăng lên.
+- Loại API: gồm WEBSOCKET APIs và RESTful APIs, mục đích là xây dựng giao tiếp giữa máy chủ và client.
+  
+    ![image](https://github.com/user-attachments/assets/3361e04f-9aeb-4233-9ade-e897ef231ad8)
 
 # 7. Storage 
 - Có 3 loại lưu trữ:
