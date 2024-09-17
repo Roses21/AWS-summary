@@ -667,10 +667,10 @@ AWS Budget bao gồm 4 loại cảnh báo:
 - Associate route table: `aws ec2 associate-route-table  --subnet-id <subnet ID> --route-table-id <RTB ID>`
 # 13. WAF (Web application firewall)
 - Giúp bảo vệ các ứng dụng web ở layer 7 khỏi các cuộc tấn công bằng cách cho phép định cấu hình các quy tắc allow, block hoặc monitor (đếm) yêu cầu web dựa trên các điều kiện mà bạn xác định. Các điều kiện này bao gồm địa chỉ IP, tiêu đề HTTP, nội dung HTTP, URI string, SQL injection và cross-site scripting.
-- WAF với Amazon CloudFront, Application Load Balancer (ALB), Amazon API Gateway, AWS AppSyn:
+- WAF với Amazon CloudFront, Application Load Balancer (ALB), Amazon API Gateway, AWS AppSync:
   - Áp dụng AWS WAF trên Amazon CloudFront: các rules sẽ chạy ở tất cả các Vị trí biên AWS, nằm trên khắp thế giới, gần với người dùng cuối. Bảo mật không ảnh hưởng đến hiệu suất. Các yêu cầu bị chặn sẽ bị dừng trước khi chúng đến được máy chủ web.
   - Dùng AWS WAF trên regional services (như Application Load Balancer, Amazon API Gateway, AWS AppSync): rules run in region and can be used to protect internet-facing resources as well as internal resources.
-#### Mối quan hệ tích hợp giữa AWS WAF và API Gateway, ALB và CloudFront:
+- Mối quan hệ tích hợp giữa AWS WAF và API Gateway, ALB và CloudFront:
   - Mỗi WebACL chỉ có thể được gắn vào một loại dịch vụ cụ thể tại một thời điểm. 
   - Các dịch vụ regional như API Gateway, ALB, AppSync chỉ có thể gắn với 1 WAF. Ngược lại thì không đúng, AWS WAF (Web Application Firewall) có thể bảo vệ nhiều service bằng cách tạo các WebACL (Web Access Control List) khác nhau và gắn chúng với các tài nguyên tương ứng. 
 # Nguồn tham khảo
