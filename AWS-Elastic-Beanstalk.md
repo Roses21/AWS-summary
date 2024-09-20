@@ -110,8 +110,13 @@ console.log('Nodejs is running at port 5000...')
 ![image](https://github.com/user-attachments/assets/70dd0cd4-d6ad-4577-9ec1-24265d90c26b)
 
 ### 6.4. Update source code
+- Để cập nhật code, chuẩn bị file và nén file, chỉ cần upload version mới và EB sẽ tự động triển khai theo yêu cầu đã cài đặt trước đó:
 
 ![image](https://github.com/user-attachments/assets/39fe9ffb-9e80-418d-abe9-fd3c8a48ada9)
+
+- Nếu quá trình update không thành công, EB sẽ trả về version trước đó:
+
+  ![image](https://github.com/user-attachments/assets/ee3cd691-90e7-4771-abb2-932001e073c7)
 
 ## Tham khảo
 https://aws.amazon.com/elasticbeanstalk/faqs/?nc1=h_ls
