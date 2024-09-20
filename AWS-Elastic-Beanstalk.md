@@ -37,6 +37,9 @@
   - Elastic Beanstalk cung cấp 2 policy templates: read-only access template và full-access template. Read-only access template cấp quyền truy cập đọc vào tài nguyên Elastic Beanstalk. Full-access template cấp quyền truy cập đầy đủ vào tất cả các hoạt động của Elastic Beanstalk cũng như các quyền để quản lý các tài nguyên phụ thuộc, chẳng hạn như Elastic Load Balancing, Auto Scaling và Amazon S3.
   - Có thể tạo policy tùy chỉnh.
 ## 4. Tính năng: Managed platform updates
+
+![image](https://github.com/user-attachments/assets/9b33b0bb-0186-4418-b61d-cc83275bd070)
+
 - Để Elastic Beanstalk tự động quản lý các bản cập nhật của platform, bạn phải kích hoạt cập nhật nền tảng được quản lý trên Configuration tab của Elastic Beanstalk console hoặc dùng EB CLI hoặc API. Sau khi kích hoạt tính năng này, bạn có thể cấu hình cho phép những loại cập nhật nào và thời điểm thực hiện cập nhật.
 - AWS Elastic Beanstalk có thể tự động thực hiện cập nhật nền tảng cho bản vá lỗi mới và các phiên bản của nền tảng phụ. Elastic Beanstalk sẽ không tự động thực hiện các cập nhật phiên bản nền tảng chính (ví dụ: từ Java 7 Tomcat 7 lên Java 8 Tomcat 8) vì chúng bao gồm những thay đổi không tương thích với quá khứ và yêu cầu phải kiểm thử bổ sung. Trong các trường hợp này, bạn phải khởi tạo cập nhật một cách thủ công.
 - Cách AWS Elastic Beanstalk có thể phân biệt giữa các bản phát hành phiên bản “chính,” “phụ,” và “vá lỗi”:
@@ -52,10 +55,67 @@
 ## 5. Billing
 Không tính thêm phí khi sử dụng AWS Elastic Beanstalk – bạn chỉ phải trả phí cho những tài nguyên AWS được sử dụng trên thực tế để lưu trữ và chạy ứng dụng của mình.
 ## 6. Thực hành
+Triển khai một ứng dụng NodeJS đơn giản lên EB.
+### 6.1. Cài đặt NodeJS
+- Truy cập https://nodejs.org/en/download/prebuilt-installer để tải source.
+- Kiểm tra đã cài đặt thành công chưa:
+  
+  ![image](https://github.com/user-attachments/assets/a5eebffc-152c-44c4-b055-72d303caf4aa)
+
+- Source code tạo website đơn giản:
+
+*Lưu ý: file code EB yêu cầu phải nén, nên dù chỉ có file app.js nhưng cũng cần phải nén lại.*
+
+```
+var http = require('http'); 
+var server = http.createServer(function (req, res) {
+    if (req.url == '/') { 
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.write('<html><body><h1 style="color:red;">Welcome to Annie Website v0.1</h1></body></html>');
+        res.end();
+    }
+    else if (req.url == "/training") {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.write('<html><body><h1 style="color:green;">Welcome to Training page v0.1!</h1></body></html>');
+        res.end();
+    }
+    else if (req.url == "/admin") {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.write('<html><body><h1 style="color:black;">You need admin permission to access this page! -v0.1</h1></body></html>');
+        res.end();
+    }
+    else
+        res.end('Invalid Request! v0.1');
+});
+server.listen(5000);
+console.log('Nodejs is running at port 5000...')
+```
+
+- Chạy thử ở local:
+  
+  ![image](https://github.com/user-attachments/assets/951f5225-d257-4afc-aa76-021836007886)
+
+### 6.2. Tạo môi trường và upload source code lên EB
+- Chi tiết hướng dẫn xem tại https://www.youtube.com/watch?v=6QgHr0RCkic
+- Sau khi tạo xong, chọn tab Events để xem những service được tạo bởi EB:
+  
+  ![image](https://github.com/user-attachments/assets/03489604-781a-44c3-900d-46d7007ba03b)
+
+- Sau khi launch thành công, có thể truy cập domain:
+
+  ![image](https://github.com/user-attachments/assets/0b1305da-c1b5-4332-856a-4ba4581320a8)
+
+### 6.3. Kiểm tra kết quả triển khai website trên cloud
+
+![image](https://github.com/user-attachments/assets/70dd0cd4-d6ad-4577-9ec1-24265d90c26b)
+
+### 6.4. Update source code
+
+![image](https://github.com/user-attachments/assets/39fe9ffb-9e80-418d-abe9-fd3c8a48ada9)
 
 ## Tham khảo
 https://aws.amazon.com/elasticbeanstalk/faqs/?nc1=h_ls
 
 https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/Welcome.html
 
-https://www.youtube.com/playlist?list=PL4NoNM0L1m72JODh4efPGC-XhAJ9_uEJl
+https://www.youtube.com/watch?v=6QgHr0RCkic
