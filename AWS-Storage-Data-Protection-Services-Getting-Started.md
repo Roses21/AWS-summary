@@ -60,5 +60,43 @@ AWS Elastic Disaster Recovery lưu giữ bản sao cập nhật của các máy 
   - AWS Backup and compliance: bạn cần theo dõi, kiểm tra và báo cáo về hoạt động sao lưu để đảm bảo đáp ứng các yêu cầu về tổ chức và quy định.
   - AWS Backup and ransomware mitigation: Vault lock - A powerful function of AWS Backup is that when you create a backup vault, you can use a different AWS KMS key (protect against bad actors modifying critical data for ransomware attacks).
 
-## 3. Service Native Snapshots
-## 4. AWS Elastic Disaster Recovery
+# 3. Service Native Snapshots
+- Snapshots có tính nhất quán cao trên nhiều ổ lưu trữ. Điều này có nghĩa là nhiều Snapshots có thể được chụp cùng một lúc. Điều này rất quan trọng khi dữ liệu có thể được phân phối trên nhiều thiết bị lưu trữ. Nếu bạn cần khôi phục hoặc sao chép dữ liệu, tất cả các nguồn dữ liệu sẽ được khớp với cùng một thời điểm.
+- Snapshots are stored in a protected part of Amazon S3 as part of the managed service. Storing snapshots on Amazon S3 protects your data with 99.999999999 percent (11 9s) of durability and provides you Regional access and availability.
+- Bốn dịch vụ AWS Storage cốt lõi hỗ trợ snapshort: Amazon EBS, Amazon FSx for NetApp ONTAP, Amazon FSx for OpenZFS và Amazon FSx for Lustre.
+## 3.1. Amazon EBS snapshots
+- Each snapshot contains all of the information for that point in time that is needed to restore your data to a new Amazon EBS volume.
+- Khi bạn tạo ổ đĩa (volume) Amazon EBS mới dựa trên một snapshort, ổ đĩa mới sẽ giống y chang ổ đĩa gốc - cái mà được dùng để tạo ra snapshort đó. Dữ liệu của bạn được tải vào ổ đĩa mới ở chế độ nền. Bạn có thể bắt đầu sử dụng ổ đĩa mới ngay lập tức trong khi tải dữ liệu lên Amazon EBS. Nếu bạn truy cập vào dữ liệu chưa được tải, ổ đĩa sẽ tải xuống ngay dữ liệu được yêu cầu từ Amazon S3. Sau đó, snapshort của Amazon EBS sẽ tiếp tục tải phần dữ liệu còn lại của ổ đĩa ở chế độ nền.
+- When you delete a snapshot, only the data unique to that snapshot is removed. Any information contained in that snapshot that is required by other snapshots remains available and is not deleted.
+- Amazon EBS snapshot events are tracked through CloudWatch events.
+- Bạn có thể tạo bản sao lưu của khối lượng công việc quan trọng, chẳng hạn như cơ sở dữ liệu lớn hoặc hệ thống tệp trải rộng trên nhiều ổ đĩa Amazon EBS.
+## 3.2. Amazon FSx for NetApp ONTAP 
+- A snapshot is a read-only image of an Amazon FSx for NetApp ONTAP volume at a point in time.
+- Snapshort được lưu trữ cùng với dữ liệu hệ thống file của bạn. Chúng tiêu tốn dung lượng lưu trữ sẵn có của hệ thống tập tin. Tuy nhiên, snapshort chỉ tiêu tốn dung lượng lưu trữ gia tăng cho các phần đã thay đổi của tệp kể từ snapshort cuối cùng. Các snapshort được lưu trữ trong hệ thống tệp của bạn sẽ không được đưa vào bản sao lưu của các ổ đĩa hệ thống tệp của bạn.
+- Với FSx for ONTAP, bạn có thể sử dụng ảnh chụp nhanh để tạo các ổ đĩa mới, khôi phục các ổ đĩa cũng như khôi phục các tệp và thư mục riêng lẻ.
+## 3.3. Amazon FSx for OpenZFS
+- A snapshot is a read-only image of an FSx for OpenZFS volume at a point in time.
+- Cung cấp khả năng bảo vệ chống lại việc vô tình xóa hoặc sửa đổi các tệp trong ổ đĩa; khôi phục thuận tiện; người dùng có thể hoàn tác các thay đổi và so sánh các phiên bản tệp.
+- Các snapshorts được lưu trữ cùng với dữ liệu của hệ thống tệp nên chúng tiêu tốn dung lượng lưu trữ của hệ thống tệp.
+## 3.4. Amazon FSx for Lustre
+- Là hệ thống tệp nhất quán, có độ bền cao và tăng dần.
+- Bạn có thể kết hợp cả snapshort thủ công và tự động trên cùng một hệ thống tệp. Tuy nhiên, chỉ có một snapshort có thể xảy ra tại một thời điểm.
+- Snapshort chỉ khả dụng với các hệ thống tệp liên tục mà không được liên kết với kho dữ liệu Amazon S3.
+# 4. AWS Elastic Disaster Recovery
+## 4.1. Introduction
+- AWS DRS sao chép ứng dụng của bạn sang Amazon EC2 instance và bộ lưu trữ Amazon EBS tiết kiệm chi phí. Trong trường hợp cần thiết sẽ được nâng lên thành các tài nguyên có khả năng xử lý toàn bộ khối lượng công việc của ứng dụng.
+- AWS DRS works with your on-premises applications servers, applications in other cloud providers, or with Amazon EC2 and Amazon EBS between AWS Regions.
+- Using AWS DRS to protect your most critical databases, including Oracle, MySQL, and SQL Server, and enterprise applications such as SAP.
+- AWS DRS liên tục sao chép máy của bạn vào khu vực tổ chức có chi phí thấp trong tài khoản AWS mục tiêu và Khu vực ưa thích của bạn. Bản sao bao gồm hệ điều hành, cấu hình trạng thái hệ thống, cơ sở dữ liệu, ứng dụng và tệp.
+- Trong trường hợp xảy ra thảm họa, bạn có thể hướng dẫn AWS DRS tự động khởi chạy hàng nghìn máy ở trạng thái được cung cấp đầy đủ trong vài phút.
+## 4.2. AWS DRS Features
+- Continuous replication: khả năng sao chép liên tục, không đồng bộ, ở cấp block của máy nguồn của bạn vào khu vực tổ chức. Bạn có thể đạt được Mục tiêu điểm khôi phục (RPO) dưới giây vì các ứng dụng cập nhật luôn sẵn sàng khởi động trên AWS nếu thảm họa xảy ra.
+- Low-cost staging area: Dữ liệu liên tục được đồng bộ hóa trong khu vực tổ chức gọn nhẹ. Khu vực tổ chức chứa các tài nguyên chi phí thấp mà AWS DRS tự động cung cấp và quản lý. Điều này làm giảm nhu cầu về các tài nguyên trùng lặp và giảm đáng kể tổng chi phí sở hữu (TCO) để khắc phục thảm họa.
+- Automated machine conversion and orchestration: AWS DRS sao chép toàn bộ máy, bao gồm hệ điều hành, cấu hình trạng thái hệ thống, ổ đĩa hệ thống, cơ sở dữ liệu, ứng dụng và tệp. Do đó, bạn không cần phải cài đặt lại mọi thứ hoặc duy trì các bản sao trùng lặp của hệ điều hành, cấu hình trạng thái hệ thống hoặc phần mềm.
+- Point-in-time recovery: bạn có thể khôi phục các ứng dụng và môi trường CNTT đã bị hỏng do vô tình thay đổi hệ thống, phần mềm tống tiền hoặc các cuộc tấn công độc hại khác.
+- Non-disruptive disaster recovery testing: có thể tiến hành diễn tập khắc phục thảm họa mà không làm gián đoạn môi trường nguồn hoặc gặp rủi ro mất dữ liệu.
+- Wide application and infrastructure support.
+## 4.3. AWS DRS Use Cases
+- On premises to AWS: Nhanh chóng khôi phục hoạt động sau các sự kiện không mong muốn như sự cố phần mềm hoặc lỗi phần cứng trung tâm dữ liệu. AWS DRS có RPO tính bằng giây và RTO tính bằng phút.
+- Cloud to AWS: Giúp tăng khả năng phục hồi và đáp ứng các yêu cầu tuân thủ bằng cách sử dụng AWS làm trang khôi phục của bạn. AWS DRS chuyển đổi các ứng dụng dựa trên đám mây của bạn để chạy tự nhiên trên AWS.
+- Region to Region: Tăng khả năng phục hồi của ứng dụng và giúp đáp ứng các mục tiêu về tính khả dụng cho ứng dụng AWS của bạn bằng cách sử dụng AWS DRS để khôi phục các ứng dụng ở Khu vực AWS khác.
