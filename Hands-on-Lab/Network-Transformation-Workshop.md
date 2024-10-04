@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/b2bfe96c-ef08-4668-b4b6-612cf9ba08f9" width="20%">
+</p>
+
 AWS Transit Gateway là dịch vụ mạng của Amazon giúp bạn kết nối nhiều mạng VPCs, VPNs, và On-premises networks với nhau, tất cả qua một gateway duy nhất. Transit Gateway hoạt động như một trung tâm (hub) trong mô hình hub-and-spoke, giúp đơn giản hóa và tăng cường khả năng mở rộng của mạng trên AWS.
 # 1. Tổng quan về workshop
 - Workshop sẽ sử dụng các dịch vụ sau: AWS Transit Gateway, AWS Network Firewall, VPC Interface Endpoints.
@@ -28,7 +32,7 @@ AWS Transit Gateway là dịch vụ mạng của Amazon giúp bạn kết nối 
   - Establish VPC to VPC connectivity (DEV <-> Prod) via VPC Peering
   - Access each instance using AWS SSM Session Manager.
 ## 2.2. Use Cases
-
+<p align="center">
 <img src="https://github.com/user-attachments/assets/296d1a9b-d408-4176-b15d-a9cfc12810e7" width="50%"/>
 
 <img src="https://github.com/user-attachments/assets/2dc1f9c8-9de1-4920-aa95-f257b83622b8" width="50%"/>
@@ -38,6 +42,7 @@ AWS Transit Gateway là dịch vụ mạng của Amazon giúp bạn kết nối 
 <img src="https://github.com/user-attachments/assets/8727d079-3fab-4dc8-8d2a-625fe3d5ab6f" width="50%"/>
 
 <img src="https://github.com/user-attachments/assets/2be629db-1f85-4410-9411-2f8e2e9c3e0a" width="50%"/>
+</p>
 
 # 3. Enable Transitive Routing
 Ở phần này, chúng ta sẽ đi sâu vào từng use case cụ thể.
@@ -58,11 +63,11 @@ AWS Transit Gateway là dịch vụ mạng của Amazon giúp bạn kết nối 
   ![{A192566C-3B64-4688-A03A-B7B3ED78E0DD}](https://github.com/user-attachments/assets/9ddbe7f7-72bc-498a-a80f-5619bc15892d)
 
 ### Deploy
-- Prepare VPC connectivity to Transit Gateway:
+ - 1. Prepare VPC connectivity to Transit Gateway
 
     <img src="https://github.com/user-attachments/assets/20ad9b03-d609-4b30-8347-7307fa0b3115" width="50%"/>
 
- - Create Transit Gateway: To create Transit Gateway infrastructure, you'll need to perform the following steps:
+ - 2. Create Transit Gateway: To create Transit Gateway infrastructure, you'll need to perform the following steps:
    - Create TGW:
      
      <img src="https://github.com/user-attachments/assets/d82536e0-457a-475c-b4aa-c1ae93d547ad" width="100%"/>
@@ -70,13 +75,33 @@ AWS Transit Gateway là dịch vụ mạng của Amazon giúp bạn kết nối 
      ASN (Autonomous System Number): Hệ thống tự trị (AS) là một nhóm các mạng dưới sự kiểm soát quản trị duy nhất duy trì một chính sách định tuyến được xác định rõ ràng. Để nhiều hệ thống tự trị tương tác với nhau, mỗi hệ thống cần có một mã định danh duy nhất (number).
      
    - Create TGW Attachments
-     - Transit Gateway Attachment là một "kết nối" hay "liên kết" giữa Transit Gateway và các tài nguyên mạng của bạn, như VPC, VPN, Direct Connect, hoặc TGW peering.
+
+     Transit Gateway Attachment là một "kết nối" hay "liên kết" giữa Transit Gateway và các tài nguyên mạng của bạn, như VPC, VPN, Direct Connect, hoặc TGW peering.
        
        ![{2A12572A-282B-4446-A621-4CF9227F3A1A}](https://github.com/user-attachments/assets/e746664b-202c-4b9b-9bcd-a4117bf3e7b3)
 
-   - Create TGW Route Table and associate VPC Attachments
+   - Create TGW Route Table and associate VPC Attachments:
+     
+       ![{54FDC050-AA92-4822-B647-0D263831202E}](https://github.com/user-attachments/assets/18c88a8f-f791-41c3-9d1d-dfcb52319dd4)
+
    - Create TGW Propagations
+     
+       ![{B464722A-1A34-4C5B-B875-A94F77623A7C}](https://github.com/user-attachments/assets/08d7405a-5af7-401e-9cc8-10461b3c809a)
+
    - Verify Routes in TGW
-  
-<img src="" width="50%"/>
+
+     <img src="https://github.com/user-attachments/assets/20fe5baf-f01c-4ed6-ba32-611bf27bff75" width="70%"/>
+ - 3. Switch Traffic to Transit Gateway
+  - Kịch bản: Traffic chỉ truyền qua giữa các spoke VPCs (DEV and PROD) thông qua VPC Peering. 
+
+    <img src="https://github.com/user-attachments/assets/03805d82-88d7-4905-8ded-2c7ce71d80cf" width="50%"/>
+    
+  - Kết quả mong đợi cuối cùng:
+    
+     <img src="https://github.com/user-attachments/assets/11cd6e96-4a9d-40e2-99d5-fa7cf4f0b6ac" width="50%"/>
+
+  - Kiểm tra kịch bản:
+    - Ping qua lại giữa các instance trong DEV và PROD:
+  - Adjust VPC routing tables to enable connectivity via Transit Gateway: Ở bước này, chúng ta cần cập nhật bảng định tuyến trong mỗi VPC.
+
 
