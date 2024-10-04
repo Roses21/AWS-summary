@@ -63,45 +63,55 @@ AWS Transit Gateway là dịch vụ mạng của Amazon giúp bạn kết nối 
   ![{A192566C-3B64-4688-A03A-B7B3ED78E0DD}](https://github.com/user-attachments/assets/9ddbe7f7-72bc-498a-a80f-5619bc15892d)
 
 ### Deploy
- - 1. Prepare VPC connectivity to Transit Gateway
 
+1. Prepare VPC connectivity to Transit Gateway.
+      - Bước này, chúng ta sẽ tạo các Transit Gateway subnet- điều này không bắt buộc. Tuy nhiên, best practice là nên có các subnet dành riêng cho Transit Gateway Attachments. Điều này sẽ hữu ích nếu bạn cần kiểm soát việc định tuyến lối vào hoặc chỉ định các NACL chuyên dụng.
     <img src="https://github.com/user-attachments/assets/20ad9b03-d609-4b30-8347-7307fa0b3115" width="50%"/>
-
- - 2. Create Transit Gateway: To create Transit Gateway infrastructure, you'll need to perform the following steps:
-   - Create TGW:
+      - Tiếp theo, liên kết các subnets với từng private route table của VPC. Ví dụ đối với SHARED SERVICES VPC: Select SHARED-SERVICES Private RT, Click on Subnet associations, Click on Edit subnet association, Select SHARED-SERVICES TGW Subnet and SHARED-SERVICES Private Subnet, Click Save associations.
+2. Create Transit Gateway: To create Transit Gateway infrastructure, you'll need to perform the following steps:
+   
+   -  Create TGW:
      
-     <img src="https://github.com/user-attachments/assets/d82536e0-457a-475c-b4aa-c1ae93d547ad" width="100%"/>
+     <img src="https://github.com/user-attachments/assets/04eb0ed1-41e5-4ade-b5a3-d801e0d65810" width="100%"/>
 
      ASN (Autonomous System Number): Hệ thống tự trị (AS) là một nhóm các mạng dưới sự kiểm soát quản trị duy nhất duy trì một chính sách định tuyến được xác định rõ ràng. Để nhiều hệ thống tự trị tương tác với nhau, mỗi hệ thống cần có một mã định danh duy nhất (number).
      
    - Create TGW Attachments
 
-     Transit Gateway Attachment là một "kết nối" hay "liên kết" giữa Transit Gateway và các tài nguyên mạng của bạn, như VPC, VPN, Direct Connect, hoặc TGW peering.
-       
-       ![{2A12572A-282B-4446-A621-4CF9227F3A1A}](https://github.com/user-attachments/assets/e746664b-202c-4b9b-9bcd-a4117bf3e7b3)
+     Transit Gateway Attachment là một "kết nối" hay "liên kết" giữa Transit Gateway và các tài nguyên mạng, như VPC, VPN, Direct Connect, hoặc TGW peering. Mỗi Transit Gateway Attachment phải được gắn với một Transit Gateway duy nhất. Trong workshop này, attachment type của chúng ta là VPC:
+     
+     <img src="https://github.com/user-attachments/assets/3ccdebed-e66a-4b16-8ae7-bacc24ba76e8" width="60%"/>
+
+     ![{2A12572A-282B-4446-A621-4CF9227F3A1A}](https://github.com/user-attachments/assets/e746664b-202c-4b9b-9bcd-a4117bf3e7b3)
 
    - Create TGW Route Table and associate VPC Attachments:
      
        ![{54FDC050-AA92-4822-B647-0D263831202E}](https://github.com/user-attachments/assets/18c88a8f-f791-41c3-9d1d-dfcb52319dd4)
 
    - Create TGW Propagations
+  
+     Transit Gateway Propagations là một tính năng trong AWS Transit Gateway giúp **tự động cập nhật bảng định tuyến (route tables) của Transit Gateway** với thông tin định tuyến từ các kết nối mạng đã được liên kết với nó. Điều này giúp việc quản lý và định tuyến lưu lượng giữa các VPC, VPN, hoặc Direct Connect dễ dàng hơn mà không cần phải thêm các route thủ công.
      
        ![{B464722A-1A34-4C5B-B875-A94F77623A7C}](https://github.com/user-attachments/assets/08d7405a-5af7-401e-9cc8-10461b3c809a)
 
-   - Verify Routes in TGW
+   - Verify Routes in TGW: cả 3 VPC CIDRs của 3 VPC đã xuất hiện trong TGW Route Table:
 
      <img src="https://github.com/user-attachments/assets/20fe5baf-f01c-4ed6-ba32-611bf27bff75" width="70%"/>
+
+     Điều này có nghĩa là từ góc độ Transit Gateway, Transit Gateway có khả năng định tuyến giữa các VPC, nhưng để VPC có thể gửi lưu lượng đi, bạn phải cấu hình route trong bảng định tuyến của từng VPC để chỉ rõ lưu lượng nào cần đi qua Transit Gateway. Nếu không có các route này trong bảng định tuyến của từng VPC, mặc dù Transit Gateway có thể định tuyến, các VPC sẽ không biết cách gửi lưu lượng đến Transit Gateway. Chúng ta sẽ tiếp tục khắc phục vấn đề này ở bước 3.
+     
  - 3. Switch Traffic to Transit Gateway
-  - Kịch bản: Traffic chỉ truyền qua giữa các spoke VPCs (DEV and PROD) thông qua VPC Peering. 
+
+    Ở giai đoạn này, chúng ta sẽ thiết lập Transit Gateway với tất cả cấu trúc cần thiết để kích hoạt kết nối giữa các VPC.
+      
+  - Kịch bản: Traffic chỉ truyền qua lại được giữa các spoke VPCs (DEV and PROD) thông qua VPC Peering.  
 
     <img src="https://github.com/user-attachments/assets/03805d82-88d7-4905-8ded-2c7ce71d80cf" width="50%"/>
     
-  - Kết quả mong đợi cuối cùng:
+  - Kết quả mong đợi cuối cùng: cả 3 EC2 instance có thể giao tiếp với nhau thông qua TGW.
     
      <img src="https://github.com/user-attachments/assets/11cd6e96-4a9d-40e2-99d5-fa7cf4f0b6ac" width="50%"/>
 
-  - Kiểm tra kịch bản:
-    - Ping qua lại giữa các instance trong DEV và PROD:
-  - Adjust VPC routing tables to enable connectivity via Transit Gateway: Ở bước này, chúng ta cần cập nhật bảng định tuyến trong mỗi VPC.
+  - Chúng ta cần cập nhật bảng định tuyến của từng VPC để traffic có thể đi qua Transit Gateway: VPC > Route Table > Select route table > Routes > Edit routes > Add an entry for CIDR 10.0.0.0/8 with TGW as the target > Remove VPC Peering.
 
 
