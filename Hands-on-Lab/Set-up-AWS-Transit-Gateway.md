@@ -33,7 +33,7 @@ Link lab: https://000020.awsstudygroup.com/1-introduce/
 
 - Tab Associations (Liên kết): Gán một TGW attachment với một Route Table duy nhất, kiểm soát toàn bộ lưu lượng từ attachment đó. Thực hiện đính cả 4 VPC:
 
-  ![Uploading {CD3C45BB-2F16-4DDD-9BBF-2AA36C0B7867}.png…]()
+  ![{C4D62B64-65A5-457D-ADDD-3EEE9F3C127B}](https://github.com/user-attachments/assets/cfc2110c-5118-4772-9ae2-7746ef7442c7)
 
 - Tab Propagations (Lan truyền): Tự động thêm các route của TGW attachment vào Route TablAn attachment, giúp đơn giản hóa việc quản lý route trong môi trường phức tạp:
 
