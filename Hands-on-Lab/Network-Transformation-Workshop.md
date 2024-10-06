@@ -76,7 +76,11 @@ AWS Transit Gateway là dịch vụ mạng của Amazon giúp bạn kết nối 
      
    - Create TGW Attachments
 
-     Transit Gateway Attachment là một "kết nối" hay "liên kết" giữa Transit Gateway và các tài nguyên mạng, như VPC, VPN, Direct Connect, hoặc TGW peering. Mỗi Transit Gateway Attachment phải được gắn với một Transit Gateway duy nhất. Trong workshop này, attachment type của chúng ta là VPC:
+     Transit Gateway Attachment là một "kết nối" hay "liên kết" giữa Transit Gateway và các tài nguyên mạng, như VPC, VPN, Direct Connect, hoặc TGW peering. Mỗi Transit Gateway Attachment phải được gắn với một Transit Gateway duy nhất.
+
+     Trong VPC, khi một subnet ở một AZ có Transit Gateway Attachment với một TGW, các subnet khác trong cùng AZ đều có thể kết nối tới TGW đó.
+
+     Trong workshop này, attachment type của chúng ta là VPC:
      
      <img src="https://github.com/user-attachments/assets/3ccdebed-e66a-4b16-8ae7-bacc24ba76e8" width="60%"/>
 
