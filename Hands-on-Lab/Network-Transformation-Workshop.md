@@ -161,7 +161,3 @@ Việc triển khai một giải pháp kết nối internet riêng biệt trong 
   - Create Private Hosted Zone: Trong phần này, chúng ta sẽ tạo ba PHZ, một PHZ cho mỗi điểm cuối được đề cập ở trên.
 
     Route 53 -> Hosted zones > Create hosted zone
-
-    ![Uploading {206A5DF2-8F58-4F98-8369-2931F19BA60E}.png…]()
-
-
