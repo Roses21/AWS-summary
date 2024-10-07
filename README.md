@@ -179,14 +179,22 @@ Gồm 6 trụ cột chính:
 - Nằm trong 1 Region (1 khu vực địa lý nơi đặt cụm data center), hiện tại 1 AWS Region tối đa 5 VPC trên 1 AWS account.
 - Khi tạo VPC cần khai báo 1 lớp mạng CIDR IPv4 (bắt buộc) và IPv6 (tùy chọn).
 - Mục đích chính: phân tách các môi trường (dev/test/production/…) ở mức network. Còn muốn tách biệt hẳn các tài nguyên (user không thấy được tài nguyên) thì cần tạo nhiều AWS account chứ không phải tạo nhiều VPC.
+- Địa chỉ IP trong VPC là IP private: 10.0.0.0 - 10.255.255.255, 172.16.0.0 - 172.31.255.255, 192.168.0.0 - 192.168.255.255.
 ### Firewall trong VPC
 Dùng khi muốn public subnet connect tới private subnet thông qua 1 port.
-  - Security Group (phạm vi instance): là 1 tường lửa ảo lưu giữ trạng thái (stateful - 2 chiều kết nối vào ra trong cùng 1 session), giúp kiểm soát lưu lượng truy cập đến và đi trong tài nguyên của AWS. Rule chỉ cho phép rule allow, rule sẽ hạn chế theo protocol, IP nguồn, port kết nối or 1 SG khác. Không có thứ tự xử lý quy tắc. Áp dụng lên các tài nguyên bên trong VPC. Mặc định: chặn tất cả đến, cho tất cả đi. Mỗi Security Group có thể chứa tối đa 60 quy tắc inbound và 60 quy tắc outbound.
-  - NACL (Network Access Control List) (phạm vi subnet): stateless, áp dụng lên các Amazon VPC subnets => ảnh hưởng đến nhiều máy chủ/ứng dụng khác khi change NACL. Mặc định là cho phép mọi truy cập đến và đi. NACLs xử lý các quy tắc theo thứ tự số tăng dần. Khi một quy tắc phù hợp được tìm thấy, NACL sẽ dừng đánh giá và áp dụng quy tắc đó. Điều này có nghĩa là thứ tự quy tắc trong NACLs rất quan trọng. Mỗi NACL có thể chứa tối đa 20 quy tắc inbound và 20 quy tắc outbound.
+  - Security Group (phạm vi **instance**): là 1 tường lửa ảo lưu giữ trạng thái (**stateful** - return traffic automatically allowed, regardless of any rules). Rule **chỉ cho phép rule allow**, rule sẽ hạn chế theo protocol, IP nguồn, port kết nối or 1 SG khác. Không có thứ tự xử lý quy tắc. Mặc định: chặn tất cả đến, cho tất cả đi. Mỗi Security Group có thể chứa tối đa 60 quy tắc inbound và 60 quy tắc outbound.
+  - NACL (Network Access Control List) (phạm vi **subnet**): **stateless**, áp dụng lên các Amazon VPC subnets => ảnh hưởng đến nhiều máy chủ/ứng dụng khác khi thay đổi rule NACL.
+    - NACLs xử lý các quy tắc **ưu tiên số nhỏ hơn** (1-32766). Khi một quy tắc phù hợp được tìm thấy, NACL sẽ dừng đánh giá và áp dụng quy tắc đó. AWS khuyến nghị thêm quy tắc theo mức tăng 100. Nếu không có quy tắc nào áp dụng, thì mặc định NACL sẽ chặn (DENY) gói tin.
+    - Mỗi NACL có thể chứa tối đa 20 quy tắc inbound và 20 quy tắc outbound.
+    - Default NACL không thể modify, nó cho phép toàn bộ lưu lượng vào/ra.
+    - Custom NACL mặc định sẽ chặn toàn bộ lưu lượng vào/ra cho đến khi bạn thêm các quy tắc cho phép.
   - VPC Flow logs: cho phép nắm bắt thông tin về lưu lượng IP đến và đi từ các giao diện mạng trong VPC. Các file logs để thể xuất lên  Amazon CloudWatch và S3. Không capture được nội dung gói tin. => Theo dõi lưu lượng bất thường trong mạng.
 ### Subnet
-- VPC cho phép tạo nhiều mạng ảo và chia các mạng ảo này thành các mạng con. VPC Subnet sẽ nằm trong 1 AZ cụ thể. Khi tạo subnet, cần chỉ định CIDR cho mạng con đó và đây là một tập hợp con của khối VPC CIDR (Classless Inter-Domain Routing ví dụ: 192.168.10.1/24).
-- AWS giữ 4 địa chỉ IP đầu và 1 IP cuối của mỗi subnet để kết nối mạng. Subnet nhỏ nhất là /28 ~ 16 địa chỉ IP.
+- VPC cho phép tạo nhiều mạng ảo và chia các mạng ảo này thành các mạng con. VPC Subnet sẽ nằm trong 1 AZ cụ thể. Khi tạo subnet, cần chỉ định CIDR cho mạng con đó và đây là một tập hợp con của khối VPC CIDR.
+  - CIDR (Classless Inter-Domain Routing): Định nghĩa 1 dải địa chỉ IP. Tối đa 5 CIDR/VPC.
+  - A CIDR consists of two components: IP và subnet mask. Ví dụ: 192.168.0.0/24
+  - Your VPC CIDR should NOT overlap with your other networks.
+- AWS giữ 4 địa chỉ IP đầu và 1 IP cuối của mỗi subnet để kết nối mạng. Subnet nhỏ nhất là /28 ~ 16 địa chỉ IP. Subnet lớn nhất là /16 ~ 65536 địa chỉ IP.
  - Public subnet: được ra ngoài internet.
  - Private subnet: giao tiếp với internet qua NAT gateway.
  - VPN-only subnet: This subnet has a route table that directs traffic to Amazon VPC’s Virtual Private Gateway 
@@ -199,10 +207,33 @@ Khi tạo VPC, AWS sẽ tự tạo 1 Default Route Table - không thể bị xó
 ### Connect to VPC
 - Internet gateways:
   - Có quy mô theo chiều ngang, dự phòng và có tính khả dụng cao cho phép giao tiếp giữa VPC và Internet. Nó hỗ trợ lưu lượng IPv4 và IPv6.
+  - Một VPC chỉ có thể được gắn vào một IGW và ngược lại.
   - Sử dụng Internet gateway thì miễn phí, nhưng sẽ tính phí truyền dữ liệu đối với các EC2 instances sử dụng internet gateway.
+- Bastion Host:
+  - Use a Bastion Host to **SSH into our private EC2 instances**.
+  - Bastion host nằm trong public subnet nhưng SSH được đến instance trong private subnet.
+  - Bastion Host security group must allow inbound from the internet on port 22 from restricted CIDR, for example the **public CIDR** of your corporation.
+  - Security Group of the EC2 Instances must allow the Security Group of the Bastion Host, or the **private IP** of the Bastion host.
+  - Trước tiên, bạn SSH vào Bastion Host, sau đó từ đó, bạn có thể SSH vào các máy chủ khác trong private subnet. Điều này hạn chế quyền truy cập trực tiếp vào máy chủ trong private subnet từ internet, cải thiện tính bảo mật.
 - NAT devices:
-  
-  ![image](https://github.com/user-attachments/assets/4b84ee6e-caa8-45c2-b474-dddf74f37cb0)
+  - NAT Instance (outdated):
+    - Allows EC2 instances in private subnets to connect to the Internet. Must be launched in a public subnet.
+    - Must disable EC2 setting: Source/destination Check
+    - Must have Elastic IP attached to it
+    - Route Tables must be configured to route traffic from private subnets to the NAT Instance
+
+      ![{B6AEED66-28E1-452A-93A4-EEF5A7FD2031}](https://github.com/user-attachments/assets/823214c0-9016-468f-b5a4-b61fdb30c8ae)
+
+   - NAT gateway:
+     - NAT gateway: cho traffic ra internet nhưng chặn traffic từ ngoài internet vào. Các phiên bản trong private subnet có thể sử dụng cổng NAT để truy cập Internet để cập nhật phần mềm, tìm nạp các phần phụ thuộc, v.v. mà không để lộ địa chỉ IP riêng tư của chúng trên Internet.
+     - AWS-managed NAT => Không cần Security Group. Nhưng có thể kiểm soát lưu lượng đi ra và vào thông qua Route Tables và Network ACLs.
+     - Higher bandwidth, high availability, no administration.
+     - Cần phải có IGW: private subnet -> NATGW -> IGW.
+     - NAT Gateway bắt buộc phải có một EIP để hoạt động.
+     - Trong từng AZ, NAT Gateway có khả năng chịu lỗi nội bộ. Điều này có nghĩa là trong mỗi AZ, nếu hạ tầng bên trong AZ đó vẫn hoạt động, NAT Gateway sẽ tự đảm bảo tính sẵn sàng và hoạt động ổn định cho các tài nguyên trong cùng AZ. Nhưng để tránh sự cố toàn cục khi một AZ ngừng hoạt động, bạn cần triển khai NAT Gateway ở nhiều AZ để đảm bảo dịch vụ hoạt động liên tục trong các AZ còn lại.
+     - Các tài nguyên trong mỗi AZ cần sử dụng NAT Gateway trong chính AZ của mình.
+
+![image](https://github.com/user-attachments/assets/4b84ee6e-caa8-45c2-b474-dddf74f37cb0)
 
 - Elastic IP (EIP): cho phép tài nguyên đám mây của bạn giao tiếp với Internet bằng địa chỉ IP công cộng tĩnh và băng thông có thể mở rộng. Nếu một tài nguyên được gán EIP, nó có khả năng truy cập Internet trực tiếp. Mỗi EIP chỉ có thể được liên kết với một tài nguyên đám mây và chúng phải ở cùng một khu vực. Tính năng:
   - Uyển chuyển: có thể liên kết linh hoạt EIP với hoặc hủy liên kết EIP khỏi bất kỳ EC, GPU, cổng NAT, bộ cân bằng tải và địa chỉ IP ảo nào.
@@ -226,14 +257,14 @@ Khi tạo VPC, AWS sẽ tự tạo 1 Default Route Table - không thể bị xó
   ![image](https://github.com/user-attachments/assets/569b4519-c6ca-4bb5-97bf-75f0ab81ce68)
 
   - Cho phép liên lạc trực tiếp và an toàn giữa hai đám mây riêng ảo (VPC). Đảm bảo rằng không có điểm lỗi hoặc tắc nghẽn băng thông nào.
-  - Có khả năng kết nối các VPC trên các tài khoản AWS khác nhau hoặc thậm chí các Khu vực AWS khác nhau.
+  - You must update route tables in each VPC’s subnets to ensure EC2 instances can communicate with each other.
+  - Có khả năng **kết nối các VPC trên các tài khoản AWS/Regions khác nhau**.
   - Đảm bảo rằng tất cả lưu lượng dữ liệu giữa các VPC ngang hàng vẫn nằm trong mạng AWS mà không bao giờ truyền qua Internet công cộng.
   - Use cases: 
     - Cho phép liên lạc an toàn giữa các tầng khác nhau của ứng dụng (chẳng hạn như máy chủ web và máy chủ cơ sở dữ liệu).
     - Hỗ trợ chia sẻ tài nguyên giữa nhiều nhóm hoặc đơn vị kinh doanh.
     - Cho phép kiến ​​trúc đám mây lai bằng cách kết nối mạng tại chỗ với VPC AWS.
 ## 5.2. Elastic Load Balancing (ELB)
-
 
 ## 5.3. ENB
 ## 5.4. Route 53
