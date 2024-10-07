@@ -49,6 +49,8 @@
 13. [WAF](https://github.com/Roses21/AWS-summary/blob/main/README.md#13-waf-web-application-firewall) 
 14. [Nguồn tham khảo](https://github.com/Roses21/AWS-summary/blob/main/README.md#ngu%E1%BB%93n-tham-kh%E1%BA%A3o)
 
+![{085F76D4-136F-4A53-8841-04F633E24232}](https://github.com/user-attachments/assets/ec7d14c8-7030-40d7-81a6-9b0b0c9a2341)
+
 # 1. Lưu ý về vẽ kiến trúc trên draw.io
 - Tỉ lệ khung ngoài cùng của kiến trúc AWS: 1.618, ví dụ Height = 500 => Width = 500 x 1.618 = 809.
 - Khung tên của service AWS nên là màu cam (FF8000).
