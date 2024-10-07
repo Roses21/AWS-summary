@@ -174,7 +174,7 @@ Gồm 6 trụ cột chính:
 - Ví dụ: Bạn có thể tạo một policy để tự động thêm hoặc bớt EC2 instances trong một Auto Scaling group nhằm duy trì mức sử dụng CPU trung bình là 50%.
 # 5. AWS Network
 ## 5.1. VPC
-- Nằm trong 1 Region (1 khu vực địa lý nơi mà AWS đặt hạ tầng chính), hiện tại 1 AWS Region tối đa 5 VPC trên 1 AWS account.
+- Nằm trong 1 Region (1 khu vực địa lý nơi đặt cụm data center), hiện tại 1 AWS Region tối đa 5 VPC trên 1 AWS account.
 - Khi tạo VPC cần khai báo 1 lớp mạng CIDR IPv4 (bắt buộc) và IPv6 (tùy chọn).
 - Mục đích chính: phân tách các môi trường (dev/test/production/…) ở mức network. Còn muốn tách biệt hẳn các tài nguyên (user không thấy được tài nguyên) thì cần tạo nhiều AWS account chứ không phải tạo nhiều VPC.
 ### Firewall trong VPC
