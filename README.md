@@ -174,7 +174,7 @@ Gồm 6 trụ cột chính:
 ### Target Tracking
 - Tự động điều chỉnh số lượng instances dựa trên một chỉ số mục tiêu đã được xác định, chẳng hạn như mức sử dụng CPU. AWS sẽ liên tục theo dõi chỉ số này và tăng hoặc giảm số lượng instances để duy trì chỉ số gần với mục tiêu.
 - Ví dụ: Bạn có thể tạo một policy để tự động thêm hoặc bớt EC2 instances trong một Auto Scaling group nhằm duy trì mức sử dụng CPU trung bình là 50%.
-# 5. AWS Network
+# 5. AWS Networking
 ## 5.1. VPC
 - Nằm trong 1 Region (1 khu vực địa lý nơi đặt cụm data center), hiện tại 1 AWS Region tối đa 5 VPC trên 1 AWS account.
 - Khi tạo VPC cần khai báo 1 lớp mạng CIDR IPv4 (bắt buộc) và IPv6 (tùy chọn).
@@ -188,7 +188,10 @@ Dùng khi muốn public subnet connect tới private subnet thông qua 1 port.
     - Mỗi NACL có thể chứa tối đa 20 quy tắc inbound và 20 quy tắc outbound.
     - Default NACL không thể modify, nó cho phép toàn bộ lưu lượng vào/ra.
     - Custom NACL mặc định sẽ chặn toàn bộ lưu lượng vào/ra cho đến khi bạn thêm các quy tắc cho phép.
-  - VPC Flow logs: cho phép nắm bắt thông tin về lưu lượng IP đến và đi từ các giao diện mạng trong VPC. Các file logs để thể xuất lên  Amazon CloudWatch và S3. Không capture được nội dung gói tin. => Theo dõi lưu lượng bất thường trong mạng.
+  - VPC Flow logs: cho phép nắm bắt thông tin về lưu lượng IP đi vào giao diện mạng (ELB, RDS, ElastiCache, Redshift,WorkSpaces, NATGW, TGW,...) trong VPC. Các file logs để thể xuất lên Amazon CloudWatch, Kinesis Data Firehose và S3. Không capture được nội dung gói tin. => Theo dõi lưu lượng bất thường trong mạng.
+    
+    ![{F7241509-69F9-4A8B-A41A-0A485D9B2283}](https://github.com/user-attachments/assets/f55a6082-ebc8-4808-9934-87af6358b4d8)
+
 ### Subnet
 - VPC cho phép tạo nhiều mạng ảo và chia các mạng ảo này thành các mạng con. VPC Subnet sẽ nằm trong 1 AZ cụ thể. Khi tạo subnet, cần chỉ định CIDR cho mạng con đó và đây là một tập hợp con của khối VPC CIDR.
   - CIDR (Classless Inter-Domain Routing): Định nghĩa 1 dải địa chỉ IP. Tối đa 5 CIDR/VPC.
@@ -197,27 +200,27 @@ Dùng khi muốn public subnet connect tới private subnet thông qua 1 port.
 - AWS giữ 4 địa chỉ IP đầu và 1 IP cuối của mỗi subnet để kết nối mạng. Subnet nhỏ nhất là /28 ~ 16 địa chỉ IP. Subnet lớn nhất là /16 ~ 65536 địa chỉ IP.
  - Public subnet: được ra ngoài internet.
  - Private subnet: giao tiếp với internet qua NAT gateway.
- - VPN-only subnet: This subnet has a route table that directs traffic to Amazon VPC’s Virtual Private Gateway 
+ - VPN-only subnet: This subnet has a route table that directs traffic to Amazon VPC’s Virtual Private Gateway
+   
 ### Route table
 Khi tạo VPC, AWS sẽ tự tạo 1 Default Route Table - không thể bị xóa và chỉ chứa 1 route duy nhất cho phép tất cả các subnet trong VPC liên lạc với nhau.
 1 router-table có thể có nhiều subnets, nhưng 1 subnet chỉ có 1 route-table.
-### VPC Peering và Transit gateway
-- VPC Peering: giúp kết nối 2 VPC, để các tài nguyên trong 2 VPC có thể liên lạc trực tiếp với nhau mà không thông qua Internet. Kết nối 1:1 giữa 2 VPC. Không hỗ trợ khi 2 VPC bị overlap IP address space. Phải cấu hình bảng định tuyến, chỉ ra rằng phải kết nối với VPC Peering để đến được IP đích. IP đích có thể là IP của VPC/máy ảo/subnet.
-- Transit Gateway: phổ biến và tiện ích hơn VPC Peering. Cho phép kết nối nhiều VPCs và các mạng tại chỗ (on-premises networks) thông qua một gateway trung tâm duy nhất. Transit Gateway Attachment là công cụ dùng để gán các subnet của từng VPC cần kết nối với nhau vào một Transit Gateway đã được khởi tạo, hoạt động ở phạm vi toàn bộ AZ.
+
 ### Connect to VPC
-- Internet gateways:
+- **Internet gateways**:
   - Có quy mô theo chiều ngang, dự phòng và có tính khả dụng cao cho phép giao tiếp giữa VPC và Internet. Nó hỗ trợ lưu lượng IPv4 và IPv6.
   - Một VPC chỉ có thể được gắn vào một IGW và ngược lại.
   - Sử dụng Internet gateway thì miễn phí, nhưng sẽ tính phí truyền dữ liệu đối với các EC2 instances sử dụng internet gateway.
-- Bastion Host:
-  - Use a Bastion Host to **SSH into our private EC2 instances**.
+    
+- **Bastion Host**:
+  - Là public EC2 instance, use a Bastion Host to **SSH into our private EC2 instances**.
   - Bastion host nằm trong public subnet nhưng SSH được đến instance trong private subnet.
   - Bastion Host security group must allow inbound from the internet on port 22 from restricted CIDR, for example the **public CIDR** of your corporation.
   - Security Group of the EC2 Instances must allow the Security Group of the Bastion Host, or the **private IP** of the Bastion host.
   - Trước tiên, bạn SSH vào Bastion Host, sau đó từ đó, bạn có thể SSH vào các máy chủ khác trong private subnet. Điều này hạn chế quyền truy cập trực tiếp vào máy chủ trong private subnet từ internet, cải thiện tính bảo mật.
-- NAT devices:
+- **NAT devices**:
   - NAT Instance (outdated):
-    - Allows EC2 instances in private subnets to connect to the Internet. Must be launched in a public subnet.
+    - Đặt ở public subnet, cho phép EC2 ở private subnet kết nối Internet.
     - Must disable EC2 setting: Source/destination Check
     - Must have Elastic IP attached to it
     - Route Tables must be configured to route traffic from private subnets to the NAT Instance
@@ -225,7 +228,7 @@ Khi tạo VPC, AWS sẽ tự tạo 1 Default Route Table - không thể bị xó
       ![{B6AEED66-28E1-452A-93A4-EEF5A7FD2031}](https://github.com/user-attachments/assets/823214c0-9016-468f-b5a4-b61fdb30c8ae)
 
    - NAT gateway:
-     - NAT gateway: cho traffic ra internet nhưng chặn traffic từ ngoài internet vào. Các phiên bản trong private subnet có thể sử dụng cổng NAT để truy cập Internet để cập nhật phần mềm, tìm nạp các phần phụ thuộc, v.v. mà không để lộ địa chỉ IP riêng tư của chúng trên Internet.
+     - Cho traffic ra internet nhưng chặn traffic từ ngoài internet vào. Các phiên bản trong private subnet có thể sử dụng cổng NAT để truy cập Internet để cập nhật phần mềm, tìm nạp các phần phụ thuộc, v.v. mà không để lộ địa chỉ IP riêng tư của chúng trên Internet.
      - AWS-managed NAT => Không cần Security Group. Nhưng có thể kiểm soát lưu lượng đi ra và vào thông qua Route Tables và Network ACLs.
      - Higher bandwidth, high availability, no administration.
      - Cần phải có IGW: private subnet -> NATGW -> IGW.
@@ -235,35 +238,71 @@ Khi tạo VPC, AWS sẽ tự tạo 1 Default Route Table - không thể bị xó
 
 ![image](https://github.com/user-attachments/assets/4b84ee6e-caa8-45c2-b474-dddf74f37cb0)
 
-- Elastic IP (EIP): cho phép tài nguyên đám mây của bạn giao tiếp với Internet bằng địa chỉ IP công cộng tĩnh và băng thông có thể mở rộng. Nếu một tài nguyên được gán EIP, nó có khả năng truy cập Internet trực tiếp. Mỗi EIP chỉ có thể được liên kết với một tài nguyên đám mây và chúng phải ở cùng một khu vực. Tính năng:
+- **Elastic IP (EIP)**: cho phép tài nguyên đám mây của bạn giao tiếp với Internet bằng địa chỉ IP công cộng tĩnh và băng thông có thể mở rộng. Nếu một tài nguyên được gán EIP, nó có khả năng truy cập Internet trực tiếp. Mỗi EIP chỉ có thể được liên kết với một tài nguyên đám mây và chúng phải ở cùng một khu vực. Tính năng:
   - Uyển chuyển: có thể liên kết linh hoạt EIP với hoặc hủy liên kết EIP khỏi bất kỳ EC, GPU, cổng NAT, bộ cân bằng tải và địa chỉ IP ảo nào.
   - Băng thông tốc độ cao.
   - Chi phí thấp.
   - Quản lý dễ dàng
-- Transit Gateway:
+
+
+- **Direct Connect (DX)**:
+  - Cung cấp kết nối riêng biệt và bảo mật từ mạng từ xa của bạn đến VPC.
+  - Cần thiết lập kết nối chuyên dụng giữa trung tâm dữ liệu (Data Center - DC) của bạn và các vị trí của AWS Direct Connect.
+  - Bạn cần thiết lập Virtual Private Gateway trên VPC của mình.
+  - Có thể truy cập cả tài nguyên công cộng (như S3) và tài nguyên riêng (như EC2) trên cùng một kết nối.
+  - Các trường hợp sử dụng:
+    - Tăng băng thông truyền tải: Phù hợp với việc xử lý các bộ dữ liệu lớn – chi phí thấp hơn.
+    - Trải nghiệm mạng nhất quán hơn: Thích hợp cho các ứng dụng sử dụng luồng dữ liệu thời gian thực.
+    - Môi trường kết hợp: Phối hợp giữa hệ thống tại chỗ (on-premise) và đám mây.
+    - Hỗ trợ cả IPv4 và IPv6.
+   - Direct Connect Gateway: dùng trong trường hợp cần thiết lập DX trên 1 hoặc nhiều VPC ở nhiều Regions (cùng account).
+   - Data trên đường truyền sẽ không được mã hóa nhưng nó private => DX + VPN để có IPsec-encrypted private connection.
+   - Connection Types:
+     - Dedicated Connections: Cung cấp dung lượng 1Gbps, 10Gbps, và 100Gbps qua cổng ethernet vật lý dành riêng cho khách hàng, yêu cầu qua AWS và được hoàn thành bởi AWS Direct Connect Partners.
+     - Hosted Connections: Dung lượng từ 50Mbps đến 10Gbps, **có thể điều chỉnh linh hoạt**, yêu cầu qua AWS Direct Connect Partners. Các mức 1Gbps, 2Gbps, 5Gbps, và 10Gbps có sẵn tại một số đối tác.
+   - In case Direct Connect fails, you can set up a backup Direct Connect connection (expensive), or a Site-to-Site VPN connection.
+   
+- **Transit Gateway**:
   
   ![image](https://github.com/user-attachments/assets/b7f6f0fb-a971-4682-aa98-35bbdebc9737)
 
-  - Lợi ích chính: khả năng tập trung và đơn giản hóa việc quản lý kết nối giữa VPC và mạng tại chỗ.
+  - Lợi ích chính: khả năng tập trung và đơn giản hóa việc quản lý kết nối giữa VPC và mạng tại chỗ thông qua một gateway trung tâm duy nhất.
   - Dùng kết nối các VPC và mạng tại chỗ, cổng này hoạt động như một trung tâm định tuyến lưu lượng giữa các VPC, kết nối VPN và kết nối AWS Direct Connect.
   - Pricing: dựa trên lượng dữ liệu truyền qua cổng và thời gian sử dụng.
-- AWS Virtual Private Network (VPN): kết nối VPC của mình với các mạng và người dùng remote. VPN connectivity option:
-  - AWS Site-to-Site VPN: create an IPsec VPN connection between your VPC and your remote network. On the AWS side of the Site-to-Site VPN connection, a virtual private gateway or transit gateway provides two VPN endpoints (tunnels) for automatic failover. 
+  - Transit Gateway Attachment là công cụ dùng để gán các subnet của từng VPC cần kết nối với nhau vào một Transit Gateway đã được khởi tạo, hoạt động ở phạm vi toàn bộ AZ.
+  - You can use AWS Resource Access Manager (RAM) to share Transit Gateway with other accounts.
+    
+- **AWS Virtual Private Network (VPN)**: kết nối VPC của mình với các mạng và người dùng remote. VPN connectivity option:
+  - AWS Site-to-Site VPN: create an IPsec VPN connection between your VPC and your remote network. On the AWS side of the Site-to-Site VPN connection, a virtual private gateway or transit gateway provides two VPN endpoints (tunnels) for automatic failover. Customer Gateway (On-premises) is Software application or physical device on customer side of the VPN connection.
   - AWS Client VPN
   - AWS VPN CloudHub
   - Third party software VPN appliance
-- VPC peering connections: 
+    
+- **VPC peering connections**: 
   
   ![image](https://github.com/user-attachments/assets/569b4519-c6ca-4bb5-97bf-75f0ab81ce68)
 
-  - Cho phép liên lạc trực tiếp và an toàn giữa hai đám mây riêng ảo (VPC). Đảm bảo rằng không có điểm lỗi hoặc tắc nghẽn băng thông nào.
-  - You must update route tables in each VPC’s subnets to ensure EC2 instances can communicate with each other.
+  - VPC Peering: giúp kết nối 2 VPC, để các tài nguyên trong 2 VPC có thể liên lạc trực tiếp với nhau mà không thông qua Internet. Kết nối 1:1 giữa 2 VPC. Không hỗ trợ khi 2 VPC bị overlap CIDR.
+  - Phải cấu hình bảng định tuyến, chỉ ra rằng phải kết nối với VPC Peering để đến được IP đích. IP đích có thể là IP của VPC/máy ảo/subnet.
   - Có khả năng **kết nối các VPC trên các tài khoản AWS/Regions khác nhau**.
   - Đảm bảo rằng tất cả lưu lượng dữ liệu giữa các VPC ngang hàng vẫn nằm trong mạng AWS mà không bao giờ truyền qua Internet công cộng.
   - Use cases: 
     - Cho phép liên lạc an toàn giữa các tầng khác nhau của ứng dụng (chẳng hạn như máy chủ web và máy chủ cơ sở dữ liệu).
     - Hỗ trợ chia sẻ tài nguyên giữa nhiều nhóm hoặc đơn vị kinh doanh.
     - Cho phép kiến ​​trúc đám mây lai bằng cách kết nối mạng tại chỗ với VPC AWS.
+   
+- **VPC Endpoint**:
+  - Mọi service của AWS đều public (có URL để connect).
+  - VPC Endpoint provide private access to AWS Services (S3, DynamoDB, CloudFormation, SSM) within a VPC.
+  - Use case:
+    - Check DNS Setting Resolution in your VPC.
+    - Check Route Tables.
+  - Gồm 2 loại:
+    - Interface Endpoints (powered by PrivateLink): Cung cấp ENI làm điểm vào (phải đính kèm SG), hỗ trợ hầu hết các dịch vụ AWS. Chi phí gồm $ mỗi giờ + $ mỗi GB dữ liệu được xử lý
+    - Gateway Endpoints: Provisions a gateway and must be used as a target in a route table (does not use security groups); Supports both S3 and DynamoDB; Free.
+
+- Egress-only Internet Gateway: like a NAT Gateway, but for IPv6 targets.
+- Traffic Mirroring: copy network traffic from ENIs for further analysis.
 ## 5.2. Elastic Load Balancing (ELB)
 
 ## 5.3. ENB
