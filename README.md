@@ -307,7 +307,26 @@ Dùng khi muốn public subnet connect tới private subnet thông qua 1 port.
 
 - Egress-only Internet Gateway: like a NAT Gateway, but for IPv6 targets.
 - Traffic Mirroring: copy network traffic from ENIs for further analysis.
+  
 ## 5.2. Elastic Load Balancing (ELB)
+- **Automated distributes incoming application or network traffic** across multiple targets, such as EC2 instances, containers (ECS), Lambda functions, and IP addresses, in multiple Availability Zones.
+- When you create a load balancer, you must specify one public subnet from at least two Availability Zones.
+- **Cross Zone Load Balancing** – when enabled, each load balancer node distributes traffic across the registered targets in all enabled AZs.
+- Benefits:
+  - Load balancers phân phối khối lượng công việc giữa các tài nguyên tính toán như máy chủ ảo, giúp tăng cường tính sẵn sàng và khả năng chịu lỗi của ứng dụng. Bạn có thể thêm hoặc gỡ bỏ tài nguyên mà không làm gián đoạn luồng yêu cầu.
+  - Load balancers cũng có thể cấu hình kiểm tra sức khỏe để đảm bảo chỉ gửi yêu cầu đến các tài nguyên hoạt động tốt.
+  - Chúng có thể xử lý việc mã hóa và giải mã để giảm tải cho tài nguyên tính toán, giúp chúng tập trung vào công việc chính.
+- ELB gồm 4 loại:
+  - Application Load Balancers
+
+    ![{E85D97C2-1062-4C51-B455-5087FD7BA4A7}](https://github.com/user-attachments/assets/dfdec2ac-562d-4149-b83d-8cd2dcbd3811)
+
+  - Network Load Balancers
+
+    ![{C3142AB5-B989-4B5D-B624-144548DADD6F}](https://github.com/user-attachments/assets/81a9587a-e47b-48ca-906c-891f57131be2)
+
+  - Gateway Load Balancers
+  - Classic Load Balancers
 
 ## 5.3. ENB
 ## 5.4. Route 53
