@@ -15,7 +15,7 @@
    
 6. [AWS Compute](https://github.com/Roses21/AWS-summary/blob/main/README.md#6-compute)
 
-   6.1. [Virtual machines (VMs): Elastic Compute Cloud (EC2)](https://github.com/Roses21/AWS-summary/tree/main#61-elastic-compute-cloud-ec2](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#61-virtual-machines-vms-elastic-compute-cloud-ec2))
+   6.1. [Virtual machines (VMs): Elastic Compute Cloud (EC2)](https://github.com/Roses21/AWS-summary/tree/main?tab=readme-ov-file#61-virtual-machines-vms-elastic-compute-cloud-ec2)
       
    6.2. [Containers](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#62-containers)
 
