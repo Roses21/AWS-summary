@@ -1,5 +1,5 @@
 # Mục lục:
-1. [Lưu ý về vẽ kiến trúc trên draw.io](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#1-l%C6%B0u-%C3%BD-v%E1%BB%81-v%E1%BA%BD-ki%E1%BA%BFn-tr%C3%BAc-tr%C3%AAn-drawio)
+1. [Cloud Computing](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#1-l%C6%B0u-%C3%BD-v%E1%BB%81-v%E1%BA%BD-ki%E1%BA%BFn-tr%C3%BAc-tr%C3%AAn-drawio)
 2. [Three tier architecture](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#2-three-tier-architecture)
 3. [AWS Well-Architected Framework](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#3-aws-well-architected-framework)
 4. [Auto Scaling](https://github.com/Roses21/AWS-summary/blob/main/README.md#4-ec2-auto-scaling)
@@ -51,10 +51,17 @@
 
 ![{085F76D4-136F-4A53-8841-04F633E24232}](https://github.com/user-attachments/assets/ec7d14c8-7030-40d7-81a6-9b0b0c9a2341)
 
-# 1. Lưu ý về vẽ kiến trúc trên draw.io
-- Tỉ lệ khung ngoài cùng của kiến trúc AWS: 1.618, ví dụ Height = 500 => Width = 500 x 1.618 = 809.
-- Khung tên của service AWS nên là màu cam (FF8000).
-- Size icon: 60x60.
+# 1. Cloud Computing
+- Là việc cung cấp các dịch vụ điện toán qua internet thay vì sử dụng các máy chủ cục bộ.
+- Nó cung cấp các dịch vụ điện toán đám mây đáng tin cậy, có thể mở rộng và không tốn kém, bao gồm lưu trữ dữ liệu, cơ sở dữ liệu, ứng dụng, phân tích, học máy và thậm chí thiết lập máy chủ ảo. 
+- Three types of cloud service models:
+  - IaaS (Infrastructure as a Service): cung cấp cơ sở hạ tầng ảo hóa (máy chủ, lưu trữ, mạng, và các tài nguyên máy tính khác) qua internet. VD: Amazon EC2, S3, ELB,...
+  - PaaS (Platform as a Service): cung cấp môi trường thời gian chạy để phát triển, thử nghiệm và quản lý ứng dụng. VD:Lambda, RDS, Elastic Beanstalk
+  - SaaS (Software as a Service): cung cấp phần mềm qua internet, người dùng chỉ cần truy cập và sử dụng dịch vụ mà không phải quản lý cơ sở hạ tầng hay cài đặt phần mềm. VD: Amazon WorkMail, Google Workspace, Microsoft Office 365, Dropbox.
+- Lưu ý khi vẽ architect trên draw.io:
+  - Tỉ lệ khung ngoài cùng của kiến trúc AWS: 1.618, ví dụ Height = 500 => Width = 500 x 1.618 = 809.
+  - Khung tên của service AWS nên là màu cam (FF8000).
+  - Size icon: 60x60.
 # 2. Three tier architecture
 - Web/Presentation Tier: Houses the user-facing elements of the application, such as web servers and the interface/frontend.
 - Application Tier: Houses the backend and application source code needed to process data and run functions.
