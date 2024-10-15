@@ -55,7 +55,7 @@
 - Là việc cung cấp các dịch vụ điện toán qua internet thay vì sử dụng các máy chủ cục bộ.
 - Nó cung cấp các dịch vụ điện toán đám mây đáng tin cậy, có thể mở rộng và không tốn kém, bao gồm lưu trữ dữ liệu, cơ sở dữ liệu, ứng dụng, phân tích, học máy và thậm chí thiết lập máy chủ ảo. 
 - Three types of cloud service models:
-  - IaaS (Infrastructure as a Service): cung cấp cơ sở hạ tầng ảo hóa (máy chủ, lưu trữ, mạng, và các tài nguyên máy tính khác) qua internet. VD: Amazon EC2, S3, ELB,...
+  - IaaS (Infrastructure as a Service): cung cấp cơ sở hạ tầng ảo hóa (máy chủ, lưu trữ, mạng, và các tài nguyên máy tính khác) qua internet. VD: Amazon CloudFormation, EC2, S3, ELB,...
   - PaaS (Platform as a Service): cung cấp môi trường thời gian chạy để phát triển, thử nghiệm và quản lý ứng dụng. VD:Lambda, RDS, Elastic Beanstalk
   - SaaS (Software as a Service): cung cấp phần mềm qua internet, người dùng chỉ cần truy cập và sử dụng dịch vụ mà không phải quản lý cơ sở hạ tầng hay cài đặt phần mềm. VD: Amazon WorkMail, Google Workspace, Microsoft Office 365, Dropbox.
 - Lưu ý khi vẽ architect trên draw.io:
