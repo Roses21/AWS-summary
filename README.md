@@ -667,7 +667,7 @@ S3 Standard, S3 Standard-IA, S3 Intelligent-Tiering, S3 Glacier Instant Retrieva
 
 ![image](https://github.com/user-attachments/assets/ad53f89b-f7ec-472a-83a5-fa140a316b34)
 
-- AWS CloudTrail AWS CloudTrail: là một dịch vụ audit cho tài khoản AWS. Actions taken by a user, role, or an AWS service are recorded as events in CloudTrail. Các events bao gồm các hành động được thực hiện trong AWS Management Console, AWS Command Line Interface, và AWS SDKs và APIs. Event được lưu lại tối đa 90 ngày trên CloudTrail (enabled by default and is no additional cost).
+- AWS CloudTrail: là một dịch vụ audit cho tài khoản AWS. Actions taken by a user, role, or an AWS service are recorded as events in CloudTrail. Các events bao gồm các hành động được thực hiện trong AWS Management Console, AWS Command Line Interface, và AWS SDKs và APIs. Event được lưu lại tối đa 90 ngày trên CloudTrail (enabled by default and is no additional cost).
 - Use case:
   - Tuân thủ & kiểm toán: sử dụng CloudTrail logs để chứng minh việc tuân thủ những quy định như SOC, PCI và HIPAA.
   - Bảo mật: Cải thiện tình hình bảo mật của bạn bằng cách ghi lại các sự kiện và hoạt động của người dùng, đồng thời thiết lập quy tắc luồng công việc tự động với Amazon EventBridge.
@@ -690,6 +690,45 @@ S3 Standard, S3 Standard-IA, S3 Intelligent-Tiering, S3 Glacier Instant Retrieva
     - AWS Lambda function execution activity (the Invoke API).
 - By default, CloudTrail logs management events, but not data events.
 # 10. CloudFormation
+- Là dịch vụ IaC (Infrastructure as Code), giúp bạn lập mô hình và thiết lập tài nguyên AWS để bạn tiết kiệm thời gian cho việc quản lý các tài nguyên đó và có nhiều thời gian hơn để tập trung vào các ứng dụng chạy trong AWS.
+- You create a template that describes all the AWS resources that you want (like Amazon EC2 instances or Amazon RDS DB instances) => CloudFormation takes care of provisioning and configuring those resources for you.
+- CloudFormation is a **free** service; however, you are charged for the AWS resources you include in your stacks at the current rates for each
+- Những trường hợp CloudFormation hữu ích:
+  - Simplify infrastructure management: when you use that template to create a CloudFormation stack, CloudFormation provisions the Auto Scaling group, load balancer, and database for you
+  - Quickly replicate your infrastructure: reuse your template
+  - Easily control and track changes to your infrastructure: these templates are text files, you simply track differences in your templates to track changes to your infrastructure.
+## How CloudFormation works?
+
+![{CFE53A99-80A8-463C-BB5A-D6E5181BAACD}](https://github.com/user-attachments/assets/e10e0879-c708-478b-9867-a11268ca2c6b)
+
+- Template:
+  - Định dạng file: JSON or YAML; có thể lưu extention .json, .yaml, .template, hoặc .txt
+  - Templates as blueprints for building your AWS resource
+  - CloudFormation templates have additional capabilities that you can use to build complex sets of resources and reuse those templates in multiple contexts.
+- Stack:
+  - You create, update, and delete a collection of resources by creating, updating, and deleting stacks.
+  - To create those resources, you create a stack by submitting the template that you created, and CloudFormation provisions all those resources for you.
+- Change sets:
+  - A summary of your proposed changes.
+  - Allow you to see **how your changes might impact your running resources**, especially for critical resources, before implementing them.
+  - Updates can cause interruptions.
+## Security in AWS CloudFormation
+- Prevent a stack from being accidentally deleted by enabling termination protection on the stack.
+- Prevent stack resources from being unintentionally updated or deleted during a stack update by using a stack policy.
+- Data protection:
+  - Encryption at rest: AWS CloudFormation stores your data encrypted at rest. Customers are responsible for setting encryption and storage policies for data stored in their accounts.
+  - Encryption at transit: CloudFormation uses encrypted channels for service communications
+  - Internetwork traffic privacy: AWS CloudFormation service communications are securely encrypted by default between Regions or Availability Zones.
+- Control CloudFormation access with IAM
+- Logging AWS CloudFormation API calls with AWS CloudTrail
+- Resilience
+- Compliance validation for AWS CloudFormation
+- Configuration and vulnerability analysis
+- Security best practices for CloudFormation:
+  - Use IAM to control access
+  - Do not embed credentials in your templates
+  - Use AWS CloudTrail to log CloudFormation calls
+- AWS PrivateLink: use AWS PrivateLink to create a private connection between your VPC and CloudFormation. 
 # 11. AWS Billing and Cost Management
 ### Sử dụng để làm gì?
   - Ước tính và lập kế hoạch chi phí AWS của bạn.
