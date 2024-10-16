@@ -29,9 +29,17 @@
 
    7.3. [EBS](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#73-ebs)
 
+   7.4. [Glacier]()
+
+   7.5. [Storage Gateway]()
+
+   7.6. []()
+
 8. [Database](https://github.com/Roses21/AWS-summary/blob/main/README.md#8-database) 
 
    8.1. [Amazon Relational Database Service](https://github.com/Roses21/AWS-summary/blob/main/README.md#81-amazon-relational-database-service-rds)
+
+   8.2. [DynamoDB]()
 
    
    
@@ -510,6 +518,12 @@ S3 Standard, S3 Standard-IA, S3 Intelligent-Tiering, S3 Glacier Instant Retrieva
 - To get started, just log into the Athena Management Console, define your schema, and start querying. Amazon Athena uses Presto with full standard SQL support and works with a variety of standard data formats, including CSV, JSON, ORC, Apache Parquet and Avro. While Athena is ideal for quick, ad-hoc querying and integrates with Amazon QuickSight for easy visualization, it can also handle complex analysis, including large joins, window functions, and arrays.
 
 ## 7.3. EBS
+
+
+## 7.4. Glacier
+
+## 7.5. Storage Gateway
+
 # 8. Database
 ## 8.1. Amazon Relational Database Service (RDS):
 ### Relational Database
@@ -556,6 +570,8 @@ S3 Standard, S3 Standard-IA, S3 Intelligent-Tiering, S3 Glacier Instant Retrieva
 ![image](https://github.com/user-attachments/assets/e1df3cde-9445-4fbe-b898-5fc9a287fa24)
 
 ![image](https://github.com/user-attachments/assets/8a462c72-0754-4f0c-8e10-3276c3c9253b)
+
+## 8.2. DynamoDB
 
 # 9. AWS Management Tools
 ## 9.1. IAM
