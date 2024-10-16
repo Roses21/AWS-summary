@@ -22,27 +22,68 @@
    6.3. [Severless](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#63-serverless)
    
 7. [Storage](https://github.com/Roses21/AWS-summary/blob/main/README.md#7-storage)
+
+   7.1. [Object, file, and block storage]()
    
-   7.1. [CloudFront](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#71-cloudfront)
+      7.1.1. [Amazon File Cache]()
    
-   7.2. [S3](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#72-s3)
+      7.1.2. [Simple Storage Service - S3](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#72-s3)
 
-   7.3. [EBS](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#73-ebs)
+      7.1.3. [Elastic Block Storage - EBS](https://github.com/Roses21/AWS-summary?tab=readme-ov-file#73-ebs)
 
-   7.4. [Glacier]()
+      7.1.4. [Amozon FSx]()
 
-   7.5. [Storage Gateway]()
+   7.2. [Data migration]()
+   
+      7.2.1. [AWS DataSync]()
 
-   7.6. []()
+      7.2.2. [AWS Snow Family]()
+
+   7.3. [Hybrid cloud storage and edge computing]()
+
+      7.3.1. [AWS Storage Gateway]()
+
+      7.3.2. [AWS Snow Family]()
+   
+   7.4. [Disaster recovery and backup]()
+
+      7.4.1. [AWS Elastic Disaster Recovery]()
+
+      7.4.1. [Backup]()
+
+   7.5. [Managed file transfer]()
+
+      AWS Transfer Family
 
 8. [Database](https://github.com/Roses21/AWS-summary/blob/main/README.md#8-database) 
 
+   Relational:
+
    8.1. [Amazon Relational Database Service](https://github.com/Roses21/AWS-summary/blob/main/README.md#81-amazon-relational-database-service-rds)
 
-   8.2. [DynamoDB]()
+   8.2. [Amazon Aurora]()
 
+   Non-relational:
    
+   8.3. [NoSQL Database Service (Key-value) - DynamoDB]()
+
+   8.4. [Graph - Neptune]()
+
+   8.5. [Data Warehouse - RedShift]()
+
+   8.6. [Caching - Amazon ElastiCache]()
+
+   8.7. [Document - DocumentDB]()
+
+   8.8. [In-memory - MemoryDB]()
+
+   8.9. [Time-series - Timestream]()
+
+   8.10. [Ledger - Amazon LQDB]()
+
+   8.11. [Wide column - Amazon Keyspace]()
    
+
 9. [AWS Management Tools](https://github.com/Roses21/AWS-summary/blob/main/README.md#9-aws-management-tools)
 
    9.1. [IAM](https://github.com/Roses21/AWS-summary/blob/main/README.md#91-iam)
