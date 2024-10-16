@@ -569,17 +569,17 @@ S3 Standard, S3 Standard-IA, S3 Intelligent-Tiering, S3 Glacier Instant Retrieva
 
 ![{84756FCC-0C90-426B-B7F9-2B4141CFF712}](https://github.com/user-attachments/assets/a621e3cc-4ace-4488-a9d5-f8f2e290c56d)
 
-**Relational/SQL/OLTP**
+**Relational:**
 
-## 8.1. Relational Database Management System (RDMS):
-### Relational Database
+## Relational Database Management System
 - Cơ sở dữ liệu quan hệ **tổ chức dữ liệu thành các bảng**. Dữ liệu trong các bảng có thể liên kết với nhau để tạo mối quan hệ.
 - Một bảng lưu trữ dữ liệu theo hàng và cột. Một hàng, thường được gọi là bản ghi (record), chứa tất cả thông tin về một mục cụ thể. Các cột mô tả các thuộc tính của một mục.
 - Lợi ích khi dùng RD: dùng câu **truy vấn SQL phức tạp**, giảm dư thừa (lưu data vào 1 bảng và các bảng khác truy vấn đến thay vì lưu trong nhiều bảng), quen thuộc (ra đời 1970s), accuracy (đảm bảo rằng dữ liệu có tính toàn vẹn cao và tuân thủ nguyên tắc).
 - Use cases:
   - Những ứng dụng có lược đồ cố định và **không thay đổi thường xuyên**.
   - Những ứng dụng **cần lưu trữ liên tục** và tuân theo nguyên tắc **ACID** (Atomicity, Consistency, Isolation, and Durability), chẳng hạn như: Ứng dụng hoạch định nguồn lực doanh nghiệp (ERP) Ứng dụng quản lý quan hệ khách hàng (CRM).
-### Amazon Relational Database Service
+    
+## 8.1. Amazon Relational Database Service
 - Là một dịch vụ quản lý cho phép bạn triển khai và quản lý các cơ sở dữ liệu quan hệ trên AWS. 
 - Storage in the RDS:
    - EBS: MySQL, MariaDB, PostgreSQL, Oracle, and SQL Server. 
@@ -617,7 +617,58 @@ S3 Standard, S3 Standard-IA, S3 Intelligent-Tiering, S3 Glacier Instant Retrieva
 
 ![{6C31027D-1C9B-42E6-954E-33D73107B2E2}](https://github.com/user-attachments/assets/7092993d-577d-41a0-a4ea-855cb574f8d5)
 
-**Non-relational/NoSQL database:**
+=>Same as RDS, but with **less maintenance / more flexibility / more performance / more features**
+
+**Non-relational:**
+
+## 8.3. NoSQL Database Service (Key-value) - DynamoDB
+- Serverless, multi AZ, NoSQL database (Key-value).
+- 99.999% availability SLA; single-digit millisecond latency
+- Có thể giải quyết **hơn 10 nghìn tỉ/ngày**, **hơn 20 triệu request/giây**.
+- **DAX cluster** for read cache, microsecond read latency
+- Event Processing: **DynamoDB Streams** to integrate with AWS Lambda, or Kinesis Data Streams
+- Sao lưu tự động lên đến 35 ngày với tính năng PITR, hoặc on-demand backups.
+- **Global Table** feature: active-active setup.
+- Great to rapidly evolve schemas
+- Use Case: Serverless applications development (small documents 100s KB), distributed serverless cache
+  
+## 8.4. Graph - Neptune
+- Fully managed graph database, billions of relations, query with milliseconds latency, fast, reliable.
+- A popular graph dataset would be a **social network**.
+- Highly available across 3 AZ, with up to 15 read replicas => 3 AZ => full backup and restore
+- Build and run applications working with **highly connected datasets** – optimized for these complex and hard queries
+- Great for knowledge graphs (Wikipedia), fraud detection, recommendation engines, social networking.
+- Amazon Neptune – Streams:
+  - Thay đổi dữ liệu trong graph được sắp xếp theo **thứ tự thời gian thực**
+  - Cập nhật ngay lập tức sau khi áp dụng thay đổi.
+  - **No duplicates, strict order**.
+  - Streams data is accessible in an HTTP REST API
+  - Use case: Gửi thông báo khi có một số thay đổi nhất định. Duy trì đồng bộ dữ liệu đồ thị của bạn trong một kho dữ liệu khác (ví dụ: S3, OpenSearch, ElastiCache). Sao chép dữ liệu giữa các regions trong Neptune.
+- Amazon Keyspaces for Apache Cassandra:
+  - Apache Cassandra is an open-source NoSQL distributed database.
+   - A managed Apache Cassandra-compatible database service
+   - Serverless, Scalable, highly available, fully managed by AWS
+   - Automatically scale tables up/down based on the application’s traffic
+   - Tables are replicated 3 times across multiple AZ
+   - Using the Cassandra Query Language (CQL)
+   - **Single-digit millisecond latency** at any scale, **1000s of requests/second**
+   - Capacity: On-demand mode or provisioned mode with auto-scaling
+   - Encryption, backup, Point-In-Time Recovery (PITR) up to 35 days
+   - Use cases: store IoT devices info, time-series data,...
+     
+## 8.5. Data Warehouse - RedShift
+
+## 8.6. Caching - Amazon ElastiCache
+
+## 8.7. Document - DocumentDB
+
+## 8.8. In-memory - MemoryDB
+
+## 8.9. Time-series - Timestream
+
+## 8.10. Ledger - Amazon LQDB
+
+## 8.11. Wide column - Amazon Keyspace
 
 ## Sumary
 
