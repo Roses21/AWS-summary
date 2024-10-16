@@ -53,7 +53,7 @@
 
    7.5. [Managed file transfer]()
 
-      AWS Transfer Family
+      [AWS Transfer Family]()
 
 8. [Database](https://github.com/Roses21/AWS-summary/blob/main/README.md#8-database) 
 
@@ -566,6 +566,9 @@ S3 Standard, S3 Standard-IA, S3 Intelligent-Tiering, S3 Glacier Instant Retrieva
 ## 7.5. Storage Gateway
 
 # 8. Database
+
+![{84756FCC-0C90-426B-B7F9-2B4141CFF712}](https://github.com/user-attachments/assets/a621e3cc-4ace-4488-a9d5-f8f2e290c56d)
+
 ## 8.1. Amazon Relational Database Service (RDS):
 ### Relational Database
 - Cơ sở dữ liệu quan hệ tổ chức dữ liệu thành các bảng. Dữ liệu trong một bảng có thể liên kết với dữ liệu trong các bảng khác để tạo mối quan hệ.
@@ -612,7 +615,12 @@ S3 Standard, S3 Standard-IA, S3 Intelligent-Tiering, S3 Glacier Instant Retrieva
 
 ![image](https://github.com/user-attachments/assets/8a462c72-0754-4f0c-8e10-3276c3c9253b)
 
-## 8.2. DynamoDB
+## 8.2. Amazon Aurora
+
+![{E52EEC45-FFA8-464D-A999-51D90EBD4427}](https://github.com/user-attachments/assets/602d8480-17df-4db5-9836-d4a84b7f7d70)
+
+![{6C31027D-1C9B-42E6-954E-33D73107B2E2}](https://github.com/user-attachments/assets/7092993d-577d-41a0-a4ea-855cb574f8d5)
+
 
 # 9. AWS Management Tools
 ## 9.1. IAM
