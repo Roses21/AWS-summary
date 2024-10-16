@@ -622,6 +622,10 @@ S3 Standard, S3 Standard-IA, S3 Intelligent-Tiering, S3 Glacier Instant Retrieva
 ![{6C31027D-1C9B-42E6-954E-33D73107B2E2}](https://github.com/user-attachments/assets/7092993d-577d-41a0-a4ea-855cb574f8d5)
 
 
+## Sumary
+
+![{C32E72EB-42CD-4D49-AFD7-057848AD1887}](https://github.com/user-attachments/assets/33d253f1-234b-4df3-8bf7-5ba667712209)
+
 # 9. AWS Management Tools
 ## 9.1. IAM
 - AWS Identity and Access Management (IAM) is an AWS service that helps you manage access to your AWS account and resources. It also provides a centralized view of who and what are allowed inside your AWS account (authentication), and who and what have permissions to use and work with your AWS resources (authorization).
