@@ -1,5 +1,9 @@
 ## 1. GuardDuty
 
-![{4D47CD8C-7A4A-4F27-AFAC-9E59AA3FE40D}](https://github.com/user-attachments/assets/ed82c4d9-125e-429a-a598-b581042136aa)
+![{01FEFE5E-2908-4CC7-BD44-5A4B2DA47F77}](https://github.com/user-attachments/assets/37bb45e9-49d9-4046-ab02-7bb780973a18)
 
-## 2. 
+## 2. Amazon Detective
+
+## 3. AWS Security Hub
+
+## 4. Amazon Inspector
