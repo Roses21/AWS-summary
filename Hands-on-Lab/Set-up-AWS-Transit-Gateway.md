@@ -7,7 +7,7 @@ Link lab: https://000020.awsstudygroup.com/1-introduce/
 - Tài nguyên:
   - First EC2 Host ở VPC1 và Third EC2 Host ở VPC3 có thể kết nối Internet.
   - Second EC2 Host ở VPC2 và Fourth EC2 Host ở VPC4 không thể kết nối Internet.
-- Tạo
+- Đẩy key từ máy tính local lên EC2 instance:
 
 ![{0FA47161-85F8-4F10-A2D5-17F63ED08534}](https://github.com/user-attachments/assets/9abc8968-accf-49b3-abb4-a6510772bc00)
 
