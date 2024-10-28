@@ -1,25 +1,28 @@
 ## 1. Kiến trúc
 
-![{5D0E1CE2-1A7A-47CC-8A14-8160C0F7E67C}](https://github.com/user-attachments/assets/2f79e78a-9f33-435e-95c7-3bd153bee11b)
-
-![{EC58CA94-7AFA-473A-A95E-0C0DC511E684}](https://github.com/user-attachments/assets/c82e702a-5753-454d-9cb2-d0bb0f4fd69d)
+![{958395C0-80EF-4D21-9A77-BF4DA617EA8C}](https://github.com/user-attachments/assets/d220ac1d-adfd-4afe-a355-6e19cf70284e)
 
 ## 2. Thực hiện
-
 - Để tạo kết nối site-to-site VPN, cần có các thành phần:
   - Transit gateway hoặc Virtual Private Gateway.
   - Customer Gateway.
   - Customer Gateway Device.
+
+Lưu ý: Khi tạo Site-to-site VPN sử dụng TGW, mặc định AWS sẽ tạo sẵn cho chúng ta 1 TGW Attachment loại VPN (được sử dụng để kết nối Transit Gateway với các mạng on-premises thông qua một VPN) như hình. Do đó chúng ta cần tạo thêm 1 TGW Attachment cho Cloud VPC trong bài lab này:
+
+![{5C618883-0932-4759-9052-B8CDF1C86C71}](https://github.com/user-attachments/assets/4359a143-4c2a-48e9-bf97-d030dbb0b9d9)
+
 - Các bước triển khai cần thiết:
+
+![{D04B5155-FB32-41BF-8186-D6E73F390FE4}](https://github.com/user-attachments/assets/b9bfae4f-7ff3-4322-864b-646b931d6006)
+
+![{9D3A04A4-5789-4D36-889F-0D18EDF42D26}](https://github.com/user-attachments/assets/7746aec6-501c-49ba-b072-684779c1bd20)
+
+![{BCF6E25C-5A16-4876-A3BD-231C4A88E5FF}](https://github.com/user-attachments/assets/3dcb1bea-617f-407d-b3fd-e0a55bc0c845)
+
+![{2652BE1D-8C6B-4437-BF84-29769E6990F8}](https://github.com/user-attachments/assets/449fc4d8-275f-481f-a5e4-71b9b9612854)
+
   
-![{C5CBF58C-9114-484C-A03F-7CD139DB5145}](https://github.com/user-attachments/assets/8793ce7b-e5cb-49a0-983b-ce3aa8273dfe)
 
-![{2D922AE5-756C-437D-8962-2CBC7EFAEBE7}](https://github.com/user-attachments/assets/2666e852-c9ba-4f49-b3c4-93baf0dae9f6)
 
-![{21CBE021-E04C-49FD-BECE-F2E12B14FED1}](https://github.com/user-attachments/assets/68a2763b-ca9c-46bf-b1f7-3432ab273026)
 
-![{15506F22-F2D9-4023-994A-702206D8C65A}](https://github.com/user-attachments/assets/c0425ea8-bd90-4496-b75e-b19119aa2460)
-
-## 3. Nguồn tham khảo
-- https://000003.awsstudygroup.com/
-- https://aws.amazon.com/blogs/networking-and-content-delivery/simulating-site-to-site-vpn-customer-gateways-strongswan/
