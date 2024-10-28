@@ -31,15 +31,15 @@ Link lab: https://000020.awsstudygroup.com/1-introduce/
   
   ![{B401B7D8-B94A-44C0-A6B7-1D3D003AA875}](https://github.com/user-attachments/assets/44c788b6-ca14-472f-8f7a-03a10b59cdd5)
 
-- Tab Associations (Liên kết): Gán một TGW attachment với một Route Table duy nhất, kiểm soát toàn bộ lưu lượng từ attachment đó. Thực hiện đính cả 4 VPC:
+- Tab Associations (Liên kết): một TGW Attachment sẽ được gán với một Route Table duy nhất để kiểm soát toàn bộ lưu lượng từ Attachment đó. Thực hiện gán cả 4 VPC:
 
   ![{C4D62B64-65A5-457D-ADDD-3EEE9F3C127B}](https://github.com/user-attachments/assets/cfc2110c-5118-4772-9ae2-7746ef7442c7)
 
-- Tab Propagations (Lan truyền): Tự động thêm các route của TGW attachment vào Route TablAn attachment, giúp đơn giản hóa việc quản lý route trong môi trường phức tạp:
+- Tab Propagations (Lan truyền): Tự động thêm các route từ các VPC vào route table, tức là các VPC này sẽ có khả năng giao tiếp với nhau thông qua TGW. Propagations giúp đơn giản hóa việc quản lý route trong môi trường phức tạp vì không cần cấu hình thủ công:
 
   ![{D8F7DACC-08A9-4699-A963-86DC6C09A8DF}](https://github.com/user-attachments/assets/d12c64e7-1e9e-45d5-8f49-15a93a534c65)
 
-## 4. Thêm Transit Gateway Routes vào VPC Route Tables
+## 4. Cập nhật VPC Route Tables
 
 Ở phần này, bạn sẽ cấu hình route table ở từng VPC để route traffic tới các VPC còn lại thông qua Transit Gateway.
 
@@ -47,7 +47,7 @@ Link lab: https://000020.awsstudygroup.com/1-introduce/
 
   ![{66FB5EA9-19B6-42C9-813C-F739BFC26E8A}](https://github.com/user-attachments/assets/9e709352-5439-4968-bc5e-ef7d22929694)
 
-Điều này cho VPC1 biết rằng tất cả packet cho bất kỳ mạng 172.16.x.x nào đều thông qua Transit Gateway.
+Điều này cho VPC1 biết rằng tất cả packet gửi đến 172.16.x.x đều đi thông qua Transit Gateway.
 
 - Ở VPC2 và VPC4: Destination: 0.0.0.0/0, Target: chọn Transit Gateway bạn đã tạo:
 
