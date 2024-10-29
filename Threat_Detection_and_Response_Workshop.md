@@ -4,6 +4,9 @@
 
 ## 2. Amazon Detective
 
+![{8AFA6FD2-7F35-4D69-A2D7-71EE865EF571}](https://github.com/user-attachments/assets/347d2224-b2db-4462-9435-2090a7c327f8)
+
+
 ## 3. AWS Security Hub
 
 ## 4. Amazon Inspector
