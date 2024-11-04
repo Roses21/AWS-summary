@@ -15,6 +15,10 @@
 
 ![{F4655DDD-569B-4A08-B191-04FB543EAB69}](https://github.com/user-attachments/assets/2bca6daa-17b2-43c7-b459-da4792309f71)
 
+## 5. Workshop 
+
+![{D68EC102-0D44-4736-B53C-191C8DF9D948}](https://github.com/user-attachments/assets/5dbba12f-0c1f-4a72-bb97-9fea40793634)
+
 ## Tóm tắt
 - GuardDuty: Phát hiện mối đe dọa dựa trên logs.
 - Amazon Detective: Điều tra sâu hơn các cảnh báo bảo mật từ GuardDuty. Phân tích đồ thị để kết nối các sự kiện từ GuardDuty và các dịch vụ khác để xác định mức độ nghiêm trọng và nguồn gốc của mối đe dọa trong các sự cố bảo mật phức tạp.
