@@ -9,7 +9,7 @@
 
   ![{0D6019AC-5D8A-4D88-A331-21AAFC657AC8}](https://github.com/user-attachments/assets/393972c3-7b47-4b5d-a2d2-ab1718c37d68)
 
-- DRS Recovery Server: Khi Source Instance gặp sự cố, AWS DRS sẽ khởi động DRS Recovery Server trong vùng Recovery, đảm bảo dịch vụ tiếp tục hoạt động mà không gián đoạn. Tuy nhiên, chỉ tồn tại để thực hiện failover; chúng không trực tiếp xử lý lưu lượng từ người dùng.
+- DRS Recovery Server: Là các EC2 instance light weigh được dùng để sao chép dữ liệu giữa máy chủ nguồn và AWS của bạn. Khi Source Instance gặp sự cố, AWS DRS sẽ khởi động DRS Recovery Server trong vùng Recovery, đảm bảo dịch vụ tiếp tục hoạt động mà không gián đoạn. Tuy nhiên, chỉ tồn tại để thực hiện failover; chúng không trực tiếp xử lý lưu lượng từ người dùng.
   
   ![{990916AD-2076-46F3-81C5-7EFAC0CC83E2}](https://github.com/user-attachments/assets/178ade5f-72ff-496a-befb-b150611c43f1)
 
