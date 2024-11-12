@@ -1,3 +1,6 @@
+# 0. RTO và RPT
+- Recovery Time Objective (RTO): là thời gian tối đa có thể chấp nhận được để hệ thống và ứng dụng của bạn offline sau thảm họa.
+- Recovery Point Objective (RPO): là lượng dữ liệu bị mất tối đa có thể chấp nhận được tính theo thời gian, đề cập đến tần suất sao lưu dữ liệu. Ví dụ: RPO là 1 giờ => Back up dữ liệu sau mỗi giờ.
 # 1. Giới thiệu AWS Elastic Disaster Recovery
 - Các thảm họa CNTT như lỗi trung tâm dữ liệu, hỏng máy chủ hoặc tấn công mạng không chỉ có thể làm gián đoạn hoạt động kinh doanh của bạn mà còn gây mất dữ liệu, ảnh hưởng đến doanh thu và gây tổn hại đến danh tiếng của bạn.
 - AWS Elastic Disaster Recovery (thường được gọi là DRS) giảm thiểu thời gian ngừng hoạt động và mất dữ liệu bằng cách cung cấp **khả năng khôi phục nhanh chóng, đáng tin cậy** cho các máy chủ vật lý, ảo và dựa trên đám mây vào Đám mây AWS.
