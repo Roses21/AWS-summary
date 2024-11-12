@@ -9,11 +9,12 @@
 
   ![{0D6019AC-5D8A-4D88-A331-21AAFC657AC8}](https://github.com/user-attachments/assets/393972c3-7b47-4b5d-a2d2-ab1718c37d68)
 
-- DRS Recovery Instances: Khi Source Instance gặp sự cố, AWS DRS sẽ khởi động DRS Recovery Instance trong vùng Recovery, đảm bảo dịch vụ tiếp tục hoạt động mà không gián đoạn. Tuy nhiên, chỉ tồn tại để thực hiện failover; chúng không trực tiếp xử lý lưu lượng từ người dùng.
+- DRS Recovery Server: Khi Source Instance gặp sự cố, AWS DRS sẽ khởi động DRS Recovery Server trong vùng Recovery, đảm bảo dịch vụ tiếp tục hoạt động mà không gián đoạn. Tuy nhiên, chỉ tồn tại để thực hiện failover; chúng không trực tiếp xử lý lưu lượng từ người dùng.
   
   ![{990916AD-2076-46F3-81C5-7EFAC0CC83E2}](https://github.com/user-attachments/assets/178ade5f-72ff-496a-befb-b150611c43f1)
 
 - Recovered Instances: thực sự thay thế các Source Instance trong việc cung cấp dịch vụ cho người dùng, đảm bảo hệ thống hoạt động liên tục ngay cả khi xảy ra sự cố ở Source Region.
+- Replication Agent: install the AWS Replication Agent on each source server that you want to add to AWS Application Migration Service.
   
 ## Best practices
 - Lập kế hoạch khôi phục cẩn thận và có ghi nhận lại, nên dùng CloudFormation template.
@@ -47,7 +48,14 @@
 
 # 2. Failover và Failback
 ## 2.1. Failover
+- Là quá trình chuyển hoạt động từ Source Region sang DR Region khi Source Region gặp sự cố.
+- Tác vụ chính: Khởi chạy bản sao ở DR Region.
+
+  ![{E1A47AA5-42BA-4BAD-939F-A59A834EC99B}](https://github.com/user-attachments/assets/315a45c9-af86-4222-92e1-96c0ee681464)
+
 ## 2.2. Failback
+- Là quá trình chuyển hoạt động từ DR Region về lại Source Region khi Source Region đã phục hồi và sẵn sàng.
+- Tác vụ chính: Đồng bộ lại dữ liệu về Source và chuyển hoạt động về đó.
 - During failover, AWS DRS allows you to replace the EC2 source instance (A1) with the EC2 recovered instance (B3). After performing a recovery, your applications are running on EC2 instances in the recovery region. However, these recovered instances (marked B3 in the diagram above) are not protected against other potential outages. In order to avoid data loss, you should start a reversed replication immediately. Starting reversed replication involves copying the data from the EC2 recovered instances (B3) to the original region, an operation that takes time and incurs cross-Region data transfer costs.
 
   A Source server (A2) will be created in the source region.
@@ -80,9 +88,10 @@ We have two EC2 instances that host different pages of a website, and both of th
 
   ![{CAED35E6-EC0A-4DE6-B165-7CE300718C7C}](https://github.com/user-attachments/assets/57364da6-911c-4670-9873-1dc5a37ec2b3)
 
-## 2.1. Module 1 - Environment Setup
-- Configuring DRS service in DR Region:
-Configuring required IAM Permissions
-Tag the target EC2 Instances
-Installing the DRS Replication agent
-Configuring Launch Templates
+- Failover:
+
+  ![{6431342B-8732-4E6A-88AA-E8D6D8D965E9}](https://github.com/user-attachments/assets/cb9c5639-e54d-462e-aabe-66000b89d8db)
+
+- Failback:
+
+  ![{E345B6C1-3148-4E57-B9C6-2BE37E785B06}](https://github.com/user-attachments/assets/a8df2d29-eb8e-418d-b38e-94dbc62225ee)
