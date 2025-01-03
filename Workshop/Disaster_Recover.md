@@ -1,4 +1,4 @@
-# 0. RTO và RPT
+# 0. RTO và RPO
 - Recovery Time Objective (RTO): là thời gian tối đa có thể chấp nhận được để hệ thống và ứng dụng của bạn offline sau thảm họa.
 - Recovery Point Objective (RPO): là lượng dữ liệu bị mất tối đa có thể chấp nhận được tính theo thời gian, đề cập đến tần suất sao lưu dữ liệu. Ví dụ: RPO là 1 giờ => Back up dữ liệu sau mỗi giờ.
 # 1. Giới thiệu AWS Elastic Disaster Recovery
